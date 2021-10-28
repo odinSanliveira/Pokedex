@@ -26,5 +26,10 @@ namespace Pokedex
         {
             this.InitializeComponent();
         }
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            SplitMenu.IsPaneOpen = !SplitMenu.IsPaneOpen;
+        }
     }
 }

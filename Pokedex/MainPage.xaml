@@ -8,7 +8,48 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Background="#FFE8E8E8">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+       
+        <!--top menu-->
+        <RelativePanel Background="#FF4EA095" Grid.Column="1">
+            <Button Name="MenuButton" RelativePanel.AlignLeftWithPanel="True" FontFamily="Segoe MDL2 Assets" FontSize="30" Content="&#xE700;" Click="MenuButton_Click"/>
+            <Button Name="BackArrow" RelativePanel.RightOf="MenuButton" FontFamily="Segoe MDL2 Assets" Content="&#xE0C4;" FontSize="30" Margin="15,0,0,0"/>
+            <TextBlock Name="TitlePage" RelativePanel.RightOf="BackArrow" Text="Pokedéx" FontSize="30" Margin="35,0,0,0" FontWeight="Bold"/>
+            <Button Name="SearchButton" RelativePanel.AlignRightWithPanel="True" FontFamily="Segoe MDL2 Assets" Content="&#xE1A3;" FontSize="30"/>
+            <TextBox Name="SearchTextBox"  RelativePanel.LeftOf="SearchButton" Height="43" FontSize="24" Width="300" PlaceholderText="Search" Background="#FF7BBDB4" SelectionHighlightColor="#FF9AE0BD" PlaceholderForeground="White"/>
+        </RelativePanel>
+        <RelativePanel Grid.Row="1"
+            >
+            <Button Name="ByNumberButton" Height="34" Foreground="Black" RelativePanel.AlignHorizontalCenterWithPanel="True">BY #</Button>
+            <Button Name="ByNameButton" Height="34" Foreground="Black" RelativePanel.RightOf="ByNumberButton">BY NAME</Button>
+            <Button Name="ByTypeButton" Height="34" Foreground="Black" RelativePanel.RightOf="ByNameButton">BY TYPE</Button>
+            
+        </RelativePanel>
+
+            <SplitView Grid.Row="2"
+                   Name="SplitMenu"
+                   DisplayMode="Overlay"
+                   OpenPaneLength="150" Background="White"
+                   >
+            <SplitView.Pane>
+                <ListBox Background="#FF419380">
+                    <ListBoxItem Name="Register">
+                        <TextBlock FontSize="24">Registrar</TextBlock>
+                    </ListBoxItem>
+                </ListBox>
+            </SplitView.Pane>
+
+            <SplitView.Content>
+                <Frame Name="PokedexFrame"></Frame>
+            </SplitView.Content>
+        </SplitView>
+
 
     </Grid>
 </Page>
