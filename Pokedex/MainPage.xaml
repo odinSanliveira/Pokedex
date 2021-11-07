@@ -16,13 +16,40 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
        
+       
+        
+        
         <!--top menu-->
         <RelativePanel Background="#FF4EA095" Grid.Column="1">
-            <Button Name="MenuButton" RelativePanel.AlignLeftWithPanel="True" FontFamily="Segoe MDL2 Assets" FontSize="30" Content="&#xE700;" Click="MenuButton_Click"/>
-            <Button Name="BackArrow" RelativePanel.RightOf="MenuButton" FontFamily="Segoe MDL2 Assets" Content="&#xE0C4;" FontSize="30" Margin="15,0,0,0"/>
-            <TextBlock Name="TitlePage" RelativePanel.RightOf="BackArrow" Text="Pokedéx" FontSize="30" Margin="35,0,0,0" FontWeight="Bold"/>
-            <Button Name="SearchButton" RelativePanel.AlignRightWithPanel="True" FontFamily="Segoe MDL2 Assets" Content="&#xE1A3;" FontSize="30"/>
-            <TextBox Name="SearchTextBox"  RelativePanel.LeftOf="SearchButton" Height="43" FontSize="24" Width="300" PlaceholderText="Search" Background="#FF7BBDB4" SelectionHighlightColor="#FF9AE0BD" PlaceholderForeground="White"/>
+            <Button Name="MenuButton" 
+                    RelativePanel.AlignLeftWithPanel="True" 
+                    FontFamily="Segoe MDL2 Assets" 
+                    FontSize="30" 
+                    Content="&#xE700;" 
+                    Click="MenuButton_Click"/>
+            
+            
+            <Button Name="BackArrow" 
+                    RelativePanel.RightOf="MenuButton" 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Content="&#xE0C4;" 
+                    FontSize="30" 
+                    Margin="15,0,0,0"/>
+            
+            
+            <TextBlock Name="TitlePage" 
+                       RelativePanel.RightOf="BackArrow" 
+                       Text="Pokedéx" 
+                       FontSize="30" 
+                       Margin="35,0,0,0" 
+                       FontWeight="Bold"/>
+            
+            <AutoSuggestBox Name="AutoSuggestBox"
+                            QueryIcon="Find"
+                            PlaceholderText="Search"
+                            RelativePanel.AlignRightWithPanel="True"
+                            Width="200"
+                            Margin="0,5,10,0"/>
         </RelativePanel>
         <RelativePanel Grid.Row="1"
             >
@@ -49,7 +76,8 @@
                 <Frame Name="PokedexFrame"></Frame>
             </SplitView.Content>
         </SplitView>
-
+        
+        
 
     </Grid>
 </Page>
