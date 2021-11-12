@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Pokedex.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,14 +24,28 @@ namespace Pokedex
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainPage()
+        //ApiRequest api = new ApiRequest();
+        public ObservableCollection<Pokemon> pokemons { get; set; }
+        public MainPage() 
         {
             this.InitializeComponent();
+            pokemons = new ObservableCollection<Pokemon>();
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             SplitMenu.IsPaneOpen = !SplitMenu.IsPaneOpen;
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ProgressRing.IsActive = true;
+            ProgressRing.Visibility = Visibility.Visible;
+
+            await ApiRequest.FillPokedex(pokemons);
+
+            ProgressRing.IsActive = false;
+            ProgressRing.Visibility = Visibility.Collapsed;
         }
     }
 }
