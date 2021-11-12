@@ -25,7 +25,7 @@ using System.Threading.Tasks;
             //public Sprites Sprites { get; set; }
 
             [JsonProperty("id")]
-            public int id { get; set; }
+            public int Id { get; set; }
         }
         
         public class Sprites
