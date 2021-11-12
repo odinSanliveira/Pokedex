@@ -89,7 +89,7 @@
                     </Grid.ColumnDefinitions>
 
                     <ListView Name="PokeListViewMain" 
-                              ItemsSource="{x:Bind pokemons}"
+                              ItemsSource="{x:Bind Pokedex}"
                               Grid.Row="1"
                               Grid.Column="1">
                         <ListView.ItemTemplate>
@@ -101,7 +101,7 @@
                                                VerticalAlignment="Center"
                                                FontSize="12"
                                                Foreground="Black"/>
-                                    <TextBlock Text="{x:Bind Link}"
+                                    <TextBlock Text="{x:Bind Id}"
                                                Margin="5 0 10 5"
                                                VerticalAlignment="Center"
                                                FontSize="12"

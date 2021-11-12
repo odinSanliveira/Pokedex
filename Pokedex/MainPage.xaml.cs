@@ -25,11 +25,11 @@ namespace Pokedex
     public sealed partial class MainPage : Page
     {
         //ApiRequest api = new ApiRequest();
-        public ObservableCollection<Pokemon> pokemons { get; set; }
+        public ObservableCollection<PokemonDataWrapper> Pokedex { get; set; }
         public MainPage() 
         {
             this.InitializeComponent();
-            pokemons = new ObservableCollection<Pokemon>();
+            Pokedex = new ObservableCollection<PokemonDataWrapper>();
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -42,7 +42,7 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
 
-            await ApiRequest.FillPokedex(pokemons);
+            await ApiRequest.GetPokemonsAsync();
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
