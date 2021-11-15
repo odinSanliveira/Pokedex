@@ -93,19 +93,20 @@
                               Grid.Row="1"
                               Grid.Column="1">
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="data:Pokemon">
+                            <DataTemplate x:DataType="data:NamedAPIResource">
                                 <StackPanel Orientation="Horizontal">
 
-                                    <TextBlock Text="{x:Bind NamePokemon}"
+                                    <TextBlock Text="{x:Bind name}"
                                                Margin="5 0 10 5"
                                                VerticalAlignment="Center"
                                                FontSize="12"
                                                Foreground="Black"/>
-                                    <TextBlock Text="{x:Bind Id}"
+                                    <TextBlock Text="{x:Bind url}"
                                                Margin="5 0 10 5"
                                                VerticalAlignment="Center"
                                                FontSize="12"
                                                Foreground="Black"/>
+                       
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Pokedex.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,16 @@ namespace Pokedex
         public string Url { get; set; }
         private int actual = 0;
 
+        public static HttpClient apiClient { get; set; }
+
+        public static void InitializeClient()
+        {
+            apiClient = new HttpClient();
+            apiClient.DefaultRequestHeaders.Accept.Clear();
+            apiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+        }
+
         
 
 
@@ -35,36 +46,38 @@ namespace Pokedex
         //    Console.Write(result);
         //    return result;
         //}
-        public static async Task<PokemonDataWrapper> GetPokemonsAsync()
+        public static async Task<NamedAPIResourceList> GetPokemonsAsync()
         {
 
             HttpClient Client = new HttpClient();
-            var responseMessage = await Client.GetAsync("https://pokeapi.co/api/v2/pokemon/");
+            int offset = 0;
+            int limit = 15;
+            string url = String.Format("https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}", offset, limit);
+            var responseMessage = await Client.GetAsync(url);
             var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
 
-            var serializer = new DataContractJsonSerializer(typeof(PokemonDataWrapper));
+            var serializer = new DataContractJsonSerializer(typeof(NamedAPIResourceList));
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
-
-                var result = (PokemonDataWrapper)serializer.ReadObject(ms);
+                
+            var result = (NamedAPIResourceList)serializer.ReadObject(ms);
             return result;
+            
+            
 
-            //var jsonResponse = await Client.GetStringAsync("https://pokeapi.co/api/v2/pokemon/");
-            //var pokemonModel = JsonConvert.DeserializeObject<ObservableCollection<Pokemon>>(jsonResponse);
-            //return pokemonModel;
             
         }
 
 
-        public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex)
+        public static async Task FillPokedexList(ObservableCollection<NamedAPIResource> pokedex)
         {
             var pokemonData = await GetPokemonsAsync();
 
-            var pokemons = pokemonData.data.listPokemon;
+            var pokemons = pokemonData.results;
 
             /* here we could implement path for the attributes*/
 
             foreach(var pokemon in pokemons)
-            {
+            {   
                 pokedex.Add(pokemon);
             }
         }

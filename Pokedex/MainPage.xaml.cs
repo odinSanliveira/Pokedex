@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,11 +26,12 @@ namespace Pokedex
     public sealed partial class MainPage : Page
     {
         //ApiRequest api = new ApiRequest();
-        public ObservableCollection<PokemonDataWrapper> Pokedex { get; set; }
+        public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
         public MainPage() 
         {
             this.InitializeComponent();
-            Pokedex = new ObservableCollection<PokemonDataWrapper>();
+            ApiRequest.InitializeClient();
+            Pokedex = new ObservableCollection<NamedAPIResource>();
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -41,8 +43,8 @@ namespace Pokedex
         {
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
-
-            await ApiRequest.GetPokemonsAsync();
+            
+            await ApiRequest.FillPokedexList(Pokedex);
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
