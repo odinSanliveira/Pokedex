@@ -16,9 +16,6 @@ namespace Pokedex
 {
     public class ApiRequest
     {
-        public string Url { get; set; }
-        private int actual = 0;
-
         public static HttpClient apiClient { get; set; }
 
         public static void InitializeClient()
@@ -28,24 +25,6 @@ namespace Pokedex
             apiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
         }
-
-        
-
-
-
-
-        //public static async Task<Pokemon> FillPokedex(ObservableCollection<Pokemon> pokemon)
-        //{
-        //    var Url = String.Format("https://pokeapi.co/api/v2/pokemon/");
-        //    var jsonMessage = await CallPokedexAsync(Url);
-
-        //    var serializer = new DataContractJsonSerializer(typeof(Pokemon));
-        //    var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
-
-        //    var result = (Pokemon)serializer.ReadObject(ms);
-        //    Console.Write(result);
-        //    return result;
-        //}
         public static async Task<NamedAPIResourceList> GetPokemonsAsync()
         {
 
@@ -60,25 +39,54 @@ namespace Pokedex
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
                 
             var result = (NamedAPIResourceList)serializer.ReadObject(ms);
+            
             return result;
             
             
 
             
         }
+        public static async Task<Pokemon> GetPokemonDetail(string url)
+        {
+            
+            HttpClient Client = new HttpClient();
+            string request = String.Format(url);
+            var responseMessage = await Client.GetAsync(request);
+            var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
 
+            var serializer = new DataContractJsonSerializer(typeof(Pokemon));
+            var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
+
+            var pokemonData = (Pokemon)serializer.ReadObject(ms);
+            return pokemonData;
+
+
+
+
+        }
 
         public static async Task FillPokedexList(ObservableCollection<NamedAPIResource> pokedex)
         {
             var pokemonData = await GetPokemonsAsync();
 
             var pokemons = pokemonData.results;
-
+            
             /* here we could implement path for the attributes*/
 
             foreach(var pokemon in pokemons)
-            {   
-                pokedex.Add(pokemon);
+            {
+                var pokemonLoading = await GetPokemonDetail(pokemon.url);
+
+                if (pokemonLoading.sprites.front_default != null)
+                {
+                    //need to access keys in url
+                    
+                   
+                    pokedex.Add(pokemon);
+                    
+                   
+
+                }
             }
         }
     }

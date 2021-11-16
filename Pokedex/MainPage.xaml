@@ -91,21 +91,24 @@
                     <ListView Name="PokeListViewMain" 
                               ItemsSource="{x:Bind Pokedex}"
                               Grid.Row="1"
-                              Grid.Column="1">
+                              Grid.Column="0">
+                        
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="data:NamedAPIResource">
                                 <StackPanel Orientation="Horizontal">
 
+                                    
+
                                     <TextBlock Text="{x:Bind name}"
                                                Margin="5 0 10 5"
                                                VerticalAlignment="Center"
-                                               FontSize="12"
+                                               FontSize="18"
                                                Foreground="Black"/>
-                                    <TextBlock Text="{x:Bind url}"
+                                    <!--<TextBlock Text="{x:Bind url}"
                                                Margin="5 0 10 5"
                                                VerticalAlignment="Center"
                                                FontSize="12"
-                                               Foreground="Black"/>
+                                               Foreground="Black"/>-->
                        
                                 </StackPanel>
                             </DataTemplate>

@@ -16,4 +16,5 @@ namespace Pokedex.Models
         public string url { get; set; }
 
     }
+
 }

@@ -27,11 +27,13 @@ namespace Pokedex
     {
         //ApiRequest api = new ApiRequest();
         public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
+        public ObservableCollection<Pokemon> Pokemon { get; set; }
         public MainPage() 
         {
             this.InitializeComponent();
             ApiRequest.InitializeClient();
             Pokedex = new ObservableCollection<NamedAPIResource>();
+            Pokemon = new ObservableCollection<Pokemon>();
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
