@@ -15,6 +15,6 @@ namespace Pokedex.Models
         [JsonProperty("url")]
         public string url { get; set; }
 
+        
     }
-
 }

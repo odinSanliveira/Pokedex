@@ -14,7 +14,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
        
@@ -83,22 +83,28 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <ListView Name="PokeListViewMain" 
-                              ItemsSource="{x:Bind Pokedex}"
+                    <ListView Name="PokeListViewMain"
+                              IsItemClickEnabled="True"
+                              ItemClick="PokeListViewMain_ItemClick"
+                              ItemsSource="{x:Bind Pokemon}"
                               Grid.Row="1"
                               Grid.Column="0">
                         
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="data:NamedAPIResource">
+                            <DataTemplate x:DataType="data:Pokemon">
                                 <StackPanel Orientation="Horizontal">
 
-                                    
 
+                                    <TextBlock Text="{x:Bind id}"
+                                               Margin="5 0 10 5"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Foreground="Black"/>
+                                    
                                     <TextBlock Text="{x:Bind name}"
                                                Margin="5 0 10 5"
                                                VerticalAlignment="Center"
@@ -114,6 +120,51 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    
+                    <!-- Detail Layout-->
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="1">
+                        <TextBlock Name="PokemonName"
+                                   FontSize="32" 
+                                   TextWrapping="Wrap"                                   
+                                   Grid.Column="1"
+                                   Foreground="Black"
+                                   Margin="10,0,0,0" 
+                                   />
+                        <GridView Name="PokemonDetailView"
+                                  Grid.Row="1"
+                                  ItemsSource="{x:Bind Pokemon}">
+
+                            <GridView>
+                                <DataTemplate x:DataType="data:Pokemon">
+                                    <Image Source="{x:Bind sprites.front_default}" 
+                                           Width="200"
+                                           Height="200"/>
+                                </DataTemplate>
+                            </GridView>
+
+
+                        </GridView>
+                        
+                        
+                        <Grid.RowDefinitions>
+                            
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            
+                        </Grid.RowDefinitions>
+                        
+                        <Grid.ColumnDefinitions>
+                            
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            
+                        </Grid.ColumnDefinitions>
+                        
+                        
+                        
+                    </Grid>
                     
 
                 </Grid>

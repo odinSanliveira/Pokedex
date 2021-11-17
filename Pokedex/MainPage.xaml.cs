@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // O modelo de item de Página em Branco está documentado em https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x416
@@ -46,10 +47,21 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
             
-            await ApiRequest.FillPokedexList(Pokedex);
-
+            await ApiRequest.FillPokedexList(Pokemon);
+           
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
+        }
+
+        private void PokeListViewMain_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            var selectedPokemon = (Pokemon)e.ClickedItem;
+
+            PokemonName.Text = selectedPokemon.name;
+
+           
+            
         }
     }
 }

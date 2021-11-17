@@ -9,16 +9,16 @@ using System.Threading.Tasks;
     {        
         public class NamedAPIResourceList
         {
-            [JsonProperty("count")]
+           
             public int count { get; set; }
 
-            [JsonProperty("next")]
+            
             public Uri next { get; set; }
 
-            [JsonProperty("previous")]
+            
             public Uri previous { get; set; }
 
-            [JsonProperty("results")]
+           
             public List<NamedAPIResource> results { get; set; }
 
             
