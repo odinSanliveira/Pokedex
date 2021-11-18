@@ -37,17 +37,17 @@ namespace Pokedex
 
             var serializer = new DataContractJsonSerializer(typeof(NamedAPIResourceList));
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
-                
+
             var result = (NamedAPIResourceList)serializer.ReadObject(ms);
-            
+
             return result;
         }
 
         public static async Task<Pokemon> GetPokemonDetailByUrl(string url)
         {
-            
+
             HttpClient Client = new HttpClient();
-       
+
             var responseMessage = await Client.GetAsync(url);
             var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
 
@@ -55,46 +55,39 @@ namespace Pokedex
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
 
             var detail = (Pokemon)serializer.ReadObject(ms);
-            
+
             return detail;
         }
-
-
-        //public static async Task FillPokedexList(ObservableCollection<NamedAPIResource> pokedex)
-        //{
-
-        //    var pokemonData = await GetPokemonsAsync();
-
-        //    var pokemons = pokemonData.results;
-
-
-        //        /* here we could implement path for the attributes*/
-        //    foreach (var pokemon in pokemons)
-        //    {
-        //         //need to access keys in url
-        //        var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url);
-
-        //        pokedex.Add(pokemon);
-
-
-        //    }
-
-        //}
         public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex)
         {
 
-            var pokemonData = await GetPokemonsAsync();
-            var pokemons = pokemonData.results;
-            /* here we could implement path for the attributes*/
-            foreach (var pokemon in pokemons)
+            try
             {
-                //need to access keys in url
-                var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url);
-                pokedex.Add(pokemonDetail);
+                var pokemonData = await GetPokemonsAsync();
+                var pokemons = pokemonData.results;
+                /* here we could implement path for the attributes*/
+                foreach (var pokemon in pokemons)
+                {
 
+                    //need to access keys in url
+                    var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url);
+                    //if(pokemonDetail.sprites.front_default != null)
+                    //{
+
+                    //}
+                    pokedex.Add(pokemonDetail);
+
+
+
+                }
 
             }
+            catch (Exception)
+            {
+                return;
+            }
+
 
         }
     }
-}
+    }

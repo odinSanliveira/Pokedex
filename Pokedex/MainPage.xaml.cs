@@ -60,8 +60,14 @@ namespace Pokedex
 
             PokemonName.Text = selectedPokemon.name;
 
-           
-            
+            var pokemonImage = new BitmapImage();
+            Uri url = new Uri(selectedPokemon.sprites.front_default, UriKind.Absolute);
+            pokemonImage.UriSource = url;
+            PokemonDetailImage.Source = pokemonImage;
+
+
+
+
         }
     }
 }

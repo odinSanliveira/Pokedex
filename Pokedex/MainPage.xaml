@@ -17,10 +17,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-       
-       
-        
-        
+
+
+
+
         <!--top menu-->
         <RelativePanel Background="#FF4EA095" Grid.Column="1">
             <Button Name="MenuButton" 
@@ -29,23 +29,23 @@
                     FontSize="30" 
                     Content="&#xE700;" 
                     Click="MenuButton_Click"/>
-            
-            
+
+
             <Button Name="BackArrow" 
                     RelativePanel.RightOf="MenuButton" 
                     FontFamily="Segoe MDL2 Assets" 
                     Content="&#xE0C4;" 
                     FontSize="30" 
                     Margin="15,0,0,0"/>
-            
-            
+
+
             <TextBlock Name="TitlePage" 
                        RelativePanel.RightOf="BackArrow" 
                        Text="Pokedéx" 
                        FontSize="30" 
                        Margin="35,0,0,0" 
                        FontWeight="Bold"/>
-            
+
             <AutoSuggestBox Name="AutoSuggestBox"
                             QueryIcon="Find"
                             PlaceholderText="Search"
@@ -58,10 +58,10 @@
             <Button Name="ByNumberButton" Height="34" Foreground="Black" RelativePanel.AlignHorizontalCenterWithPanel="True">BY #</Button>
             <Button Name="ByNameButton" Height="34" Foreground="Black" RelativePanel.RightOf="ByNumberButton">BY NAME</Button>
             <Button Name="ByTypeButton" Height="34" Foreground="Black" RelativePanel.RightOf="ByNameButton">BY TYPE</Button>
-            
+
         </RelativePanel>
 
-            <SplitView Grid.Row="2"
+        <SplitView Grid.Row="2"
                    Name="SplitMenu"
                    DisplayMode="Overlay"
                    OpenPaneLength="150" Background="White"
@@ -79,7 +79,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="30"/>                        
+                        <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -93,7 +93,7 @@
                               ItemsSource="{x:Bind Pokemon}"
                               Grid.Row="1"
                               Grid.Column="0">
-                        
+
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="data:Pokemon">
                                 <StackPanel Orientation="Horizontal">
@@ -104,7 +104,7 @@
                                                VerticalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
-                                    
+
                                     <TextBlock Text="{x:Bind name}"
                                                Margin="5 0 10 5"
                                                VerticalAlignment="Center"
@@ -115,57 +115,52 @@
                                                VerticalAlignment="Center"
                                                FontSize="12"
                                                Foreground="Black"/>-->
-                       
+
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    
+
                     <!-- Detail Layout-->
-                    <Grid
-                        Grid.Row="1"
-                        Grid.Column="1">
-                        <TextBlock Name="PokemonName"
-                                   FontSize="32" 
-                                   TextWrapping="Wrap"                                   
-                                   Grid.Column="1"
-                                   Foreground="Black"
-                                   Margin="10,0,0,0" 
-                                   />
-                        <GridView Name="PokemonDetailView"
-                                  Grid.Row="1"
-                                  ItemsSource="{x:Bind Pokemon}">
-
-                            <GridView>
-                                <DataTemplate x:DataType="data:Pokemon">
-                                    <Image Source="{x:Bind sprites.front_default}" 
-                                           Width="200"
-                                           Height="200"/>
-                                </DataTemplate>
-                            </GridView>
-
-
-                        </GridView>
-                        
+                    <Grid Grid.Row="1" Grid.Column="1">                        
                         
                         <Grid.RowDefinitions>
-                            
+
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
-                            
+
                         </Grid.RowDefinitions>
-                        
-                        <Grid.ColumnDefinitions>
+
+                        <!-- pokemon detail layout -->
+                        <Grid Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
                             
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            
-                        </Grid.ColumnDefinitions>
-                        
-                        
-                        
+                            <Image Name="PokemonDetailImage" 
+                                               Grid.Column="0" 
+                                               Grid.RowSpan="2" 
+                                               VerticalAlignment="Top" />
+
+                            <TextBlock Name="PokemonName"
+                                       FontSize="32" 
+                                       TextWrapping="Wrap"                                   
+                                       Grid.Column="1"
+                                       Foreground="Black"
+                                       Margin="10,0,0,0" 
+                                       />
+
+                           
+
+                        </Grid>
                     </Grid>
-                    
+
 
                 </Grid>
             </SplitView.Content>
