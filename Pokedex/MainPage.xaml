@@ -104,6 +104,10 @@
                                                VerticalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
+                                    <Image Source="{x:Bind sprites.front_default}" Name="PokemonDetailImage" 
+                                               Grid.Column="0" 
+                                               Grid.RowSpan="2" 
+                                               VerticalAlignment="Top" />
 
                                     <TextBlock Text="{x:Bind name}"
                                                Margin="5 0 10 5"
