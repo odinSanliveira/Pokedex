@@ -25,13 +25,12 @@ namespace Pokedex
             apiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
         }
-        public static async Task<NamedAPIResourceList> GetPokemonsAsync()
+        public static async Task<NamedAPIResourceList> getAPIAtribbute(string link)
         {
-
             HttpClient Client = new HttpClient();
             int offset = 0;
-            int limit = 15;
-            string url = String.Format("https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}", offset, limit);
+            int limit = 1;
+            string url = String.Format(link, offset, limit);
             var responseMessage = await Client.GetAsync(url);
             var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
 
@@ -58,23 +57,19 @@ namespace Pokedex
 
             return detail;
         }
+
         public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex)
         {
 
             try
             {
-                var pokemonData = await GetPokemonsAsync();
+                var pokemonData = await getAPIAtribbute("https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
                 var pokemons = pokemonData.results;
                 /* here we could implement path for the attributes*/
                 foreach (var pokemon in pokemons)
                 {
-
                     //need to access keys in url
                     var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url);
-                    //if(pokemonDetail.sprites.front_default != null)
-                    //{
-
-                    //}
                     pokedex.Add(pokemonDetail);
 
 
@@ -89,5 +84,24 @@ namespace Pokedex
 
 
         }
+
+
+        public static async Task<NamedAPIResourceList> GetTypeList()
+        {
+            HttpClient Client = new HttpClient();
+            string url = String.Format("https://pokeapi.co/api/v2/type/");
+            var responseMessage = await Client.GetAsync(url);
+            var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
+
+            var serializer = new DataContractJsonSerializer(typeof(NamedAPIResourceList));
+            var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
+
+            var typeResultList = (NamedAPIResourceList)serializer.ReadObject(ms);
+
+            return typeResultList;
+
+        }
+
+
     }
-    }
+}

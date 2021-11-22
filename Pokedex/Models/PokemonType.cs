@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Models
 {
-    public class Pokemon
+    public  class PokemonType
     {
         public int id { get; set; }
-        public string name { get; set; }        
-        public PokemonSprites sprites { get; set; }
+        public string name { get; set; }
 
-        public List<PokemonType> types { get; set; }
-
-        
     }
 }

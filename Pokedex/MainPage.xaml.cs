@@ -48,6 +48,7 @@ namespace Pokedex
             ProgressRing.Visibility = Visibility.Visible;
             
             await ApiRequest.FillPokedexList(Pokemon);
+            await ApiRequest.getAPIAtribbute("https://pokeapi.co/api/v2/type/");
            
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
