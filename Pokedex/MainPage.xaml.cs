@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using static Pokedex.DBCreation;
 
 // O modelo de item de Página em Branco está documentado em https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x416
 
@@ -64,6 +65,7 @@ namespace Pokedex
             Uri url = new Uri(selectedPokemon.sprites.front_default, UriKind.Absolute);
             pokemonImage.UriSource = url;
             PokemonDetailImage.Source = pokemonImage;
+            DBCreation.addRecord(selectedPokemon.id,selectedPokemon.name);
 
 
 

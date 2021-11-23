@@ -114,7 +114,9 @@
                                                VerticalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
-                                    <!--<TextBlock Text="{x:Bind url}"
+                                    
+                                               
+                                    <!--<TextBlock Text="{x:Bind url}"nd="Black"/>
                                                Margin="5 0 10 5"
                                                VerticalAlignment="Center"
                                                FontSize="12"
