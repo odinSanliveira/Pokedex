@@ -8,8 +8,8 @@ namespace Pokedex.Models
 {
     public  class PokemonType
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        public int slot { get; set; }
+        public NamedAPIResource type { get; set; }
 
     }
 }

@@ -94,10 +94,9 @@
                               Grid.Row="1"
                               Grid.Column="0">
 
-                        <ListView.ItemTemplate>
+                        <ListView.ItemTemplate> 
                             <DataTemplate x:DataType="data:Pokemon">
                                 <StackPanel Orientation="Horizontal">
-
 
                                     <TextBlock Text="{x:Bind id}"
                                                Margin="5 0 10 5"
@@ -131,7 +130,7 @@
                         <Grid.RowDefinitions>
 
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
 
                         </Grid.RowDefinitions>
@@ -163,6 +162,56 @@
                            
 
                         </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/> 
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0"
+                                       Text="Type"
+                                       FontSize="18"
+                                       FontWeight="ExtraBold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="1"
+                                       Name="TypeOne"
+                                       FontSize="18"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="2"
+                                       Name="TypeTwo"
+                                       FontSize="18"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="HP"
+                                       FontSize="18"
+                                       FontWeight="ExtraBold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                        </Grid>
+                        
                     </Grid>
 
 
