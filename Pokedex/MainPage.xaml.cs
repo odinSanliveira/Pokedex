@@ -65,7 +65,7 @@ namespace Pokedex
             Uri url = new Uri(selectedPokemon.sprites.front_default, UriKind.Absolute);
             pokemonImage.UriSource = url;
             PokemonDetailImage.Source = pokemonImage;
-            DBCreation.addRecord(selectedPokemon.id,selectedPokemon.name);
+            DBCreation.addRecord(selectedPokemon.id,selectedPokemon.name,selectedPokemon.sprites.front_default);
 
 
 
