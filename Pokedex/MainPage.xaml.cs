@@ -30,12 +30,14 @@ namespace Pokedex
         //ApiRequest api = new ApiRequest();
         public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
         public ObservableCollection<Pokemon> Pokemon { get; set; }
-        public MainPage() 
+        public MainPage()
         {
+
             this.InitializeComponent();
             ApiRequest.InitializeClient();
             Pokedex = new ObservableCollection<NamedAPIResource>();
             Pokemon = new ObservableCollection<Pokemon>();
+
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -47,9 +49,11 @@ namespace Pokedex
         {
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
-            
+
             await ApiRequest.FillPokedexList(Pokemon);
-           
+
+
+
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
         }
@@ -60,16 +64,13 @@ namespace Pokedex
             var selectedPokemon = (Pokemon)e.ClickedItem;
 
             PokemonName.Text = selectedPokemon.name;
+            PokemonHeight.Text = selectedPokemon.weight.ToString();
 
             var pokemonImage = new BitmapImage();
             Uri url = new Uri(selectedPokemon.sprites.front_default, UriKind.Absolute);
             pokemonImage.UriSource = url;
             PokemonDetailImage.Source = pokemonImage;
-            DBCreation.addRecord(selectedPokemon.id,selectedPokemon.name,selectedPokemon.sprites.front_default);
-
-
-
-
+            DBCreation.addRecord(selectedPokemon.id, selectedPokemon.name, selectedPokemon.sprites.back_default);
         }
     }
 }

@@ -55,7 +55,7 @@ namespace Pokedex
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
 
             var detail = (Pokemon)serializer.ReadObject(ms);
-
+            
             return detail;
         }
         public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex)
@@ -75,7 +75,16 @@ namespace Pokedex
                     //{
 
                     //}
+                    //var h = pokemonDetail.types;
+                    //foreach (var j in h)
+                    //{
+                    //    var g = j.type.name;
+     
+                    //    pokemonDetail.TypeGetter.Add(g);
+
+                    //}
                     pokedex.Add(pokemonDetail);
+                    
 
 
 
@@ -87,6 +96,7 @@ namespace Pokedex
                 return;
             }
 
+            
 
         }
     }

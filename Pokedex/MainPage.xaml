@@ -114,6 +114,27 @@
                                                VerticalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
+                                    <TextBlock 
+                                               Text="{x:Bind types[0].type.name}"
+                                               Margin="5 0 10 5"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Foreground="Black"/>
+                                    <!--<TextBlock 
+                                               Text="{x:Bind weight}"
+                                               Margin="5 0 10 5"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Foreground="Black"/>
+                                    <TextBlock 
+                                               Text="{x:Bind height}"
+                                               Margin="5 0 10 5"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Foreground="Black"/>-->
+                                    
+                                    
+                                    
                                     
                                                
                                     <!--<TextBlock Text="{x:Bind url}"nd="Black"/>
@@ -121,7 +142,6 @@
                                                VerticalAlignment="Center"
                                                FontSize="12"
                                                Foreground="Black"/>-->
-
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -161,6 +181,21 @@
                                        Foreground="Black"
                                        Margin="10,0,0,0" 
                                        />
+                            <!--<TextBlock Name="PokemonHeight"
+                                       FontSize="32" 
+                                       TextWrapping="Wrap"                                   
+                                       Grid.Column="1"
+                                       Foreground="Black"
+                                       Margin="10,0,0,0" 
+                                       />
+                            <TextBlock Name="PokemonWeight"
+                                       FontSize="32" 
+                                       TextWrapping="Wrap"                                   
+                                       Grid.Column="1"
+                                       Foreground="Black"
+                                       Margin="10,0,0,0" 
+                                       />-->
+                            
 
                            
 
