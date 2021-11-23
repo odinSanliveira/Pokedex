@@ -43,7 +43,7 @@ namespace Pokedex
                 SqliteCommand CMD_Insert = new SqliteCommand();
                 CMD_Insert.Connection = con;
 
-                CMD_Insert.CommandText = "INSERT OR REPLACE INTO Pokemon VALUES(@idPoke, @nameP, @sprites);";
+                CMD_Insert.CommandText = "INSERT OR IGNORE INTO Pokemon VALUES(@idPoke, @nameP, @sprites);";
                 CMD_Insert.Parameters.AddWithValue("@idPoke", id);
                 CMD_Insert.Parameters.AddWithValue("@nameP", name);
                 CMD_Insert.Parameters.AddWithValue("@sprites", sprites);
@@ -84,14 +84,35 @@ namespace Pokedex
 
                 while (reader.Read())
                 {
-                    int teste = int.Parse(reader.GetString(0));
-                    pokeList.Add(new storedPokeData(teste, reader.GetString(1),reader.GetString(2)));
+                    int ParsedIndex = int.Parse(reader.GetString(0));
+                    pokeList.Add(new storedPokeData(ParsedIndex, reader.GetString(1),reader.GetString(2)));
                 }
 
                 con.Close();
             }
 
             return pokeList;
+        }
+
+        public static void deleteRecord(int id, String name, String sprites)
+        {
+            string pathToDB = Path.Combine(ApplicationData.Current.LocalFolder.Path, "storedPokemon3.db");
+
+            using (SqliteConnection con = new SqliteConnection($"Filename={pathToDB}"))
+            {
+                con.Open();
+                SqliteCommand CMD_Delete = new SqliteCommand();
+                CMD_Delete.Connection = con;
+
+                CMD_Delete.CommandText = "DELETE FROM Pokemon VALUES(@idPoke, @nameP, @sprites);";
+                CMD_Delete.Parameters.AddWithValue("@idPoke", id);
+                CMD_Delete.Parameters.AddWithValue("@nameP", name);
+                CMD_Delete.Parameters.AddWithValue("@sprites", sprites);
+
+                CMD_Delete.ExecuteReader();
+
+                con.Close();
+            }
         }
 
 
