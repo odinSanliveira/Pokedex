@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Models
 {
-    public class Pokemon
+    public class Species
     {
-        public int id { get; set; }
         public string name { get; set; }
-        public PokemonSprites sprites { get; set; }
-        public List<TypeElement> types { get; set; }
+        public Uri url { get; set; }
     }
 }
