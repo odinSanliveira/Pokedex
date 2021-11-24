@@ -112,8 +112,13 @@
                                                VerticalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
-                                    <!--TODO:Facilitar o bind disso por meio de um método pra que seja simples a adição no BD-->
-                                    <ListView Name="PokeTypesListView"
+                                    <TextBlock Text="{x:Bind TypeGetter()}"
+                                               Margin="5 0 10 5"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Foreground="Black"/>
+                                  
+                                    <!--<ListView Name="PokeTypesListView"
                                               IsItemClickEnabled="True"
                                               ItemsSource="{x:Bind types}">
                                         <ListView.ItemTemplate>
@@ -128,7 +133,7 @@
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
-                                    </ListView>
+                                    </ListView>-->
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

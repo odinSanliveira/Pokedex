@@ -12,5 +12,18 @@ namespace Pokedex.Models
         public string name { get; set; }
         public PokemonSprites sprites { get; set; }
         public List<TypeElement> types { get; set; }
+
+        public string TypeGetter()
+        {
+            List<string> typePoke = new List<string>();
+            string typeUniqueList = string.Empty;
+
+            foreach (var item in types)
+            {
+                typeUniqueList += item.type.name + "\n";
+                typePoke.Add(item.type.name);
+            }
+            return typeUniqueList;
+        }
     }
 }
