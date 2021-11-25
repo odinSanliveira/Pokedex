@@ -17,6 +17,7 @@ namespace Pokedex.Models
 
         public int height { get; set; }
         public int weight { get; set; }
+        public List<Stat> stats { get; set; }
 
         public string TypeGetter()
         {

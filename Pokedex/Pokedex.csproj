@@ -128,12 +128,11 @@
     <Compile Include="Models\NamedAPIResourceList.cs" />
     <Compile Include="Models\Pokemon.cs" />
     <Compile Include="Models\PokemonSprites.cs" />
-
     <Compile Include="Models\Species.cs" />
+    <Compile Include="Models\Stat.cs" />
     <Compile Include="Models\TypeElement.cs" />
     <Compile Include="Models\PokemonType.cs" />
     <Compile Include="Models\Type.cs" />
-
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
