@@ -18,6 +18,18 @@ namespace Pokedex.Models
         public int height { get; set; }
         public int weight { get; set; }
 
+        public string TypeGetter()
+        {
+            List<string> typePoke = new List<string>();
+            string typeUniqueList = string.Empty;
+            foreach (var item in types)
+            {
+                typeUniqueList += item.type.name + "\n";
+                typePoke.Add(item.type.name);
+            }
+            return typeUniqueList;
+        }
+
 
 
     }

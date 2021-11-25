@@ -49,7 +49,7 @@ namespace Pokedex
             ProgressRing.Visibility = Visibility.Visible;
 
             await ApiRequest.FillPokedexList(Pokemon);
-            //await ApiRequest.getAPIAtribbute("https://pokeapi.co/api/v2/type/");
+         
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
@@ -62,7 +62,9 @@ namespace Pokedex
 
             PokemonName.Text = selectedPokemon.name;
             TypeOne.Text = selectedPokemon.types[0].type.name;
-            if(selectedPokemon.types.Count > 1)
+            TypeBlock.Text = "Type";
+            HpBlock.Text = "HP";
+            if (selectedPokemon.types.Count > 1)
             {
                 TypeTwo.Text = selectedPokemon.types[1].type.name;
             }
