@@ -22,7 +22,7 @@
 
 
         <!--top menu-->
-        <RelativePanel Background="#FF4EA095" Grid.Column="1">
+        <RelativePanel Background="#FF4EA095">
             <Button Name="MenuButton" 
                     RelativePanel.AlignLeftWithPanel="True" 
                     FontFamily="Segoe MDL2 Assets" 
@@ -83,7 +83,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="350"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
@@ -139,7 +139,7 @@
                         <Grid.RowDefinitions>
 
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
 
                         </Grid.RowDefinitions>
@@ -171,8 +171,11 @@
                            
 
                         </Grid>
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1" Padding="10">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/> 
                                 <RowDefinition Height="30"/> 
                                 <RowDefinition Height="30"/> 
                                 <RowDefinition Height="30"/> 
@@ -218,10 +221,24 @@
                                        Foreground="Black"
                                        HorizontalAlignment="Center"
                                        />
+                            <TextBlock Grid.Row="1" Grid.Column="1"
+                                       Name="Hp"
+                                       FontSize="18"
+                                       FontWeight="Medium"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
                             <TextBlock Grid.Row="2" Grid.Column="0"
                                        Name="AttackBlock"
                                        FontSize="18"
                                        FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="2" Grid.Column="1"
+                                       Name="Attack"
+                                       FontSize="18"
+                                       FontWeight="Medium"
                                        Foreground="Black"
                                        HorizontalAlignment="Center"
                                        />
@@ -232,10 +249,24 @@
                                        Foreground="Black"
                                        HorizontalAlignment="Center"
                                        />
+                            <TextBlock Grid.Row="3" Grid.Column="1"
+                                       Name="Defense"
+                                       FontSize="18"
+                                       FontWeight="Medium"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
                             <TextBlock Grid.Row="4" Grid.Column="0"
                                        Name="SpecialAttackBlock"
                                        FontSize="18"
                                        FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="4" Grid.Column="1"
+                                       Name="SpecialAttack"
+                                       FontSize="18"
+                                       FontWeight="Medium"
                                        Foreground="Black"
                                        HorizontalAlignment="Center"
                                        />
@@ -246,6 +277,32 @@
                                        Foreground="Black"
                                        HorizontalAlignment="Center"
                                        />
+                            <TextBlock Grid.Row="5" Grid.Column="1"
+                                       Name="SpecialDefense"
+                                       FontSize="18"
+                                       FontWeight="Medium"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="6" Grid.Column="0"
+                                       Name="SpeedBlock"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="6" Grid.Column="1"
+                                       Name="Speed"
+                                       FontSize="18"
+                                       FontWeight="Medium"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+
+
+
+
+
                             <TextBlock Grid.Row="1" Grid.Column="2"
                                        Name="HeightBlock"
                                        FontSize="18"

@@ -64,10 +64,17 @@ namespace Pokedex
             TypeOne.Text = selectedPokemon.types[0].type.name;
             TypeBlock.Text = "Type";
             HpBlock.Text = "HP";
+            Hp.Text = selectedPokemon.stats[0].base_stat.ToString();
             AttackBlock.Text = "Attack";
+            Attack.Text = selectedPokemon.stats[1].base_stat.ToString();
             DefenseBlock.Text = "Defense";
+            Defense.Text = selectedPokemon.stats[2].base_stat.ToString();
             SpecialAttackBlock.Text = "Special Attack";
+            SpecialAttack.Text = selectedPokemon.stats[3].base_stat.ToString();
             SpecialDefenseBlock.Text = "Special Defense";
+            SpecialDefense.Text = selectedPokemon.stats[4].base_stat.ToString();
+            SpeedBlock.Text = "Speed";
+            Speed.Text = selectedPokemon.stats[5].base_stat.ToString();
             HeightBlock.Text = "Height";
             Height.Text = selectedPokemon.height.ToString();
             WeightBlock.Text = "Weight";
