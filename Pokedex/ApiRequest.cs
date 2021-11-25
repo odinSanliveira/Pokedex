@@ -25,13 +25,12 @@ namespace Pokedex
             apiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
         }
-        public static async Task<NamedAPIResourceList> GetPokemonsAsync()
+        public static async Task<NamedAPIResourceList> getAPIAtribbute(string endpoint)
         {
-
             HttpClient Client = new HttpClient();
             int offset = 0;
-            int limit = 15;
-            string url = String.Format("https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}", offset, limit);
+            int limit = 10;
+            string url = String.Format(endpoint, offset, limit);
             var responseMessage = await Client.GetAsync(url);
             var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
 
@@ -57,28 +56,22 @@ namespace Pokedex
             var detail = (Pokemon)serializer.ReadObject(ms);
 
             return detail;
+            //return a Pokemon with all attributes required
         }
+
         public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex)
         {
 
             try
             {
-                var pokemonData = await GetPokemonsAsync();
+                var pokemonData = await getAPIAtribbute("https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
                 var pokemons = pokemonData.results;
                 /* here we could implement path for the attributes*/
                 foreach (var pokemon in pokemons)
                 {
-
-                    //need to access keys in url
-                    var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url);
-                    //if(pokemonDetail.sprites.front_default != null)
-                    //{
-
-                    //}
+                    
+                    var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url); //access when is clicked
                     pokedex.Add(pokemonDetail);
-
-
-
                 }
 
             }
@@ -89,5 +82,21 @@ namespace Pokedex
 
 
         }
+        public static async Task<PokemonType> GetPokemonType(string endpoint)
+        {
+            HttpClient Client = new HttpClient();
+
+            var responseMessage = await Client.GetAsync(endpoint);
+            var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
+
+            var serializer = new DataContractJsonSerializer(typeof(PokemonType));
+            var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
+
+            var detail = (PokemonType)serializer.ReadObject(ms);
+
+            return detail;
+        }
+
+
     }
-    }
+}

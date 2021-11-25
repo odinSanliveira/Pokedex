@@ -30,7 +30,7 @@ namespace Pokedex
         //ApiRequest api = new ApiRequest();
         public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
         public ObservableCollection<Pokemon> Pokemon { get; set; }
-        public MainPage() 
+        public MainPage()
         {
             this.InitializeComponent();
             ApiRequest.InitializeClient();
@@ -47,9 +47,10 @@ namespace Pokedex
         {
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
-            
+
             await ApiRequest.FillPokedexList(Pokemon);
-           
+            //await ApiRequest.getAPIAtribbute("https://pokeapi.co/api/v2/type/");
+
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
         }
@@ -60,7 +61,17 @@ namespace Pokedex
             var selectedPokemon = (Pokemon)e.ClickedItem;
 
             PokemonName.Text = selectedPokemon.name;
-
+            TypeOne.Text = selectedPokemon.types[0].type.name;
+            if(selectedPokemon.types.Count > 1)
+            {
+                TypeTwo.Text = selectedPokemon.types[1].type.name;
+            }
+            else
+            {
+                TypeTwo.Text = "";
+            }
+           
+            
             var pokemonImage = new BitmapImage();
             Uri url = new Uri(selectedPokemon.sprites.front_default, UriKind.Absolute);
             pokemonImage.UriSource = url;
