@@ -64,6 +64,15 @@ namespace Pokedex
             TypeOne.Text = selectedPokemon.types[0].type.name;
             TypeBlock.Text = "Type";
             HpBlock.Text = "HP";
+            AttackBlock.Text = "Attack";
+            DefenseBlock.Text = "Defense";
+            SpecialAttackBlock.Text = "Special Attack";
+            SpecialDefenseBlock.Text = "Special Defense";
+            HeightBlock.Text = "Height";
+            Height.Text = selectedPokemon.height.ToString();
+            WeightBlock.Text = "Weight";
+            Weight.Text = selectedPokemon.weight.ToString();
+
             if (selectedPokemon.types.Count > 1)
             {
                 TypeTwo.Text = selectedPokemon.types[1].type.name;

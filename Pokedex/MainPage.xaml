@@ -79,11 +79,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="400"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
@@ -113,9 +113,11 @@
                                                VerticalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
+                                    
                                     <TextBlock Text="{x:Bind TypeGetter()}"
-                                               Margin="5 0 10 5"
+                                               Margin="25 0 10 0"
                                                VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
                                   
@@ -124,6 +126,12 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <Grid Grid.Row="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Name="Previous" Height="50" Foreground="Black" Margin="12 0 12 0">Previous</Button>
+                            <Button Name="Next" Height="50" Foreground="Black" Margin="12 0 12 0">Next</Button>
+                        </StackPanel>
+                    </Grid>
 
                     <!-- Detail Layout-->
                     <Grid Grid.Row="1" Grid.Column="1">                        
@@ -171,22 +179,21 @@
                                 <RowDefinition Height="30"/> 
                                 <RowDefinition Height="30"/> 
                                 <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
                             </Grid.ColumnDefinitions>
                             
                             <TextBlock Grid.Row="0" Grid.Column="0"
                                        Name="TypeBlock"
                                        FontSize="18"
-                                       FontWeight="ExtraBold"
-                                       Foreground="Black"
+                                       FontWeight="Bold"
+                                       Foreground="Black "
                                        HorizontalAlignment="Center"
                                        />
                             
@@ -207,10 +214,67 @@
                             <TextBlock Grid.Row="1" Grid.Column="0"
                                        Name="HpBlock"
                                        FontSize="18"
-                                       FontWeight="ExtraBold"
+                                       FontWeight="Bold"
                                        Foreground="Black"
                                        HorizontalAlignment="Center"
                                        />
+                            <TextBlock Grid.Row="2" Grid.Column="0"
+                                       Name="AttackBlock"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="3" Grid.Column="0"
+                                       Name="DefenseBlock"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="4" Grid.Column="0"
+                                       Name="SpecialAttackBlock"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="5" Grid.Column="0"
+                                       Name="SpecialDefenseBlock"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="1" Grid.Column="2"
+                                       Name="HeightBlock"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="2" Grid.Column="2"
+                                       Name="WeightBlock"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="1" Grid.Column="3"
+                                       Name="Height"
+                                       FontSize="18"
+                                       FontWeight="Medium"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            <TextBlock Grid.Row="2" Grid.Column="3"
+                                       Name="Weight"
+                                       FontSize="18"
+                                       FontWeight="Medium"
+                                       Foreground="Black"
+                                       HorizontalAlignment="Center"
+                                       />
+                            
                         </Grid>
                         
                     </Grid>
