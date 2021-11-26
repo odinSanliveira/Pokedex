@@ -10,6 +10,24 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Style x:Key="PaginationButton" TargetType="Button">
+            <Setter Property="Background" Value="Coral" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Margin" Value="12 0 12 0" />
+            <Setter Property="CornerRadius" Value="3 12 12 12" />
+        </Style>
+
+        <Style x:Key="PaginationButtonOnMouseOver" TargetType="Button">
+            <Setter Property="Background" Value="GreenYellow" />
+        </Style>
+        <Style x:Key="DisabledButton" TargetType="Button">
+            <Setter Property="Background" Value="#A1A1A1" />
+        </Style>
+    </Page.Resources>
+
     <Grid Background="#FFE8E8E8">
 
         <Grid.RowDefinitions>
@@ -94,7 +112,7 @@
                               Grid.Row="1"
                               Grid.Column="0">
 
-                        <ListView.ItemTemplate> 
+                        <ListView.ItemTemplate>
                             <DataTemplate x:DataType="data:Pokemon">
                                 <StackPanel Orientation="Horizontal">
 
@@ -113,29 +131,35 @@
                                                VerticalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
-                                    
+
                                     <TextBlock Text="{x:Bind TypeGetter()}"
                                                Margin="25 0 10 0"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                FontSize="18"
                                                Foreground="Black"/>
-                                  
-                                   
+
+
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                     <Grid Grid.Row="2">
+
                         <StackPanel Orientation="Horizontal">
-                            <Button Name="Previous" Height="50" Foreground="Black" Margin="12 0 12 0">Previous</Button>
-                            <Button Name="Next" Height="50" Foreground="Black" Margin="12 0 12 0">Next</Button>
+                            <Button Name="Previous" Style="{StaticResource PaginationButton}" 
+                                    Click="Previous_Click" Width="150" 
+                                    HorizontalAlignment="Center" >Previous</Button>
+                            
+                            <Button Name="Next" Style="{StaticResource PaginationButton}" 
+                                    Click="Next_Click" Width="150" 
+                                    HorizontalAlignment="Center">Next</Button>
                         </StackPanel>
                     </Grid>
 
                     <!-- Detail Layout-->
-                    <Grid Grid.Row="1" Grid.Column="1">                        
-                        
+                    <Grid Grid.Row="1" Grid.Column="1">
+
                         <Grid.RowDefinitions>
 
                             <RowDefinition Height="Auto" />
@@ -154,7 +178,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            
+
                             <Image Name="PokemonDetailImage" 
                                                Grid.Column="0" 
                                                Grid.RowSpan="2" 
@@ -168,20 +192,20 @@
                                        Margin="10,0,0,0" 
                                        />
 
-                           
+
 
                         </Grid>
                         <Grid Grid.Row="1" Padding="10">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
-                                <RowDefinition Height="30"/> 
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="130"/>
@@ -191,7 +215,7 @@
                                 <ColumnDefinition Width="130"/>
                                 <ColumnDefinition Width="130"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <TextBlock Grid.Row="0" Grid.Column="0"
                                        Name="TypeBlock"
                                        FontSize="18"
@@ -199,14 +223,14 @@
                                        Foreground="Black "
                                        HorizontalAlignment="Center"
                                        />
-                            
+
                             <TextBlock Grid.Row="0" Grid.Column="1"
                                        Name="TypeOne"
                                        FontSize="18"
                                        Foreground="Black"
                                        HorizontalAlignment="Center"
                                        />
-                            
+
                             <TextBlock Grid.Row="0" Grid.Column="2"
                                        Name="TypeTwo"
                                        FontSize="18"
@@ -331,9 +355,9 @@
                                        Foreground="Black"
                                        HorizontalAlignment="Center"
                                        />
-                            
+
                         </Grid>
-                        
+
                     </Grid>
 
 

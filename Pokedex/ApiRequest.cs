@@ -17,6 +17,9 @@ namespace Pokedex
     public class ApiRequest
     {
         public static HttpClient apiClient { get; set; }
+        public static Uri previous { get; set; }
+        public static Uri next { get; set; }
+        
 
         public static void InitializeClient()
         {
@@ -59,18 +62,21 @@ namespace Pokedex
             //return a Pokemon with all attributes required
         }
 
-        public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex)
+        public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex, string endpoint)
         {
 
             try
             {
-                var pokemonData = await getAPIAtribbute("https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
+                var pokemonData = await getAPIAtribbute(endpoint);
+                next = pokemonData.next;
+                previous = pokemonData.previous;
                 var pokemons = pokemonData.results;
                 /* here we could implement path for the attributes*/
+                pokedex.Clear();
                 foreach (var pokemon in pokemons)
                 {
                     
-                    var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url); //access when is clicked
+                    var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url); //access when is clicked                    
                     pokedex.Add(pokemonDetail);
                 }
 

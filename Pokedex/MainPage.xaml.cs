@@ -48,7 +48,11 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
 
-            await ApiRequest.FillPokedexList(Pokemon);
+            await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
+            if(ApiRequest.previous == null)
+            {
+                Previous.IsEnabled = false;
+            }
          
 
             ProgressRing.IsActive = false;
@@ -97,6 +101,42 @@ namespace Pokedex
             DBCreation.addRecord(selectedPokemon.id,selectedPokemon.name,selectedPokemon.sprites.front_default);
 
 
+
+
+        }
+
+        private async void Previous_Click(object sender, RoutedEventArgs e)
+        {
+            ProgressRing.IsActive = true;
+            ProgressRing.Visibility = Visibility.Visible;
+            await ApiRequest.FillPokedexList(Pokemon, ApiRequest.previous.ToString());
+            if (ApiRequest.previous == null)
+            {
+                Previous.IsEnabled = false;
+            }
+
+            ProgressRing.IsActive = false;
+            ProgressRing.Visibility = Visibility.Collapsed;
+
+        }
+
+        private async void Next_Click(object sender, RoutedEventArgs e)
+        {
+            ProgressRing.IsActive = true;
+            ProgressRing.Visibility = Visibility.Visible;
+
+            await ApiRequest.FillPokedexList(Pokemon, ApiRequest.next.ToString());
+            if (ApiRequest.previous != null)
+            {
+                Previous.IsEnabled = true;
+            }else if(ApiRequest.next == null)
+            {
+                Previous.IsEnabled = false;
+            }
+            
+
+            ProgressRing.IsActive = false;
+            ProgressRing.Visibility = Visibility.Collapsed;
 
 
         }
