@@ -11,15 +11,17 @@ namespace Pokedex
 {
     public class PokeDataContext:DbContext
     {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source = StoredPokemonData.db");
+        }
 
 
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlite("Data Source = StoredPokemonData.db");
-        //}
-
-        //public DbSet<Type> StoredPokemon { get; set; }
+        
+        public DbSet<Pokemon> StoredPokemon { get; set; }
+        public DbSet<PokemonSprites> StoredSprite { get; set; }
+        public DbSet<PokemonType> StoredType { get; set; }
+        public DbSet<Stat> StoredStat { get; set; }
 
     }
 }

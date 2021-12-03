@@ -5,11 +5,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pokedex.Models
 {
     public class NamedAPIResource
     {
+        [Key()]
+        public int NamedID { get; set; }
         public string name { get; set; }
         public string url { get; set; }   
     }

@@ -9,6 +9,8 @@ namespace Pokedex.Models
 {
     public class Stat
     {
+        [Key()]
+        public int StatID { get; set; } 
         public long base_stat { get; set; }
     }
 }

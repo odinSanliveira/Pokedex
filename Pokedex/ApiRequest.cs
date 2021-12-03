@@ -78,6 +78,7 @@ namespace Pokedex
                     
                     var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url); //access when is clicked                    
                     pokedex.Add(pokemonDetail);
+                    pokemonDetail.Save(pokemonDetail);
                     //using (PokeDataContext context = new PokeDataContext())
                     //{
                     //    context.Add(pokemonDetail.id);
