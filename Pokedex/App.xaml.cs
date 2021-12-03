@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Pokedex
 {
@@ -40,6 +41,8 @@ namespace Pokedex
         /// <param name="e">Detalhes sobre a solicitação e o processo de inicialização.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            //DatabaseFacade facade = new DatabaseFacade(new PokeDataContext());
+            //facade.EnsureCreated();
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Não repita a inicialização do aplicativo quando a Janela já tiver conteúdo,

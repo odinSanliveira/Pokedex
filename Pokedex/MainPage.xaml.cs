@@ -36,6 +36,8 @@ namespace Pokedex
             ApiRequest.InitializeClient();
             Pokedex = new ObservableCollection<NamedAPIResource>();
             Pokemon = new ObservableCollection<Pokemon>();
+
+            
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -53,7 +55,8 @@ namespace Pokedex
             {
                 Previous.IsEnabled = false;
             }
-         
+            
+
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;

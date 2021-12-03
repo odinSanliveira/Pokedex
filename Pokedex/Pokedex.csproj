@@ -128,11 +128,9 @@
     <Compile Include="Models\NamedAPIResourceList.cs" />
     <Compile Include="Models\Pokemon.cs" />
     <Compile Include="Models\PokemonSprites.cs" />
-    <Compile Include="Models\Species.cs" />
     <Compile Include="Models\Stat.cs" />
-    <Compile Include="Models\TypeElement.cs" />
     <Compile Include="Models\PokemonType.cs" />
-    <Compile Include="Models\Type.cs" />
+    <Compile Include="PokeDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +161,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite">
       <Version>5.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
+      <Version>3.1.21</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
