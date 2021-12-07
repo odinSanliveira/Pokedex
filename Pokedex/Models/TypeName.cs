@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Pokedex.Models
 {
-    public  class PokemonType
+    public class TypeName
     {
-        [Key()]
-        public int TypeID { get; set; }
-        public virtual TypeName type { get; set; }
         
+        public int TypenameID { get; set; }
+        public string name { get; set; }
 
+        public ICollection<PokemonType> PokemonType { get; set; }
     }
 }

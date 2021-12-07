@@ -81,7 +81,7 @@ namespace Pokedex
                     pokemonDetail.Save(pokemonDetail);
                     //using (PokeDataContext context = new PokeDataContext())
                     //{
-                    //    context.Add(pokemonDetail.id);
+                       //context.Add(pokemonDetail.id);
                     //}
                 }
 

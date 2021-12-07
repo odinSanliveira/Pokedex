@@ -11,18 +11,25 @@ namespace Pokedex.Models
     public class Pokemon
     {
         //@ConvertCollumn = id_Pokemon
-        [Key()]
         public int id { get; set; }
         public string name { get; set; }
-        [ForeignKey("StoredSprite")]
+        
         public virtual PokemonSprites sprites { get; set; }
-        [ForeignKey("StoredType")]
+        
+        
         public virtual List<PokemonType> types { get; set; }
+        public int TypeID { get; set; }
+
+        public ICollection<PokemonType> type { get; set; }
+
 
         public int height { get; set; }
         public int weight { get; set; }
-        [ForeignKey("StoredStat")]
+        
         public virtual List<Stat> stats { get; set; }
+        public int StatID { get; set; }
+        public ICollection<Stat> base_stat { get; set; }
+    
 
         public string TypeGetter()
         {
@@ -39,7 +46,8 @@ namespace Pokedex.Models
         public void Save(Pokemon pokemon)
         {
             var db = new PokeDataContext();
-            db.StoredPokemon.Add(this);
+            db.Pokemon.Add(this);
+
         }
 
 
