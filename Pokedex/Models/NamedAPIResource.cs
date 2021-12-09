@@ -10,7 +10,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Pokedex.Models
 {
     public class NamedAPIResource
-    {     
+    {
+        [Key()]
+        public int TypeNameID { get; set; }
         public string name { get; set; }
         public string url { get; set; }   
     }

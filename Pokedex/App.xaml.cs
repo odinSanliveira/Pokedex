@@ -31,7 +31,6 @@ namespace Pokedex
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            DBCreation.InitDB();
         }
 
         /// <summary>

@@ -15,15 +15,16 @@ namespace Pokedex
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var sFilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "storedPokemon2263.db");
+            var sFilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "storedPokemon2264.db");
             optionsBuilder.UseSqlite("Data Source =" + sFilePath);
+            //optionsBuilder.UseLazyLoadingProxies();
         }
 
 
         
         public DbSet<Pokemon> Pokemon { get; set; }
         public DbSet<PokemonSprites> Sprite { get; set; }
-        public DbSet<TypeName> Types { get; set; }
+        public DbSet<NamedAPIResource> Types { get; set; }
         public DbSet<Stat> Stats { get; set; }
 
     }

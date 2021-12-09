@@ -13,7 +13,7 @@ namespace Pokedex.Models
     {
         [ForeignKey("Pokemon")]
         public int id { get; set; }
-        public virtual TypeName type { get; set; }
+        public virtual NamedAPIResource type { get; set; }
         
 
 

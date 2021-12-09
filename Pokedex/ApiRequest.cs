@@ -66,13 +66,14 @@ namespace Pokedex
         {
 
             try
-            {
+            { 
                 var pokemonData = await getAPIAtribbute(endpoint);
                 next = pokemonData.next;
                 previous = pokemonData.previous;
                 var pokemons = pokemonData.results;
                 /* here we could implement path for the attributes*/
                 pokedex.Clear();
+             
                 foreach (var pokemon in pokemons)
                 {
                     

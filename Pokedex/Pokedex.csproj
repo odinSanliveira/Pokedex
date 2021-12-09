@@ -129,7 +129,6 @@
     <Compile Include="Models\PokemonSprites.cs" />
     <Compile Include="Models\Stat.cs" />
     <Compile Include="Models\PokemonType.cs" />
-    <Compile Include="Models\TypeName.cs" />
     <Compile Include="PokeDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
