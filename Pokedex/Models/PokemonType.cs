@@ -11,10 +11,11 @@ namespace Pokedex.Models
 {
     public  class PokemonType
     {
-        [Key()]
-        public int TypeID { get; set; }
+        [ForeignKey("Pokemon")]
+        public int id { get; set; }
         public virtual TypeName type { get; set; }
         
+
 
     }
 }

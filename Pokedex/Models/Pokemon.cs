@@ -13,22 +13,13 @@ namespace Pokedex.Models
         //@ConvertCollumn = id_Pokemon
         public int id { get; set; }
         public string name { get; set; }
-        
         public virtual PokemonSprites sprites { get; set; }
-        
-        
         public virtual List<PokemonType> types { get; set; }
-        public int TypeID { get; set; }
-
-        public ICollection<PokemonType> type { get; set; }
-
-
         public int height { get; set; }
         public int weight { get; set; }
         
         public virtual List<Stat> stats { get; set; }
-        public int StatID { get; set; }
-        public ICollection<Stat> base_stat { get; set; }
+        
     
 
         public string TypeGetter()
@@ -47,6 +38,7 @@ namespace Pokedex.Models
         {
             var db = new PokeDataContext();
             db.Pokemon.Add(this);
+            db.SaveChanges();
 
         }
 

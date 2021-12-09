@@ -10,10 +10,11 @@ namespace Pokedex.Models
 {
     public class Stat
     {
-        [Key()]
-        public int StatID { get; set; }
+        [ForeignKey("Pokemon")]
+        public int id { get; set; }
         public long base_stat { get; set; }
-
         
+
+
     }
 }
