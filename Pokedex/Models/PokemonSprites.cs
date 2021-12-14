@@ -10,8 +10,7 @@ namespace Pokedex.Models
 {
     public class PokemonSprites
     {
-        [ForeignKey("Pokemon")]
-        public int id { get; set; }
+        [Key()]
         public string front_default { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace Pokedex
                 foreach (var pokemon in full)
                 {                  
                     empty.Add(pokemon);
+                    empty.Add(full2)
                 }
             }
             
