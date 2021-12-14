@@ -120,6 +120,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DBOperation.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -163,6 +164,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Data.Sqlite">
       <Version>5.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies">
+      <Version>3.1.14</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
       <Version>3.1.21</Version>

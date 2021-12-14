@@ -15,9 +15,9 @@ namespace Pokedex
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var sFilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "storedPokemon2264.db");
+            var sFilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "storedPokemon2268.db");
             optionsBuilder.UseSqlite("Data Source =" + sFilePath);
-            //optionsBuilder.UseLazyLoadingProxies();
+           //optionsBuilder.UseLazyLoadingProxies();
         }
 
 

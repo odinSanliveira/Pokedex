@@ -35,7 +35,7 @@ namespace Pokedex
             ApiRequest.InitializeClient();
             Pokedex = new ObservableCollection<NamedAPIResource>();
             Pokemon = new ObservableCollection<Pokemon>();
-
+            
             
         }
 
@@ -49,12 +49,13 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
 
-            await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
-            if(ApiRequest.previous == null)
-            {
-                Previous.IsEnabled = false;
-            }
-            
+            //await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
+            //if(ApiRequest.previous == null)
+            //{
+            //    Previous.IsEnabled = false;
+            //}
+
+            DBOperation.ReadDB(Pokemon);
 
 
             ProgressRing.IsActive = false;

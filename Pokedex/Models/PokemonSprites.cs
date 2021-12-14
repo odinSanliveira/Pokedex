@@ -13,9 +13,5 @@ namespace Pokedex.Models
         [ForeignKey("Pokemon")]
         public int id { get; set; }
         public string front_default { get; set; }
-
-        public virtual Pokemon Pokemon { get; set; }
-
-        
     }
 }
