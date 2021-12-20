@@ -15,6 +15,7 @@ namespace Pokedex.Models
         public string name { get; set; }
         public virtual PokemonSprites sprites { get; set; }
         public virtual List<PokemonType> types { get; set; }
+
         public int height { get; set; }
         public int weight { get; set; }
         

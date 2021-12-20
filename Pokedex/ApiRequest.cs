@@ -64,25 +64,25 @@ namespace Pokedex
 
         public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex, string endpoint)
         {
-
+            PokeDataContext nes = new PokeDataContext();
             try
-            { 
+            {
                 var pokemonData = await getAPIAtribbute(endpoint);
                 next = pokemonData.next;
                 previous = pokemonData.previous;
                 var pokemons = pokemonData.results;
                 /* here we could implement path for the attributes*/
                 pokedex.Clear();
-             
+
                 foreach (var pokemon in pokemons)
                 {
-                    
+
                     var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url); //access when is clicked                    
                     pokedex.Add(pokemonDetail);
                     pokemonDetail.Save(pokemonDetail);
                     //using (PokeDataContext context = new PokeDataContext())
                     //{
-                       //context.Add(pokemonDetail.id);
+                    //context.Add(pokemonDetail.id);
                     //}
                 }
 

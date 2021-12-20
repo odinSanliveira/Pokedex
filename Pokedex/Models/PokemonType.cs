@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Models
 {
-    public  class PokemonType
+    public class PokemonType
     {
-        [ForeignKey("Pokemon")]
+        public int Pokemonid { get; set; }
         public int id { get; set; }
-        public virtual NamedAPIResource type { get; set; }
-        
+        [ForeignKey("Types")]
+        public int TypeID { get; set; }
 
+        public virtual NamedAPIResource type { get; set; }
 
     }
 }
