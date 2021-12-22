@@ -16,18 +16,45 @@ namespace Pokedex
         {
             using (var db = new PokeDataContext()) {
 
-                //var result1 = from TypeList in db.TypeList
-                //              join Types in db.Types
-                //              on TypeList.TypeID equals Types.id
-                //              group Types by new NamedAPIResource
-                //              {
-                //                  id = Types.id,
-                //                  name = Types.name,
-                //                  url = Types.url
-                //              }
-                //              into g
-                //              select g;
-                //var result12 = from g
+                var result = from TypeList in db.TypeList
+                             join Types in db.Types
+                             on TypeList.TypeID equals Types.id
+                             select new PokemonType { id = TypeList.id, Pokemonid = TypeList.Pokemonid, type = Types, TypeID = Types.id };
+                var result12 = result.ToList<PokemonType>();
+
+                
+
+                var result34 = (from Stats in db.Stats
+                               select new Stat { Pokeid = Stats.Pokeid, id = Stats.id, base_stat = Stats.base_stat}).ToList<Stat>();
+
+
+                var result2 = (from PokemonUnit in db.Pokemon
+                              join Sprites in db.Sprite
+                              on PokemonUnit.id equals Sprites.id
+                              join Stats in db.Stats
+                              on PokemonUnit.id equals Stats.Pokeid
+                              select new Pokemon { id = PokemonUnit.id, name = PokemonUnit.name, sprites = Sprites,
+                                  /*types = result12, stats=result34,*/ height=PokemonUnit.height, weight=PokemonUnit.weight }).ToList<Pokemon>();
+
+                
+
+
+  
+                             
+
+
+                                  //var result1 = from TypeList in db.TypeList
+                                  //              join Types in db.Types
+                                  //              on TypeList.TypeID equals Types.id
+                                  //              group Types by new NamedAPIResource
+                                  //              {
+                                  //                  id = Types.id,
+                                  //                  name = Types.name,
+                                  //                  url = Types.url
+                                  //              }
+                                  //              into g
+                                  //              select g;
+                                  //var result12 = from g
 
                 //int asd = 0;
                 //var result = (from PokemonUnit in db.Pokemon
