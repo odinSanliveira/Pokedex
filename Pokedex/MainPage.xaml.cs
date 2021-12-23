@@ -137,7 +137,7 @@ namespace Pokedex
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
-
+            DBOperation.ReadDB();
 
         }
     }
