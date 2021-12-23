@@ -15,13 +15,9 @@ namespace Pokedex.Models
         public string name { get; set; }
         public virtual PokemonSprites sprites { get; set; }
         public virtual List<PokemonType> types { get; set; }
-
         public int height { get; set; }
-        public int weight { get; set; }
-        
+        public int weight { get; set; }        
         public virtual List<Stat> stats { get; set; }
-        
-    
 
         public string TypeGetter()
         {
@@ -42,7 +38,5 @@ namespace Pokedex.Models
             db.SaveChanges();
 
         }
-
-
     }
 }
