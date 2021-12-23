@@ -120,5 +120,49 @@ namespace Pokedex
             }
         }
 
+        public static ObservableCollection<Pokemon> SearchDBByType(ObservableCollection<Pokemon> empty)
+        {
+            using (var db = new PokeDataContext())
+            {
+                string mystring = "fire";
+
+                var SaveLists = from TypeList in db.TypeList
+                                join Types in db.Types
+                                on TypeList.TypeID equals Types.id
+                                select new PokemonType { id = TypeList.id, Pokemonid = TypeList.Pokemonid, type = Types, TypeID = Types.id };
+
+                var SaveStats = from Stats in db.Stats
+                                select new Stat { Pokemonid = Stats.Pokemonid, id = Stats.id, base_stat = Stats.base_stat };
+
+                var SavePokemon = (from PokemonUnit in db.Pokemon
+                                   join Sprites in db.Sprite
+                                   on PokemonUnit.id equals Sprites.id
+                                   select new Pokemon
+                                   {
+                                       id = PokemonUnit.id,
+                                       name = PokemonUnit.name,
+                                       sprites = Sprites,
+                                       height=PokemonUnit.height,
+                                       types = (List<PokemonType>)SaveLists.Where(m => m.Pokemonid == PokemonUnit.id),
+                                       stats = (List<Stat>)SaveStats.Where(m => m.Pokemonid == PokemonUnit.id),
+                                       weight=PokemonUnit.weight
+                                   }
+                                   
+                                   
+                                   ).ToList<Pokemon>();
+
+                var Test = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList();
+
+
+
+                ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(Test);
+                empty = storedPokemonList;
+                return empty;
+
+
+
+            }
+        }
+
     }
 }
