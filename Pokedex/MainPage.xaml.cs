@@ -49,15 +49,16 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
 
-            await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
-            if(ApiRequest.previous == null)
-            {
-               Previous.IsEnabled = false;
-            }
+            //await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
+            //if(ApiRequest.previous == null)
+            //{
+            //   Previous.IsEnabled = false;
+            //}
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
-            DBOperation.ReadDB();
+            DBOperation.ReadDB(Pokemon);
+            DBOperation.SearchDBByID(Pokemon);
         }
 
         private void PokeListViewMain_ItemClick(object sender, ItemClickEventArgs e)
@@ -137,7 +138,7 @@ namespace Pokedex
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
-            DBOperation.ReadDB();
+            //DBOperation.ReadDB();
 
         }
     }
