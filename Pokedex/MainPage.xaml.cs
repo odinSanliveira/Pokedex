@@ -57,9 +57,10 @@ namespace Pokedex
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
-            DBOperation.ReadDB(Pokemon);
+            //DBOperation.ReadDB(Pokemon);
             //DBOperation.SearchDBByID(Pokemon);
             //DBOperation.SearchDBByType(Pokemon);
+            //DBOperation.SearchDBByName(Pokemon);
         }
 
         private void PokeListViewMain_ItemClick(object sender, ItemClickEventArgs e)

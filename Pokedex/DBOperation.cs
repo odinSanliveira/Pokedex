@@ -35,8 +35,9 @@ namespace Pokedex
                                   weight=PokemonUnit.weight }).ToList<Pokemon>();
 
 
-                ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(SavePokemon);
-                foreach(var item in storedPokemonList)
+                //ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(SavePokemon);
+                //instanciar nova observable collection em caso de erro de view novamente
+                foreach(var item in SavePokemon)
                 {
                     empty.Add(item);
                 }
@@ -77,8 +78,11 @@ namespace Pokedex
                                    }
                                    ).ToList<Pokemon>();
 
-                ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(SavePokemon);
-                empty = storedPokemonList;
+                foreach (var item in SavePokemon)
+                {
+                    empty.Add(item);
+                }
+
                 return empty;
 
 
@@ -115,8 +119,11 @@ namespace Pokedex
                                    }
                                    ).ToList<Pokemon>();
 
-                ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(SavePokemon);
-                empty = storedPokemonList;
+                foreach (var item in SavePokemon)
+                {
+                    empty.Add(item);
+                }
+
                 return empty;
 
 
@@ -155,12 +162,8 @@ namespace Pokedex
                                    
                                    ).ToList<Pokemon>();
                 //Pode-se usar tanto name quanto url, url requer uma pequena alteração de paramatros, pois o tipo em si, só diferencia por uma número na string
-                var Test = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList();
-
-
-
-                ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(Test);
-                foreach (var item in storedPokemonList)
+                var Test = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList<Pokemon>();
+                foreach (var item in Test)
                 {
                     empty.Add(item);
                 }
