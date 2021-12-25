@@ -36,8 +36,12 @@ namespace Pokedex
 
 
                 ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(SavePokemon);
-                empty = storedPokemonList;
-                return empty;
+                foreach(var item in storedPokemonList)
+                {
+                    empty.Add(item);
+                }
+
+                return empty; 
                
             }
 
@@ -150,13 +154,17 @@ namespace Pokedex
                                    
                                    
                                    ).ToList<Pokemon>();
-
+                //Pode-se usar tanto name quanto url, url requer uma pequena alteração de paramatros, pois o tipo em si, só diferencia por uma número na string
                 var Test = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList();
 
 
 
                 ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(Test);
-                empty = storedPokemonList;
+                foreach (var item in storedPokemonList)
+                {
+                    empty.Add(item);
+                }
+
                 return empty;
 
 
