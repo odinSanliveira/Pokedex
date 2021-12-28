@@ -1,0 +1,329 @@
+﻿<Page
+    x:Class="Pokedex.MainPokedex"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pokedex"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:Pokedex.Models"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView
+                        Name="PokeListViewMain"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        IsItemClickEnabled="True"
+                        ItemClick="PokeListViewMain_ItemClick"
+                        ItemsSource="{x:Bind Pokemon}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Pokemon">
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock
+                                        Margin="5,0,10,5"
+                                        VerticalAlignment="Center"
+                                        FontSize="18"
+                                        Foreground="Black"
+                                        Text="{x:Bind id}" />
+                        <Image
+                                        Name="PokemonDetailImage"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
+                                        VerticalAlignment="Top"
+                                        Source="{x:Bind sprites.front_default}" />
+
+                        <TextBlock
+                                        Margin="5,0,10,5"
+                                        VerticalAlignment="Center"
+                                        FontSize="18"
+                                        Foreground="Black"
+                                        Text="{x:Bind name}" />
+
+                        <TextBlock
+                                        Margin="25,0,10,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="18"
+                                        Foreground="Black"
+                                        Text="{x:Bind TypeGetter()}" />
+
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="2">
+
+            <StackPanel Orientation="Horizontal">
+                <Button
+                                Name="Previous"
+                                Width="150"
+                                HorizontalAlignment="Center"
+                                Click="Previous_Click"
+                                >
+                    Previous
+                </Button>
+                <!--Estudar VisualState-->
+                <!--BorderBrush="{x:Bind TypeColor()}"-->
+                <Button
+                                Name="Next"
+                                Width="150"
+                                HorizontalAlignment="Center"
+                                Click="Next_Click"
+                                >
+                    Next
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!--  Detail Layout  -->
+        <Grid Grid.Row="1" Grid.Column="1">
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+
+            <!--  pokemon detail layout  -->
+            <Grid
+                            Grid.Row="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image
+                                Name="PokemonDetailImage"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                VerticalAlignment="Top" />
+
+                <TextBlock
+                                Name="PokemonName"
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                FontSize="32"
+                                Foreground="Black"
+                                TextWrapping="Wrap" />
+
+
+
+            </Grid>
+            <Grid Grid.Row="1" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                                Name="TypeBlock"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black " />
+
+                <TextBlock
+                                Name="TypeOne"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                Foreground="Black" />
+
+                <TextBlock
+                                Name="TypeTwo"
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                Foreground="Black" />
+
+                <TextBlock
+                                Name="HpBlock"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="Hp"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="AttackBlock"
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="Attack"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="DefenseBlock"
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="Defense"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="SpecialAttackBlock"
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="SpecialAttack"
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="SpecialDefenseBlock"
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="SpecialDefense"
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="SpeedBlock"
+                                Grid.Row="6"
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="Speed"
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Foreground="Black" />
+
+
+
+
+
+                <TextBlock
+                                Name="HeightBlock"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="WeightBlock"
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="Height"
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Foreground="Black" />
+                <TextBlock
+                                Name="Weight"
+                                Grid.Row="2"
+                                Grid.Column="3"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Foreground="Black" />
+
+            </Grid>
+
+        </Grid>
+        <ProgressRing
+            x:Name="ProgressRing"
+            Grid.RowSpan="3"
+            Grid.ColumnSpan="2"
+            Width="50"
+            Height="50"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="BlueViolet" />
+    </Grid>
+</Page>
