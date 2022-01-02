@@ -1,4 +1,5 @@
-﻿using Pokedex.Models;
+﻿using PagedList;
+using Pokedex.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace Pokedex
     public class DBOperation
     {
 
-        public static ObservableCollection<Pokemon> ReadDB(ObservableCollection<Pokemon> empty)
+        public static ObservableCollection<Pokemon> ReadDB(ObservableCollection<Pokemon> empty, int Index)
         {
             using (var db = new PokeDataContext()) {
 
@@ -24,26 +25,29 @@ namespace Pokedex
                                select new Stat { Pokemonid = Stats.Pokemonid, id = Stats.id, base_stat = Stats.base_stat };
 
                 var SavePokemon = (from PokemonUnit in db.Pokemon
-                              join Sprites in db.Sprite
-                              on PokemonUnit.id equals Sprites.id
-                              select new Pokemon { id = PokemonUnit.id, 
-                                  name = PokemonUnit.name, 
-                                  sprites = Sprites,
-                                  height=PokemonUnit.height,
-                                  types = (List<PokemonType>)SaveLists.Where(m => m.Pokemonid == PokemonUnit.id),
-                                  stats = (List<Stat>)SaveStats.Where(m => m.Pokemonid == PokemonUnit.id),
-                                  weight=PokemonUnit.weight }).ToList<Pokemon>();
+                                   join Sprites in db.Sprite
+                                   on PokemonUnit.id equals Sprites.id
+                                   select new Pokemon
+                                   {
+                                       id = PokemonUnit.id,
+                                       name = PokemonUnit.name,
+                                       sprites = Sprites,
+                                       height=PokemonUnit.height,
+                                       types = (List<PokemonType>)SaveLists.Where(m => m.Pokemonid == PokemonUnit.id),
+                                       stats = (List<Stat>)SaveStats.Where(m => m.Pokemonid == PokemonUnit.id),
+                                       weight=PokemonUnit.weight
+                                   });
 
+                var ActualPage = Index;
+                var onePageOfPokemons = SavePokemon.ToPagedList(ActualPage, 10);
+                var Convert = onePageOfPokemons.ToList<Pokemon>();
 
-                //ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(SavePokemon);
-                //instanciar nova observable collection em caso de erro de view novamente
-                foreach(var item in SavePokemon)
+                foreach (var item in Convert)
                 {
                     empty.Add(item);
                 }
 
-                return empty; 
-               
+                return empty;
             }
 
         }
