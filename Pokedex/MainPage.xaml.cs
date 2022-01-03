@@ -17,20 +17,20 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// O modelo de item de Página em Branco está documentado em https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x416
 
 namespace Pokedex
 {
-    /// <summary>
-    /// Uma página vazia que pode ser usada isoladamente ou navegada dentro de um Quadro.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
-        //ApiRequest api = new ApiRequest();
-       
+        public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
+        public ObservableCollection<Pokemon> Pokemon { get; set; }
+        public int Page { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
+            ApiRequest.InitializeClient();
+            Pokedex = new ObservableCollection<NamedAPIResource>();
+            Pokemon = new ObservableCollection<Pokemon>();            
             PokedexLayout.IsSelected = true;
             FramePokedex.Navigate(typeof(MainPokedex));
         }
@@ -41,6 +41,77 @@ namespace Pokedex
         }
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ProgressRing.IsActive = true;
+            ProgressRing.Visibility = Visibility.Visible;
+            Page = 1;
+
+                DBOperation.ReadDB(Pokemon, Page);
+                if(Pokemon.Count == 0)
+                {
+                    await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10");
+                }
+
+            if (ApiRequest.previous == null)
+            {
+               Previous.IsEnabled = false;
+            }
+            
+            ProgressRing.IsActive = false;
+            ProgressRing.Visibility = Visibility.Collapsed;
+        }
+
+        private void PokeListViewMain_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            var selectedPokemon = (Pokemon)e.ClickedItem;
+
+            PokemonName.Text = selectedPokemon.name;
+            TypeOne.Text = selectedPokemon.types[0].type.name;
+            TypeBlock.Text = "Type";
+            HpBlock.Text = "HP";
+            Hp.Text = selectedPokemon.stats[0].base_stat.ToString();
+            AttackBlock.Text = "Attack";
+            Attack.Text = selectedPokemon.stats[1].base_stat.ToString();
+            DefenseBlock.Text = "Defense";
+            Defense.Text = selectedPokemon.stats[2].base_stat.ToString();
+            SpecialAttackBlock.Text = "Special Attack";
+            SpecialAttack.Text = selectedPokemon.stats[3].base_stat.ToString();
+            SpecialDefenseBlock.Text = "Special Defense";
+            SpecialDefense.Text = selectedPokemon.stats[4].base_stat.ToString();
+            SpeedBlock.Text = "Speed";
+            Speed.Text = selectedPokemon.stats[5].base_stat.ToString();
+            HeightBlock.Text = "Height";
+            Height.Text = selectedPokemon.height.ToString();
+            WeightBlock.Text = "Weight";
+            Weight.Text = selectedPokemon.weight.ToString();
+
+            if (selectedPokemon.types.Count > 1)
+            {
+                TypeTwo.Text = selectedPokemon.types[1].type.name;
+            }
+            else
+            {
+                TypeTwo.Text = "";
+            }
+           
+            
+            var pokemonImage = new BitmapImage();
+            Uri url = new Uri(selectedPokemon.sprites.front_default, UriKind.Absolute);
+            pokemonImage.UriSource = url;
+            PokemonDetailImage.Source = pokemonImage;
+
+
+
+
+        }
+
+        private async void Previous_Click(object sender, RoutedEventArgs e)
+        {
+            Page--;
+            ProgressRing.IsActive = true;
+            ProgressRing.Visibility = Visibility.Visible;
+            DBOperation.ReadDB(Pokemon,Page);
+            if (Page == 1)
             if (Register.IsSelected)
             {
                 FramePokedex.Navigate(typeof(CrudPokemon));
@@ -51,8 +122,37 @@ namespace Pokedex
             }
         }
 
+        private async void Next_Click(object sender, RoutedEventArgs e)
+        {
+            Page++;
+            ProgressRing.IsActive = true;
+            ProgressRing.Visibility = Visibility.Visible;
+            string PageAPIReference = DBOperation.resourceDBRead();
 
 
+                DBOperation.ReadDB(Pokemon, Page);
+                if (Pokemon.Count == 0)
+                {
+                    await ApiRequest.FillPokedexList(Pokemon, PageAPIReference);
+                }
+            
+
+            if (Page == 1)
+            {
+                Previous.IsEnabled = false;
+            }
+            else if(PageAPIReference == null)
+            {
+                Previous.IsEnabled = false;
+            }
+            else
+            {
+                Previous.IsEnabled = true;
+            }
+            
+
+            ProgressRing.IsActive = false;
+            ProgressRing.Visibility = Visibility.Collapsed;
 
     }
 }

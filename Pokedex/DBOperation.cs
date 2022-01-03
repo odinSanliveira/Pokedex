@@ -1,4 +1,5 @@
-﻿using Pokedex.Models;
+﻿using PagedList;
+using Pokedex.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace Pokedex
     public class DBOperation
     {
 
-        public static ObservableCollection<Pokemon> ReadDB(ObservableCollection<Pokemon> empty)
+        public static ObservableCollection<Pokemon> ReadDB(ObservableCollection<Pokemon> empty, int Index)
         {
             using (var db = new PokeDataContext()) {
 
@@ -24,26 +25,29 @@ namespace Pokedex
                                select new Stat { Pokemonid = Stats.Pokemonid, id = Stats.id, base_stat = Stats.base_stat };
 
                 var SavePokemon = (from PokemonUnit in db.Pokemon
-                              join Sprites in db.Sprite
-                              on PokemonUnit.id equals Sprites.id
-                              select new Pokemon { id = PokemonUnit.id, 
-                                  name = PokemonUnit.name, 
-                                  sprites = Sprites,
-                                  height=PokemonUnit.height,
-                                  types = (List<PokemonType>)SaveLists.Where(m => m.Pokemonid == PokemonUnit.id),
-                                  stats = (List<Stat>)SaveStats.Where(m => m.Pokemonid == PokemonUnit.id),
-                                  weight=PokemonUnit.weight }).ToList<Pokemon>();
+                                   join Sprites in db.Sprite
+                                   on PokemonUnit.id equals Sprites.id
+                                   select new Pokemon
+                                   {
+                                       id = PokemonUnit.id,
+                                       name = PokemonUnit.name,
+                                       sprites = Sprites,
+                                       height=PokemonUnit.height,
+                                       types = (List<PokemonType>)SaveLists.Where(m => m.Pokemonid == PokemonUnit.id),
+                                       stats = (List<Stat>)SaveStats.Where(m => m.Pokemonid == PokemonUnit.id),
+                                       weight=PokemonUnit.weight
+                                   });
+                empty.Clear();
+                var ActualPage = Index;
+                var onePageOfPokemons = SavePokemon.ToPagedList(ActualPage, 10);
+                var Convert = onePageOfPokemons.ToList<Pokemon>();
 
-
-                //ObservableCollection<Pokemon> storedPokemonList = new ObservableCollection<Pokemon>(SavePokemon);
-                //instanciar nova observable collection em caso de erro de view novamente
-                foreach(var item in SavePokemon)
+                foreach (var item in Convert)
                 {
                     empty.Add(item);
                 }
 
-                return empty; 
-               
+                return empty;
             }
 
         }
@@ -78,6 +82,7 @@ namespace Pokedex
                                    }
                                    ).ToList<Pokemon>();
 
+                empty.Clear();
                 foreach (var item in SavePokemon)
                 {
                     empty.Add(item);
@@ -119,6 +124,7 @@ namespace Pokedex
                                    }
                                    ).ToList<Pokemon>();
 
+                empty.Clear();
                 foreach (var item in SavePokemon)
                 {
                     empty.Add(item);
@@ -162,8 +168,9 @@ namespace Pokedex
                                    
                                    ).ToList<Pokemon>();
                 //Pode-se usar tanto name quanto url, url requer uma pequena alteração de paramatros, pois o tipo em si, só diferencia por uma número na string
-                var Test = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList<Pokemon>();
-                foreach (var item in Test)
+                empty.Clear();
+                var SelectByTypeName = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList<Pokemon>();
+                foreach (var item in SelectByTypeName)
                 {
                     empty.Add(item);
                 }
@@ -171,6 +178,24 @@ namespace Pokedex
                 return empty;
 
 
+
+            }
+        }
+
+        public static string resourceDBRead()
+        {
+            using (var db = new PokeDataContext())
+            {
+                var result = (from List in db.Listing
+                             select new NamedAPIResourceList
+                             {
+                                 id = List.id,
+                                 next = List.next
+                             }).ToList();
+                var LastResult = result.LastOrDefault();
+                var endpoint = LastResult.next.ToString();
+
+                return endpoint;
 
             }
         }
