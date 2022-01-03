@@ -179,5 +179,23 @@ namespace Pokedex
             }
         }
 
+        public static List<NamedAPIResourceList> resourceDBRead()
+        {
+            using (var db = new PokeDataContext())
+            {
+                var result = (from List in db.Listing
+                             select new NamedAPIResourceList
+                             {
+                                 id =   List.id,
+                                 next = List.next,
+                                 previous = List.previous,
+                                 results = List.results
+                             }).ToList<NamedAPIResourceList>();
+
+                return result;
+
+            }
+        }
+
     }
 }

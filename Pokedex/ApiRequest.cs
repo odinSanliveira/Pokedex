@@ -71,6 +71,13 @@ namespace Pokedex
                 next = pokemonData.next;
                 previous = pokemonData.previous;
                 var pokemons = pokemonData.results;
+                using (var db = new PokeDataContext())
+                {
+                    db.Listing.RemoveRange(db.Listing.Where(x => x.id == 1));
+                    db.Listing.Add(pokemonData);
+                    db.SaveChanges();
+                    
+                }
                 /* here we could implement path for the attributes*/
                 pokedex.Clear();
 
