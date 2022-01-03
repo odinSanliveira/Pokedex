@@ -47,28 +47,28 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="PokemonName"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Height" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Name="PokemonHeight"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Weight" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Name="PokemonWeight"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Type One" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Name="PokemonTypeOne"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Type Two" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Name="PokemonTypeTwo"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="HP" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Name="PokemonHp"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="Attack" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" Margin="5" Name="PokemonAttack"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="Defense" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="7" Grid.Column="1" Margin="5" Name="PokemonDefense"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="8" Grid.Column="0" Text="Special Attack" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="8" Grid.Column="1" Margin="5" Name="PokemonSpecialAttack"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="9" Grid.Column="0" Text="Special Defense" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="9" Grid.Column="1" Margin="5" Name="PokemonSpecialDefense"/>
+                    <TextBox Grid.Row="9" Grid.Column="1" Margin="5"/>
                     <TextBlock Grid.Row="10" Grid.Column="0" Text="Speed" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="10" Grid.Column="1" Margin="5" Name="PokemonSpeed"/>
-                    <Button Grid.Column="1" Grid.Row="11" Content="Salvar" Margin="10" Click="RegisterPokemon"/>
+                    <TextBox Grid.Row="10" Grid.Column="1" Margin="5"/>
+                    <Button Grid.Column="1" Grid.Row="11" Content="Salvar" Margin="10"/>
                 </Grid>
             </Border>
             <Border Grid.Column="1" BorderBrush="#565656" BorderThickness="1" Margin="5">

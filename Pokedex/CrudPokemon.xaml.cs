@@ -22,39 +22,9 @@ namespace Pokedex
     /// </summary>
     public sealed partial class CrudPokemon : Page
     {
-        public string PokeName { get; set; }
-        public string PokeHeight { get; set; }
-        public string PokeWeight { get; set; }
-        public string PokeTypeOne { get; set; }
-        public string PokeTypeTwo { get; set; }
-        public string PokeHp { get; set; }
-        public string PokeAttack { get; set; }
-        public string PokeDefense { get; set; }
-        public string PokeSpeed { get; set; }
-        public string PokeSpecialAttack { get; set; }
-        public string PokeSpecialDefense { get; set; }
         public CrudPokemon()
         {
             this.InitializeComponent();
-           
-            
         }
-
-        private void RegisterPokemon(object sender, RoutedEventArgs e)
-        {
-            //test
-            PokeName = PokemonName.Text;
-            PokeHeight = PokemonHeight.Text;
-            PokeWeight = PokemonWeight.Text;
-            PokeHp = PokemonHp.Text;
-            PokeAttack = PokemonAttack.Text;
-            PokeDefense = PokemonDefense.Text;
-            PokeSpecialDefense = PokemonSpecialDefense.Text;
-            PokeSpecialAttack = PokemonSpecialAttack.Text;
-            PokeSpeed = PokemonSpeed.Text;
-            PokeTypeOne = PokemonTypeOne.Text;
-            PokeTypeTwo = PokemonTypeTwo.Text;
-        }
-
     }
 }
