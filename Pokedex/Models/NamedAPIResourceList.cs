@@ -9,7 +9,6 @@ using System.Threading.Tasks;
     {        
         public class NamedAPIResourceList
         {
-            public int id { get; set; }
             public Uri next { get; set; }
             public Uri previous { get; set; }
             public List<NamedAPIResource> results { get; set; }   

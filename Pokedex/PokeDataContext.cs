@@ -28,9 +28,8 @@ namespace Pokedex
         public DbSet<Pokemon> Pokemon { get; set; }
         public DbSet<PokemonSprites> Sprite { get; set; }
         public DbSet<PokemonType> TypeList { get; set; }
-        public DbSet<TypeDetail> Types { get; set; }
+        public DbSet<NamedAPIResource> Types { get; set; }
         public DbSet<Stat> Stats { get; set; }
-        public DbSet<NamedAPIResourceList> Listing { get; set; }    
 
     }
 }

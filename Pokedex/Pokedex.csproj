@@ -136,7 +136,6 @@
     <Compile Include="Models\PokemonSprites.cs" />
     <Compile Include="Models\Stat.cs" />
     <Compile Include="Models\PokemonType.cs" />
-    <Compile Include="Models\TypeDetail.cs" />
     <Compile Include="PokeDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,9 +190,6 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="PagedList">
-      <Version>1.17.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
