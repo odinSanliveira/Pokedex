@@ -82,6 +82,7 @@ namespace Pokedex
                                    }
                                    ).ToList<Pokemon>();
 
+                empty.Clear();
                 foreach (var item in SavePokemon)
                 {
                     empty.Add(item);
@@ -123,6 +124,7 @@ namespace Pokedex
                                    }
                                    ).ToList<Pokemon>();
 
+                empty.Clear();
                 foreach (var item in SavePokemon)
                 {
                     empty.Add(item);
@@ -166,8 +168,9 @@ namespace Pokedex
                                    
                                    ).ToList<Pokemon>();
                 //Pode-se usar tanto name quanto url, url requer uma pequena alteração de paramatros, pois o tipo em si, só diferencia por uma número na string
-                var Test = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList<Pokemon>();
-                foreach (var item in Test)
+                empty.Clear();
+                var SelectByTypeName = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList<Pokemon>();
+                foreach (var item in SelectByTypeName)
                 {
                     empty.Add(item);
                 }
@@ -189,9 +192,10 @@ namespace Pokedex
                                  id = List.id,
                                  next = List.next
                              }).ToList();
-                var result2 = result.LastOrDefault();
-                var result3 = result2.next.ToString();
-                return result3;
+                var LastResult = result.LastOrDefault();
+                var endpoint = LastResult.next.ToString();
+
+                return endpoint;
 
             }
         }

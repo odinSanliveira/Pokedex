@@ -17,16 +17,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// O modelo de item de Página em Branco está documentado em https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x416
 
 namespace Pokedex
 {
-    /// <summary>
-    /// Uma página vazia que pode ser usada isoladamente ou navegada dentro de um Quadro.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
-        //ApiRequest api = new ApiRequest();
         public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
         public ObservableCollection<Pokemon> Pokemon { get; set; }
         public int Page { get; set; }
@@ -35,9 +30,7 @@ namespace Pokedex
             this.InitializeComponent();
             ApiRequest.InitializeClient();
             Pokedex = new ObservableCollection<NamedAPIResource>();
-            Pokemon = new ObservableCollection<Pokemon>();
-            
-            
+            Pokemon = new ObservableCollection<Pokemon>();            
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -51,21 +44,12 @@ namespace Pokedex
             ProgressRing.Visibility = Visibility.Visible;
             Page = 1;
 
-            try
-            {
                 DBOperation.ReadDB(Pokemon, Page);
                 if(Pokemon.Count == 0)
                 {
-                    await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
+                    await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10");
                 }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            
-            
-            //await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
+
             if (ApiRequest.previous == null)
             {
                Previous.IsEnabled = false;
@@ -73,10 +57,6 @@ namespace Pokedex
             
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
-            
-            //DBOperation.SearchDBByID(Pokemon);
-            //DBOperation.SearchDBByType(Pokemon);
-            //DBOperation.SearchDBByName(Pokemon);
         }
 
         private void PokeListViewMain_ItemClick(object sender, ItemClickEventArgs e)
@@ -145,26 +125,21 @@ namespace Pokedex
             Page++;
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
-            string PageReference = DBOperation.resourceDBRead();
+            string PageAPIReference = DBOperation.resourceDBRead();
 
-            try
-            {
+
                 DBOperation.ReadDB(Pokemon, Page);
                 if (Pokemon.Count == 0)
                 {
-                    await ApiRequest.FillPokedexList(Pokemon, PageReference);
+                    await ApiRequest.FillPokedexList(Pokemon, PageAPIReference);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            
 
             if (Page == 1)
             {
                 Previous.IsEnabled = false;
             }
-            else if(PageReference == null)
+            else if(PageAPIReference == null)
             {
                 Previous.IsEnabled = false;
             }

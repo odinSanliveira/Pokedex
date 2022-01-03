@@ -31,10 +31,7 @@ namespace Pokedex
         public static async Task<NamedAPIResourceList> getAPIAtribbute(string endpoint)
         {
             HttpClient Client = new HttpClient();
-            int offset = 0;
-            int limit = 10;
-            string url = String.Format(endpoint, offset, limit);
-            var responseMessage = await Client.GetAsync(url);
+            var responseMessage = await Client.GetAsync(endpoint);
             var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
 
             var serializer = new DataContractJsonSerializer(typeof(NamedAPIResourceList));
