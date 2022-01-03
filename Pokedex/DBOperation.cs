@@ -194,6 +194,7 @@ namespace Pokedex
                              }).ToList();
                 var LastResult = result.LastOrDefault();
                 var endpoint = LastResult.next.ToString();
+                var dummy = 1;
 
                 return endpoint;
 
