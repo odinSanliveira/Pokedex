@@ -73,7 +73,6 @@ namespace Pokedex
                 var pokemons = pokemonData.results;
                 using (var db = new PokeDataContext())
                 {
-                    db.Listing.RemoveRange(db.Listing.Where(x => x.id == 1));
                     db.Listing.Add(pokemonData);
                     db.SaveChanges();
                     

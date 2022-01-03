@@ -29,7 +29,7 @@ namespace Pokedex
         //ApiRequest api = new ApiRequest();
         public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
         public ObservableCollection<Pokemon> Pokemon { get; set; }
-        public int Page = 1;
+        public int Page { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
@@ -49,8 +49,7 @@ namespace Pokedex
         {
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
-
-            
+            Page = 1;
 
             try
             {
@@ -127,10 +126,11 @@ namespace Pokedex
 
         private async void Previous_Click(object sender, RoutedEventArgs e)
         {
+            Page--;
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
-            await ApiRequest.FillPokedexList(Pokemon, ApiRequest.previous.ToString());
-            if (ApiRequest.previous == null)
+            DBOperation.ReadDB(Pokemon,Page);
+            if (Page == 1)
             {
                 Previous.IsEnabled = false;
             }
@@ -142,22 +142,40 @@ namespace Pokedex
 
         private async void Next_Click(object sender, RoutedEventArgs e)
         {
+            Page++;
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
+            string PageReference = DBOperation.resourceDBRead();
 
-            await ApiRequest.FillPokedexList(Pokemon, ApiRequest.next.ToString());
-            if (ApiRequest.previous != null)
+            try
             {
-                Previous.IsEnabled = true;
-            }else if(ApiRequest.next == null)
+                DBOperation.ReadDB(Pokemon, Page);
+                if (Pokemon.Count == 0)
+                {
+                    await ApiRequest.FillPokedexList(Pokemon, PageReference);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            if (Page == 1)
             {
                 Previous.IsEnabled = false;
+            }
+            else if(PageReference == null)
+            {
+                Previous.IsEnabled = false;
+            }
+            else
+            {
+                Previous.IsEnabled = true;
             }
             
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
-            //DBOperation.ReadDB();
 
         }
     }

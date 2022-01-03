@@ -37,7 +37,7 @@ namespace Pokedex
                                        stats = (List<Stat>)SaveStats.Where(m => m.Pokemonid == PokemonUnit.id),
                                        weight=PokemonUnit.weight
                                    });
-
+                empty.Clear();
                 var ActualPage = Index;
                 var onePageOfPokemons = SavePokemon.ToPagedList(ActualPage, 10);
                 var Convert = onePageOfPokemons.ToList<Pokemon>();
@@ -179,20 +179,19 @@ namespace Pokedex
             }
         }
 
-        public static List<NamedAPIResourceList> resourceDBRead()
+        public static string resourceDBRead()
         {
             using (var db = new PokeDataContext())
             {
                 var result = (from List in db.Listing
                              select new NamedAPIResourceList
                              {
-                                 id =   List.id,
-                                 next = List.next,
-                                 previous = List.previous,
-                                 results = List.results
-                             }).ToList<NamedAPIResourceList>();
-
-                return result;
+                                 id = List.id,
+                                 next = List.next
+                             }).ToList();
+                var result2 = result.LastOrDefault();
+                var result3 = result2.next.ToString();
+                return result3;
 
             }
         }
