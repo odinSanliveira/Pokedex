@@ -29,6 +29,7 @@ namespace Pokedex
 
         public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
         public ObservableCollection<Pokemon> Pokemon { get; set; }
+        public int Page { get; set; }
         public MainPokedex()
         {
             this.InitializeComponent();
@@ -41,19 +42,21 @@ namespace Pokedex
         {
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
+            Page = 1;
 
-            //await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset={0}&limit={1}");
-            //if(ApiRequest.previous == null)
-            //{
-            //   Previous.IsEnabled = false;
-            //}
+            DBOperation.ReadDB(Pokemon, Page);
+            if (Pokemon.Count == 0)
+            {
+                await ApiRequest.FillPokedexList(Pokemon, "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10");
+            }
+
+            if (ApiRequest.previous == null)
+            {
+                Previous.IsEnabled = false;
+            }
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
-            DBOperation.ReadDB(Pokemon);
-            //DBOperation.SearchDBByID(Pokemon);
-            //DBOperation.SearchDBByType(Pokemon);
-            //DBOperation.SearchDBByName(Pokemon);
         }
         private void PokeListViewMain_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -102,10 +105,11 @@ namespace Pokedex
 
         private async void Previous_Click(object sender, RoutedEventArgs e)
         {
+            Page--;
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
-            await ApiRequest.FillPokedexList(Pokemon, ApiRequest.previous.ToString());
-            if (ApiRequest.previous == null)
+            DBOperation.ReadDB(Pokemon, Page);
+            if (Page == 1)
             {
                 Previous.IsEnabled = false;
             }
@@ -117,23 +121,35 @@ namespace Pokedex
 
         private async void Next_Click(object sender, RoutedEventArgs e)
         {
+            Page++;
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
+            string PageAPIReference = DBOperation.resourceDBRead();
 
-            await ApiRequest.FillPokedexList(Pokemon, ApiRequest.next.ToString());
-            if (ApiRequest.previous != null)
+
+            DBOperation.ReadDB(Pokemon, Page);
+            if (Pokemon.Count == 0)
             {
-                Previous.IsEnabled = true;
+                await ApiRequest.FillPokedexList(Pokemon, PageAPIReference);
             }
-            else if (ApiRequest.next == null)
+
+
+            if (Page == 1)
             {
                 Previous.IsEnabled = false;
+            }
+            else if (PageAPIReference == null)
+            {
+                Previous.IsEnabled = false;
+            }
+            else
+            {
+                Previous.IsEnabled = true;
             }
 
 
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
-            //DBOperation.ReadDB();
 
         }
     }
