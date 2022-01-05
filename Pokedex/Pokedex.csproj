@@ -133,6 +133,7 @@
     <Compile Include="Models\NamedAPIResource.cs" />
     <Compile Include="Models\NamedAPIResourceList.cs" />
     <Compile Include="Models\Pokemon.cs" />
+    <Compile Include="Models\PokemonCRUD.cs" />
     <Compile Include="Models\PokemonSprites.cs" />
     <Compile Include="Models\Stat.cs" />
     <Compile Include="Models\PokemonType.cs" />
