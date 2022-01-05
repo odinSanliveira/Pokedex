@@ -23,12 +23,12 @@
         </Grid.ColumnDefinitions>
 
         <ListView
-                        Name="PokeListViewMain"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        IsItemClickEnabled="True"
-                        ItemClick="PokeListViewMain_ItemClick"
-                        ItemsSource="{x:Bind Pokemon}">
+            Name="PokeListViewMain"
+            Grid.Row="1"
+            Grid.Column="0"
+            IsItemClickEnabled="True"
+            ItemClick="PokeListViewMain_ItemClick"
+            ItemsSource="{x:Bind Pokemon}">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:Pokemon">
