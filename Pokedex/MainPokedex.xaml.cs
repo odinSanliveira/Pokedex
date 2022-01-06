@@ -27,14 +27,13 @@ namespace Pokedex
     {
 
 
-        public ObservableCollection<NamedAPIResource> Pokedex { get; set; }
+        
         public ObservableCollection<Pokemon> Pokemon { get; set; }
         public int Page { get; set; }
         public MainPokedex()
         {
             this.InitializeComponent();
             ApiRequest.InitializeClient();
-            Pokedex = new ObservableCollection<NamedAPIResource>();
             Pokemon = new ObservableCollection<Pokemon>();
         }
 
@@ -151,6 +150,15 @@ namespace Pokedex
             ProgressRing.IsActive = false;
             ProgressRing.Visibility = Visibility.Collapsed;
 
+        }
+
+        private void Types_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
+            if (comboBoxItem != null)
+            {
+                TypeOne.Text = comboBoxItem.Content.ToString();
+            }
         }
     }
 }

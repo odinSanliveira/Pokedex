@@ -19,19 +19,7 @@
             <Setter Property="CornerRadius" Value="3 12 12 12" />
         </Style>
 
-        <Style x:Key="PaginationButtonOnMouseOver" TargetType="Button">
-            <Setter Property="Background" Value="GreenYellow" />
-            <!--<Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>-->
-                                                       
-        </Style>
+        
         <Style x:Key="DisabledButton" TargetType="Button">
             <Setter Property="Background" Value="#A1A1A1" />
         </Style>
@@ -55,25 +43,17 @@
                 Click="MenuButton_Click"
                 Content="&#xE700;"
                 FontFamily="Segoe MDL2 Assets"
+                Foreground="White"
                 FontSize="30"
                 RelativePanel.AlignLeftWithPanel="True" />
-
-
-            <Button
-                Name="BackArrow"
-                Margin="15,0,0,0"
-                Content="&#xE0C4;"
-                FontFamily="Segoe MDL2 Assets"
-                FontSize="30"
-                RelativePanel.RightOf="MenuButton" />
-
-
+            
             <TextBlock
                 Name="TitlePage"
                 Margin="35,0,0,0"
                 FontSize="30"
                 FontWeight="Bold"
-                RelativePanel.RightOf="BackArrow"
+                Foreground="White"
+                RelativePanel.RightOf="MenuButton"
                 Text="Pokedéx" />
 
             <AutoSuggestBox
@@ -82,32 +62,10 @@
                 Margin="0,5,10,0"
                 PlaceholderText="Search"
                 QueryIcon="Find"
+                Foreground="White"
                 RelativePanel.AlignRightWithPanel="True" />
         </RelativePanel>
-        <RelativePanel Grid.Row="1">
-            <Button
-                Name="ByNumberButton"
-                Height="34"
-                Foreground="Black"
-                RelativePanel.AlignHorizontalCenterWithPanel="True">
-                BY #
-            </Button>
-            <Button
-                Name="ByNameButton"
-                Height="34"
-                Foreground="Black"
-                RelativePanel.RightOf="ByNumberButton">
-                BY NAME
-            </Button>
-            <Button
-                Name="ByTypeButton"
-                Height="34"
-                Foreground="Black"
-                RelativePanel.RightOf="ByNameButton">
-                BY TYPE
-            </Button>
-
-        </RelativePanel>
+        
 
         <SplitView
             Name="SplitMenu"

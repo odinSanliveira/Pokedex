@@ -21,7 +21,32 @@
             <ColumnDefinition Width="350" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <RelativePanel Grid.Row="0">
+            <ComboBox x:Name ="Types" SelectionChanged="Types_SelectionChanged" HorizontalAlignment="Center" RelativePanel.AlignLeftWithPanel="True" Width="150">
+                <ComboBoxItem Content="all"/>
+                <ComboBoxItem x:Name="normal" Content="normal"/>
+                <ComboBoxItem x:Name="fighting" Content="fighting"/>
+                <ComboBoxItem x:Name="flying" Content="flying"></ComboBoxItem>
+                <ComboBoxItem x:Name="poison" Content="poison"></ComboBoxItem>
+                <ComboBoxItem x:Name="ground">Ground</ComboBoxItem>
+                <ComboBoxItem x:Name="rock">Rock</ComboBoxItem>
+                <ComboBoxItem x:Name="bug">Bug</ComboBoxItem>
+                <ComboBoxItem x:Name="ghost">Ghost</ComboBoxItem>
+                <ComboBoxItem x:Name="steel">Steel</ComboBoxItem>
+                <ComboBoxItem x:Name="fire">Fire</ComboBoxItem>
+                <ComboBoxItem x:Name="water">Water</ComboBoxItem>
+                <ComboBoxItem x:Name="grass">Grass</ComboBoxItem>
+                <ComboBoxItem x:Name="eletric">Eletric</ComboBoxItem>
+                <ComboBoxItem x:Name="psychic">Psychic</ComboBoxItem>
+                <ComboBoxItem x:Name="ice">Ice</ComboBoxItem>
+                <ComboBoxItem x:Name="dragon">Dragon</ComboBoxItem>
+                <ComboBoxItem x:Name="dark">Dark</ComboBoxItem>
+                <ComboBoxItem x:Name="fairy">Fairy</ComboBoxItem>
+                <ComboBoxItem x:Name="unknown">Unknown</ComboBoxItem>
+                <ComboBoxItem x:Name="shadow">Shadow</ComboBoxItem>
+            </ComboBox>
 
+        </RelativePanel>
         <ListView
             Name="PokeListViewMain"
             Grid.Row="1"
