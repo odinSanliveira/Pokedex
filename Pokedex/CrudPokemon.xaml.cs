@@ -45,19 +45,18 @@ namespace Pokedex
 
         private void Register_click(object sender, RoutedEventArgs e) 
         {
-            
-            var PokeCrudName = PokeName.Text;
-            var PokeCrudTypeOne = PokeTypeOne.Text;
-            var PokeCrudTypeTwo = PokeTypeTwo.Text;
-            var PokeCrudHP = PokeHp.Text;
-            var PokeCrudATK = PokeAttack.Text;
-            var PokeCrudDefense = PokeDefense.Text;
-            var PokeCrudSpecialATK = PokeSpecialAttack.Text;
-            var PokeCrudSpecialDefense = PokeSpecialDefense.Text;
-            var PokeCrudSpeed = PokeSpeed.Text;
-            var PokeCrudHeight = PokeHeight.Text;
-            var PokeCrudWeight = PokeWeight.Text;
 
+            userPokemon.pokemonName = PokeName.Text;
+            userPokemon.pokemonType = PokeTypeOne.Text;
+            userPokemon.pokemonType2 = PokeTypeTwo.Text;
+            userPokemon.HPCrud = int.Parse(PokeHp.Text);
+            userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
+            userPokemon.DefenseCrud = int.Parse(PokeDefense.Text);
+            userPokemon.SpecialAttackCrud = int.Parse(PokeSpecialAttack.Text);
+            userPokemon.SpecialDefenseCrud = int.Parse(PokeSpecialDefense.Text);
+            userPokemon.Speed = int.Parse(PokeSpeed.Text);
+            userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
+            userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
 
             if (PokeTypeTwo.Text == "")
             {
@@ -68,18 +67,6 @@ namespace Pokedex
 
                 TypeTwo.Text = PokeTypeTwo.Text;
             }
-            
-            userPokemon.pokemonName = PokeCrudName;
-            userPokemon.pokemonType = PokeCrudTypeOne;
-            userPokemon.pokemonType2 = PokeCrudTypeTwo;
-            userPokemon.HPCrud = int.Parse(PokeCrudHP);
-            userPokemon.AttackCrud = int.Parse(PokeCrudATK);
-            userPokemon.DefenseCrud = int.Parse(PokeCrudDefense);
-            userPokemon.SpecialAttackCrud = int.Parse(PokeCrudSpecialATK);
-            userPokemon.SpecialDefenseCrud = int.Parse(PokeCrudSpecialDefense);
-            userPokemon.Speed = int.Parse(PokeCrudSpeed);
-            userPokemon.heightCRUD = int.Parse(PokeCrudHeight);
-            userPokemon.weightCRUD = int.Parse(PokeCrudWeight);
 
             var db = new PokeDataContext();
             db.UserPokemon.Add(this.userPokemon);
