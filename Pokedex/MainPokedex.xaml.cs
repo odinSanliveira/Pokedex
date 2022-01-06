@@ -27,9 +27,10 @@ namespace Pokedex
     {
 
 
-        
+
         public ObservableCollection<Pokemon> Pokemon { get; set; }
         public int Page { get; set; }
+        public int TypePage { get; set; }
         public MainPokedex()
         {
             this.InitializeComponent();
@@ -42,6 +43,7 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
             Page = 1;
+            TypePage = 1;
 
             DBOperation.ReadDB(Pokemon, Page);
             if (Pokemon.Count == 0)
@@ -120,18 +122,30 @@ namespace Pokedex
 
         private async void Next_Click(object sender, RoutedEventArgs e)
         {
-            Page++;
+
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
             string PageAPIReference = DBOperation.resourceDBRead();
-            
 
-            DBOperation.ReadDB(Pokemon, Page);
-            if (Pokemon.Count == 0)
+
+            var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
+
+            if (comboBoxItem.Content.ToString() == "all" || comboBoxItem.Content.ToString() == null)
             {
-                await ApiRequest.FillPokedexList(Pokemon, PageAPIReference);
+                Page++;
+                DBOperation.ReadDB(Pokemon, Page);
+                if (Pokemon.Count == 0)
+                {
+                    await ApiRequest.FillPokedexList(Pokemon, PageAPIReference);
+                }
             }
+            else
+            {
+                TypePage++;
+                var typeSelected = comboBoxItem.Content.ToString();
+                DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
 
+            }
 
             if (Page == 1)
             {
@@ -155,22 +169,13 @@ namespace Pokedex
         private void Types_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
-            if (comboBoxItem != null)
+            if (comboBoxItem.Content.ToString() != "all")
             {
-                if (comboBoxItem.Content.ToString() == "all")
-                {
-                    DBOperation.ReadDB(Pokemon, Page);
-                }
-                else
-                {
-                    Page = 1;
-                    var typeSelected = comboBoxItem.Content.ToString();
-                    DBOperation.SearchDBByType(Pokemon, typeSelected);
-                    
-                }
-            }
+                var typeSelected = comboBoxItem.Content.ToString();
+                DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
             }
 
-            
+
+        }
     }
 }
