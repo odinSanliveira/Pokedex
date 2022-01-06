@@ -49,6 +49,7 @@ namespace Pokedex
             userPokemon.pokemonName = PokeName.Text;
             userPokemon.pokemonType = PokeTypeOne.Text;
             userPokemon.pokemonType2 = PokeTypeTwo.Text;
+            userPokemon.sprite = PokeIdSprite.Text;
             userPokemon.HPCrud = int.Parse(PokeHp.Text);
             userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
             userPokemon.DefenseCrud = int.Parse(PokeDefense.Text);

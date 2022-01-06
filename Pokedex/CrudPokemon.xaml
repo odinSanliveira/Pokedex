@@ -46,6 +46,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -70,7 +71,9 @@
                         <TextBox Grid.Row="9" Grid.Column="1" Margin="5" x:Name="PokeSpecialDefense"/>
                         <TextBlock Grid.Row="10" Grid.Column="0" Text="Speed" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBox Grid.Row="10" Grid.Column="1" Margin="5" x:Name="PokeSpeed"/>
-                        <Button Grid.Column="1" Grid.Row="11" Content="Salvar" Margin="10" Click="Register_click"/>
+                        <TextBlock Grid.Row="11" Grid.Column="0" Text="ID Sprite" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBox Grid.Row="11" Grid.Column="1" Margin="5" x:Name="PokeIdSprite"/>
+                        <Button Grid.Column="1" Grid.Row="12" Content="Salvar" Margin="10" Click="Register_click"/>
                     </Grid>
                 </Border>
                 <Border Grid.Column="1" BorderBrush="#565656" BorderThickness="1" Margin="5">
