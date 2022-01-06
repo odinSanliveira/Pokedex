@@ -22,7 +22,12 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <RelativePanel Grid.Row="0">
-            <ComboBox x:Name ="Types" SelectionChanged="Types_SelectionChanged" HorizontalAlignment="Center" RelativePanel.AlignLeftWithPanel="True" Width="150">
+            <ComboBox x:Name ="Types"
+                      SelectedIndex="0"
+                      SelectionChanged="Types_SelectionChanged" 
+                      HorizontalAlignment="Center" 
+                      RelativePanel.AlignLeftWithPanel="True" 
+                      Width="150">
                 <ComboBoxItem Content="all"/>
                 <ComboBoxItem x:Name="normal" Content="normal"/>
                 <ComboBoxItem x:Name="fighting" Content="fighting"/>

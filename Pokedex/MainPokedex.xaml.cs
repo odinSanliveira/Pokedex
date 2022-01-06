@@ -106,7 +106,6 @@ namespace Pokedex
 
         private async void Previous_Click(object sender, RoutedEventArgs e)
         {
-            Page--;
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
@@ -146,6 +145,7 @@ namespace Pokedex
 
 
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
+  
 
             if (comboBoxItem.Content.ToString() == "all" || comboBoxItem.Content.ToString() == null)
             {
