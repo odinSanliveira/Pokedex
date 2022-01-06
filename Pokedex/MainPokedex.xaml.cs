@@ -124,7 +124,7 @@ namespace Pokedex
             }
 
 
-            if (Page == 1 || TypePage == 1)
+            if (Page == 1 && TypePage == 1)
             {
                 Previous.IsEnabled = false;
             }
@@ -164,7 +164,7 @@ namespace Pokedex
 
             }
 
-            if (Page == 1)
+            if (Page == 1 && TypePage == 1)
             {
                 Previous.IsEnabled = false;
             }
@@ -190,6 +190,10 @@ namespace Pokedex
             {
                 var typeSelected = comboBoxItem.Content.ToString();
                 DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
+            }else if(comboBoxItem.Content.ToString() == "all")
+            {
+                Page = 1;
+                DBOperation.ReadDB(Pokemon, Page);
             }
 
 
