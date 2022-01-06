@@ -26,43 +26,39 @@ namespace Pokedex
     public sealed partial class CrudPokemon : Page
     {
         public ObservableCollection<Pokemon> Pokemon { get; set; }
+        public PokemonCRUD userPokemon { get; set; }
 
         public CrudPokemon()
         {
             this.InitializeComponent();
             Pokemon = new ObservableCollection<Pokemon>();
+            userPokemon = new PokemonCRUD();
         }
 
         
         private void PokeListViewCrud_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            
+            
 
         }
 
         private void Register_click(object sender, RoutedEventArgs e) 
-        { 
-            PokemonName.Text = PokeName.Text;
-            TypeOne.Text = PokeTypeOne.Text;
-            TypeBlock.Text = "Type";
-            HpBlock.Text = "HP";
-            Hp.Text = PokeHp.Text;
-            AttackBlock.Text = "Attack";
-            Attack.Text = PokeAttack.Text;
-            DefenseBlock.Text = "Defense";
-            Defense.Text = PokeDefense.Text;
-            SpecialAttackBlock.Text = "Special Attack";
-            SpecialAttack.Text = PokeSpecialAttack.Text;
-            SpecialDefenseBlock.Text = "Special Defense";
-            SpecialDefense.Text = PokeSpecialDefense.Text;
-            SpeedBlock.Text = "Speed";
-            Speed.Text = PokeSpeed.Text;
-            HeightBlock.Text = "Height";
-            Height.Text = PokeHeight.Text;
-            WeightBlock.Text = "Weight";
-            Weight.Text = PokeWeight.Text;
+        {
 
-            if(PokeTypeTwo.Text == "")
+            userPokemon.pokemonName = PokeName.Text;
+            userPokemon.pokemonType = PokeTypeOne.Text;
+            userPokemon.pokemonType2 = PokeTypeTwo.Text;
+            userPokemon.HPCrud = int.Parse(PokeHp.Text);
+            userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
+            userPokemon.DefenseCrud = int.Parse(PokeDefense.Text);
+            userPokemon.SpecialAttackCrud = int.Parse(PokeSpecialAttack.Text);
+            userPokemon.SpecialDefenseCrud = int.Parse(PokeSpecialDefense.Text);
+            userPokemon.Speed = int.Parse(PokeSpeed.Text);
+            userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
+            userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
+
+            if (PokeTypeTwo.Text == "")
             {
                 TypeTwo.Text = "";
             }
@@ -71,6 +67,10 @@ namespace Pokedex
 
                 TypeTwo.Text = PokeTypeTwo.Text;
             }
+
+            var db = new PokeDataContext();
+            db.UserPokemon.Add(this.userPokemon);
+            db.SaveChanges();
 
         }
     }
