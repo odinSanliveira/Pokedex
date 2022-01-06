@@ -157,7 +157,7 @@ namespace Pokedex
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
             if (comboBoxItem != null)
             {
-                TypeOne.Text = comboBoxItem.Content.ToString();
+                //o código de filtro fica aqui
             }
         }
     }

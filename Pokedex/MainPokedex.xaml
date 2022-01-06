@@ -28,22 +28,22 @@
                 <ComboBoxItem x:Name="fighting" Content="fighting"/>
                 <ComboBoxItem x:Name="flying" Content="flying"></ComboBoxItem>
                 <ComboBoxItem x:Name="poison" Content="poison"></ComboBoxItem>
-                <ComboBoxItem x:Name="ground">Ground</ComboBoxItem>
-                <ComboBoxItem x:Name="rock">Rock</ComboBoxItem>
-                <ComboBoxItem x:Name="bug">Bug</ComboBoxItem>
-                <ComboBoxItem x:Name="ghost">Ghost</ComboBoxItem>
-                <ComboBoxItem x:Name="steel">Steel</ComboBoxItem>
-                <ComboBoxItem x:Name="fire">Fire</ComboBoxItem>
-                <ComboBoxItem x:Name="water">Water</ComboBoxItem>
-                <ComboBoxItem x:Name="grass">Grass</ComboBoxItem>
-                <ComboBoxItem x:Name="eletric">Eletric</ComboBoxItem>
-                <ComboBoxItem x:Name="psychic">Psychic</ComboBoxItem>
-                <ComboBoxItem x:Name="ice">Ice</ComboBoxItem>
-                <ComboBoxItem x:Name="dragon">Dragon</ComboBoxItem>
-                <ComboBoxItem x:Name="dark">Dark</ComboBoxItem>
-                <ComboBoxItem x:Name="fairy">Fairy</ComboBoxItem>
-                <ComboBoxItem x:Name="unknown">Unknown</ComboBoxItem>
-                <ComboBoxItem x:Name="shadow">Shadow</ComboBoxItem>
+                <ComboBoxItem x:Name="ground" Content="ground"></ComboBoxItem>
+                <ComboBoxItem x:Name="rock" Content="rock"></ComboBoxItem>
+                <ComboBoxItem x:Name="bug" Content="bug"></ComboBoxItem>
+                <ComboBoxItem x:Name="ghost" Content="ghost"></ComboBoxItem>
+                <ComboBoxItem x:Name="steel" Content="steel"></ComboBoxItem>
+                <ComboBoxItem x:Name="fire" Content="fire"></ComboBoxItem>
+                <ComboBoxItem x:Name="water" Content="water"></ComboBoxItem>
+                <ComboBoxItem x:Name="grass" Content="grass"></ComboBoxItem>
+                <ComboBoxItem x:Name="eletric" Content="eletric"></ComboBoxItem>
+                <ComboBoxItem x:Name="psychic" Content="psychic"></ComboBoxItem>
+                <ComboBoxItem x:Name="ice" Content="ice"></ComboBoxItem>
+                <ComboBoxItem x:Name="dragon" Content="dragon"></ComboBoxItem>
+                <ComboBoxItem x:Name="dark" Content="dark"></ComboBoxItem>
+                <ComboBoxItem x:Name="fairy" Content="fairy"></ComboBoxItem>
+                <ComboBoxItem x:Name="unknown" Content="unknown"></ComboBoxItem>
+                <ComboBoxItem x:Name="shadow" Content="shadow"></ComboBoxItem>
             </ComboBox>
 
         </RelativePanel>
