@@ -110,7 +110,7 @@ namespace Pokedex
             ProgressRing.Visibility = Visibility.Visible;
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
 
-            if (comboBoxItem.Content.ToString() == "all" || comboBoxItem.Content.ToString() == null)
+            if (comboBoxItem.Content.ToString() == "select" || comboBoxItem.Content.ToString() == "all")
             {
                 Page--;
                 DBOperation.ReadDB(Pokemon, Page);
@@ -147,7 +147,7 @@ namespace Pokedex
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
   
 
-            if (comboBoxItem.Content.ToString() == "all" || comboBoxItem.Content.ToString() == null)
+            if (comboBoxItem.Content.ToString() == "select" || comboBoxItem.Content.ToString() == "all")
             {
                 Page++;
                 DBOperation.ReadDB(Pokemon, Page);
@@ -186,17 +186,22 @@ namespace Pokedex
         private void Types_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
-            if (comboBoxItem.Content.ToString() != "all")
+            if (comboBoxItem.Content.ToString() != "select")
             {
-                var typeSelected = comboBoxItem.Content.ToString();
-                DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
-            }else if(comboBoxItem.Content.ToString() == "all")
-            {
-                Page = 1;
-                DBOperation.ReadDB(Pokemon, Page);
+                if (comboBoxItem.Content.ToString() == "all")
+                {
+                    Page = 1;
+                    TypePage = 1;
+                    DBOperation.ReadDB(Pokemon, Page);
+                }
+                else
+                {
+                    Page=1;
+                    var typeSelected = comboBoxItem.Content.ToString();
+                    DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
+                }
             }
-
-
+            
         }
     }
 }

@@ -28,7 +28,8 @@
                       HorizontalAlignment="Center" 
                       RelativePanel.AlignLeftWithPanel="True" 
                       Width="150">
-                <ComboBoxItem Content="all"/>
+                <ComboBoxItem x:Name="select" Content="select"/>
+                <ComboBoxItem x:Name="all" Content="all"/>
                 <ComboBoxItem x:Name="normal" Content="normal"/>
                 <ComboBoxItem x:Name="fighting" Content="fighting"/>
                 <ComboBoxItem x:Name="flying" Content="flying"></ComboBoxItem>
