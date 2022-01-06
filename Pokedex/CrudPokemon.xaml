@@ -100,11 +100,11 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <!--<Image
-                                Name="PokemonDetailImage"
+                            <Image
+                                Name="pokemondetailimage"
                                 Grid.RowSpan="2"
                                 Grid.Column="0"
-                                VerticalAlignment="Top" />-->
+                                VerticalAlignment="top" />
 
                             <TextBlock
                                 Name="PokemonName"
@@ -311,7 +311,7 @@
                     ItemsSource="{x:Bind Pokemon}">
 
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="data:Pokemon">
+                            <DataTemplate x:DataType="data:PokemonCRUD">
                                 <StackPanel Orientation="Horizontal">
 
                                     <TextBlock
@@ -325,22 +325,22 @@
                                         Grid.RowSpan="2"
                                         Grid.Column="0"
                                         VerticalAlignment="Top"
-                                        Source="{x:Bind sprites.front_default}" />
+                                        Source="{x:Bind sprite}" />
 
                                     <TextBlock
                                         Margin="5,0,10,5"
                                         VerticalAlignment="Center"
                                         FontSize="18"
                                         Foreground="Black"
-                                        Text="{x:Bind name}" />
+                                        Text="{x:Bind pokemonName}" />
 
-                                    <TextBlock
+                                    <!--<TextBlock
                                         Margin="25,0,10,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="18"
                                         Foreground="Black"
-                                        Text="{x:Bind TypeGetter()}" />
+                                        Text="{x:Bind TypeGetter()}" />-->
                                 </StackPanel>
                             </DataTemplate>
 

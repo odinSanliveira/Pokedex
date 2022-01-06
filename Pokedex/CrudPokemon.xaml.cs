@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Media.Imaging;
 
 // O modelo de item de Página em Branco está documentado em https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,13 +26,13 @@ namespace Pokedex
        
     public sealed partial class CrudPokemon : Page
     {
-        public ObservableCollection<Pokemon> Pokemon { get; set; }
+        public ObservableCollection<PokemonCRUD> Pokemon { get; set; }
         public PokemonCRUD userPokemon { get; set; }
 
         public CrudPokemon()
         {
             this.InitializeComponent();
-            Pokemon = new ObservableCollection<Pokemon>();
+            Pokemon = new ObservableCollection<PokemonCRUD>();
             userPokemon = new PokemonCRUD();
         }
 
@@ -46,10 +47,11 @@ namespace Pokedex
         private void Register_click(object sender, RoutedEventArgs e) 
         {
 
+
             userPokemon.pokemonName = PokeName.Text;
             userPokemon.pokemonType = PokeTypeOne.Text;
             userPokemon.pokemonType2 = PokeTypeTwo.Text;
-            userPokemon.sprite = PokeIdSprite.Text;
+            userPokemon.sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+PokeIdSprite.Text+".png";
             userPokemon.HPCrud = int.Parse(PokeHp.Text);
             userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
             userPokemon.DefenseCrud = int.Parse(PokeDefense.Text);
@@ -58,6 +60,11 @@ namespace Pokedex
             userPokemon.Speed = int.Parse(PokeSpeed.Text);
             userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
             userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
+
+            var pokemonImage = new BitmapImage();
+            Uri url = new Uri(userPokemon.sprite, UriKind.Absolute);
+            pokemonImage.UriSource = url;
+            pokemondetailimage.Source = pokemonImage;
 
             if (PokeTypeTwo.Text == "")
             {
@@ -72,6 +79,7 @@ namespace Pokedex
             var db = new PokeDataContext();
             db.UserPokemon.Add(this.userPokemon);
             db.SaveChanges();
+            DBOperation.ReadCRUDB(Pokemon);
 
         }
     }

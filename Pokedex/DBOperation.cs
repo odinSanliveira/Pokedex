@@ -205,5 +205,38 @@ namespace Pokedex
             }
         }
 
+        //Operations on CRUD
+
+        public static ObservableCollection<PokemonCRUD> ReadCRUDB(ObservableCollection<PokemonCRUD> empty)
+        {
+            using (var db = new PokeDataContext())
+            {
+                var result = (from UserPokemon in db.UserPokemon
+                              select new PokemonCRUD
+                              {
+                                  id = UserPokemon.id,
+                                  pokemonName = UserPokemon.pokemonName,
+                                  pokemonType = UserPokemon.pokemonType,
+                                  pokemonType2 = UserPokemon.pokemonType2,
+                                  sprite = UserPokemon.sprite,
+                                  HPCrud = UserPokemon.HPCrud,
+                                  heightCRUD = UserPokemon.heightCRUD,
+                                  weightCRUD = UserPokemon.weightCRUD,
+                                  AttackCrud = UserPokemon.AttackCrud,
+                                  DefenseCrud = UserPokemon.DefenseCrud,
+                                  SpecialDefenseCrud = UserPokemon.SpecialDefenseCrud,
+                                  SpecialAttackCrud = UserPokemon.SpecialAttackCrud,
+                                  Speed = UserPokemon.Speed
+                              }).ToList<PokemonCRUD>();
+                empty.Clear();
+                foreach (var item in result)
+                {
+                    empty.Add(item);
+                }
+
+                return empty;
+            }
+        }
+
     }
 }
