@@ -109,8 +109,23 @@ namespace Pokedex
             Page--;
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
-            DBOperation.ReadDB(Pokemon, Page);
-            if (Page == 1)
+            var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
+
+            if (comboBoxItem.Content.ToString() == "all" || comboBoxItem.Content.ToString() == null)
+            {
+                Page--;
+                DBOperation.ReadDB(Pokemon, Page);
+            }
+            else
+            {
+                TypePage--;
+                var typeSelected = comboBoxItem.Content.ToString();
+                DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
+
+            }
+
+
+            if (Page == 1 || TypePage == 1)
             {
                 Previous.IsEnabled = false;
             }
@@ -126,6 +141,8 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
             string PageAPIReference = DBOperation.resourceDBRead();
+            string TypePageApiReference;
+            //Definir lazyloading de tipos pela APIRequest
 
 
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;

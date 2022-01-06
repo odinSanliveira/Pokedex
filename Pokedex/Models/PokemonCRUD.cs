@@ -12,6 +12,7 @@ namespace Pokedex.Models
         [Key()]
         public int id { get; set; }
         public string pokemonName { get; set; }
+        public string sprite { get; set; }
         public string pokemonType { get; set; }
         public string pokemonType2 { get; set; }
         public int HPCrud { get; set; }
