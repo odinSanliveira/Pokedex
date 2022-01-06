@@ -137,12 +137,10 @@ namespace Pokedex
             }
         }
 
-        public static ObservableCollection<Pokemon> SearchDBByType(ObservableCollection<Pokemon> empty)
+        public static ObservableCollection<Pokemon> SearchDBByType(ObservableCollection<Pokemon> empty, string typeSelected)
         {
             using (var db = new PokeDataContext())
             {
-                string mystring = "fire";
-
                 var SaveLists = from TypeList in db.TypeList
                                 join Types in db.Types
                                 on TypeList.TypeID equals Types.id
@@ -169,7 +167,7 @@ namespace Pokedex
                                    ).ToList<Pokemon>();
                 //Pode-se usar tanto name quanto url, url requer uma pequena alteração de paramatros, pois o tipo em si, só diferencia por uma número na string
                 empty.Clear();
-                var SelectByTypeName = (SavePokemon.Where(m => m.types.Any(u => u.type.name == mystring))).ToList<Pokemon>();
+                var SelectByTypeName = (SavePokemon.Where(m => m.types.Any(u => u.type.name == typeSelected))).ToList<Pokemon>();
                 foreach (var item in SelectByTypeName)
                 {
                     empty.Add(item);

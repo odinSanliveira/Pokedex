@@ -124,7 +124,7 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
             string PageAPIReference = DBOperation.resourceDBRead();
-
+            
 
             DBOperation.ReadDB(Pokemon, Page);
             if (Pokemon.Count == 0)
@@ -157,8 +157,20 @@ namespace Pokedex
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
             if (comboBoxItem != null)
             {
-                //o código de filtro fica aqui
+                if (comboBoxItem.Content.ToString() == "all")
+                {
+                    DBOperation.ReadDB(Pokemon, Page);
+                }
+                else
+                {
+                    Page = 1;
+                    var typeSelected = comboBoxItem.Content.ToString();
+                    DBOperation.SearchDBByType(Pokemon, typeSelected);
+                    
+                }
             }
-        }
+            }
+
+            
     }
 }
