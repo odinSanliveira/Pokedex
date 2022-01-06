@@ -106,7 +106,6 @@ namespace Pokedex
 
         private async void Previous_Click(object sender, RoutedEventArgs e)
         {
-            Page--;
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
@@ -125,7 +124,7 @@ namespace Pokedex
             }
 
 
-            if (Page == 1 || TypePage == 1)
+            if (Page == 1 && TypePage == 1)
             {
                 Previous.IsEnabled = false;
             }
@@ -164,7 +163,7 @@ namespace Pokedex
 
             }
 
-            if (Page == 1)
+            if (Page == 1 && TypePage == 1)
             {
                 Previous.IsEnabled = false;
             }
@@ -190,6 +189,10 @@ namespace Pokedex
             {
                 var typeSelected = comboBoxItem.Content.ToString();
                 DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
+            }else if(comboBoxItem.Content.ToString() == "all")
+            {
+                Page = 1;
+                DBOperation.ReadDB(Pokemon, Page);
             }
 
 
