@@ -209,32 +209,45 @@ namespace Pokedex
             //pesquisa por nome
             if (RadioNome.IsChecked == true)
             {
-
+                if (sender.Text.Length > 1)
+                {
+                    //sender.ItemsSource = this.GetSuggestions(sender.Text);
+                    var nameRequested = sender.Text;
+                    DBOperation.SearchDBByName(Pokemon, nameRequested);
+                }
+                else
+                {
+                    sender.ItemsSource = new String[] { "No suggestions..." };
+                    Page = 1;
+                    DBOperation.ReadDB(Pokemon, Page);
+                }
             }
             else
             {
                 //pesquisa por ID
-            }
-            //verificação do banco de dados
-            if (sender.Text.Length > 1)
-            {
-                sender.ItemsSource = this.GetSuggestions(sender.Text);
-            }
-            else
-            {
-                sender.ItemsSource = new String[] { "No suggestions..." };
+                if (sender.Text.Length > 1)
+                {
+                    //sender.ItemsSource = this.GetSuggestions(sender.Text);
+                    var idRequested = int.Parse(sender.Text);
+                    DBOperation.SearchDBByID(Pokemon, idRequested);
+                }
+                else
+                {
+                    sender.ItemsSource = new String[] { "No suggestions..." };
+                    Page = 1;
+                    DBOperation.ReadDB(Pokemon, Page);
+                }
             }
         }
-        private string[] suggestions = new string[] { "bubassaur", "ivyssaur", "charmeleon" };
 
-        private string[] GetSuggestions(string text)
-        {
-            string[] results = null;
+        //private string[] GetSuggestions(string text)
+        //{
+        //    string[] results = null;
 
-            results = suggestions.Where(x => x.StartsWith(text)).ToArray();
+        //    results = suggestions.Where(x => x.StartsWith(text)).ToArray();
 
-            return results;
+        //    return results;
 
-        }
+        //}
     }
 }

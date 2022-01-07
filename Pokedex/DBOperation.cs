@@ -52,11 +52,10 @@ namespace Pokedex
 
         }
 
-        public static ObservableCollection<Pokemon> SearchDBByID(ObservableCollection<Pokemon> empty)
+        public static ObservableCollection<Pokemon> SearchDBByID(ObservableCollection<Pokemon> empty, int Index)
         {
             using (var db = new PokeDataContext())
             {
-                int myint = 3;
 
                 var SaveLists = from TypeList in db.TypeList
                                 join Types in db.Types
@@ -69,7 +68,7 @@ namespace Pokedex
                 var SavePokemon = (from PokemonUnit in db.Pokemon
                                    join Sprites in db.Sprite
                                    on PokemonUnit.id equals Sprites.id
-                                   where PokemonUnit.id.Equals(myint)
+                                   where PokemonUnit.id.Equals(Index)
                                    select new Pokemon
                                    {
                                        id = PokemonUnit.id,
@@ -94,11 +93,10 @@ namespace Pokedex
 
             }
         }
-        public static ObservableCollection<Pokemon> SearchDBByName(ObservableCollection<Pokemon> empty)
+        public static ObservableCollection<Pokemon> SearchDBByName(ObservableCollection<Pokemon> empty, string nameRequested)
         {
             using (var db = new PokeDataContext())
             {
-                string mystring = "saur";
 
                 var SaveLists = from TypeList in db.TypeList
                                 join Types in db.Types
@@ -111,7 +109,7 @@ namespace Pokedex
                 var SavePokemon = (from PokemonUnit in db.Pokemon
                                    join Sprites in db.Sprite
                                    on PokemonUnit.id equals Sprites.id
-                                   where PokemonUnit.name.Contains(mystring)
+                                   where PokemonUnit.name.Contains(nameRequested)
                                    select new Pokemon
                                    {
                                        id = PokemonUnit.id,
