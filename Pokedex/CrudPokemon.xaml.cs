@@ -106,6 +106,9 @@ namespace Pokedex
         private void Delete_Pokemon(object sender, RoutedEventArgs e)
         {
             var id = ItemSelected;
+            DBOperation.DeletePokemonCrud(id);
+            DBOperation.ReadCRUDB(Pokemon);
+
         }
         private void Update_Pokemon(object sender, RoutedEventArgs e)
         {

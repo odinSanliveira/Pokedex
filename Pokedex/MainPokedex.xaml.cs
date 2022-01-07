@@ -197,6 +197,7 @@ namespace Pokedex
                 else
                 {
                     Page=1;
+                    TypePage=1;
                     var typeSelected = comboBoxItem.Content.ToString();
                     DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
                 }

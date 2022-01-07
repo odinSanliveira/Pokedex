@@ -238,5 +238,35 @@ namespace Pokedex
             }
         }
 
+        public static void DeletePokemonCrud(int Index)
+        {
+            using (var db = new PokeDataContext())
+            {
+                var result = (from UserPokemon in db.UserPokemon
+                              where UserPokemon.id == Index
+                              select new PokemonCRUD
+                              {
+                                  id = UserPokemon.id,
+                                  pokemonName = UserPokemon.pokemonName,
+                                  pokemonType = UserPokemon.pokemonType,
+                                  pokemonType2 = UserPokemon.pokemonType2,
+                                  sprite = UserPokemon.sprite,
+                                  HPCrud = UserPokemon.HPCrud,
+                                  heightCRUD = UserPokemon.heightCRUD,
+                                  weightCRUD = UserPokemon.weightCRUD,
+                                  AttackCrud = UserPokemon.AttackCrud,
+                                  DefenseCrud = UserPokemon.DefenseCrud,
+                                  SpecialDefenseCrud = UserPokemon.SpecialDefenseCrud,
+                                  SpecialAttackCrud = UserPokemon.SpecialAttackCrud,
+                                  Speed = UserPokemon.Speed
+                              }).ToList<PokemonCRUD>();
+                foreach (var item in result)
+                {
+                    db.UserPokemon.Remove(item);
+                    db.SaveChanges();
+                }
+            }
+        }
+
     }
 }
