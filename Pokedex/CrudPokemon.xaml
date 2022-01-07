@@ -50,29 +50,29 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" x:Name="PokeName"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" x:Name="PokeName" BeforeTextChanging="NumberBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Height" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" x:Name="PokeHeight"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" x:Name="PokeHeight" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Weight" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" x:Name="PokeWeight"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" x:Name="PokeWeight" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="Type One" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" x:Name="PokeTypeOne"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" x:Name="PokeTypeOne" InputScope="Text" BeforeTextChanging="NumberBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="4" Grid.Column="0" Text="Type Two" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5"  x:Name="PokeTypeTwo"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5"  x:Name="PokeTypeTwo" InputScope="Text" BeforeTextChanging="NumberBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="5" Grid.Column="0" Text="HP" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="5" Grid.Column="1" Margin="5"  x:Name="PokeHp"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Margin="5"  x:Name="PokeHp" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="6" Grid.Column="0" Text="Attack" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="6" Grid.Column="1" Margin="5"  x:Name="PokeAttack"/>
+                        <TextBox Grid.Row="6" Grid.Column="1" Margin="5"  x:Name="PokeAttack" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="7" Grid.Column="0" Text="Defense" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="7" Grid.Column="1" Margin="5"  x:Name="PokeDefense"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Margin="5"  x:Name="PokeDefense" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="8" Grid.Column="0" Text="Special Attack" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="8" Grid.Column="1" Margin="5"  x:Name="PokeSpecialAttack"/>
+                        <TextBox Grid.Row="8" Grid.Column="1" Margin="5"  x:Name="PokeSpecialAttack" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="9" Grid.Column="0" Text="Special Defense" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="9" Grid.Column="1" Margin="5" x:Name="PokeSpecialDefense"/>
+                        <TextBox Grid.Row="9" Grid.Column="1" Margin="5" x:Name="PokeSpecialDefense" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="10" Grid.Column="0" Text="Speed" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="10" Grid.Column="1" Margin="5" x:Name="PokeSpeed"/>
+                        <TextBox Grid.Row="10" Grid.Column="1" Margin="5" x:Name="PokeSpeed" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="11" Grid.Column="0" Text="ID Sprite" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="11" Grid.Column="1" Margin="5" x:Name="PokeIdSprite"/>
+                        <TextBox Grid.Row="11" Grid.Column="1" Margin="5" x:Name="PokeIdSprite" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="12">
                             <Button  Content="Salvar" Margin="10" Click="Register_click"/>
                             <Button Click="Update_Pokemon">Alterar</Button>

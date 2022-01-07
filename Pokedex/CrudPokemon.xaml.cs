@@ -118,5 +118,15 @@ namespace Pokedex
         {
             var id = ItemSelected;
         }
+        private void TextBox_OnBeforeTextChanging(TextBox sender,
+                                          TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+        }
+        private void NumberBox_OnBeforeTextChanging(TextBox sender,
+                                          TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsLetter(c));
+        }
     }
 }
