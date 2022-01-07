@@ -46,7 +46,7 @@
                 Foreground="White"
                 FontSize="30"
                 RelativePanel.AlignLeftWithPanel="True" />
-            
+
             <TextBlock
                 Name="TitlePage"
                 Margin="35,0,0,0"
@@ -55,15 +55,6 @@
                 Foreground="White"
                 RelativePanel.RightOf="MenuButton"
                 Text="Pokedéx" />
-
-            <AutoSuggestBox
-                Name="AutoSuggestBox"
-                Width="200"
-                Margin="0,5,10,0"
-                PlaceholderText="Search"
-                QueryIcon="Find"
-                Foreground="White"
-                RelativePanel.AlignRightWithPanel="True" />
         </RelativePanel>
         
 

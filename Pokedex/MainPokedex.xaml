@@ -53,6 +53,18 @@
             </ComboBox>
 
         </RelativePanel>
+        <RelativePanel Grid.Row="0" Grid.Column="1">
+            <AutoSuggestBox
+                TextChanged="AutoSuggest_TextFind"
+                Width="250"
+                Margin="0,5,10,0"
+                PlaceholderText="Search"
+                QueryIcon="Find"
+                Foreground="White"
+                RelativePanel.AlignLeftWithPanel="True">
+
+            </AutoSuggestBox>
+        </RelativePanel>
         <ListView
             Name="PokeListViewMain"
             Grid.Row="1"

@@ -204,5 +204,28 @@ namespace Pokedex
             }
             
         }
+        private void AutoSuggest_TextFind(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            //verificação do banco de dados
+            if (sender.Text.Length > 1)
+            {
+                sender.ItemsSource = this.GetSuggestions(sender.Text);
+            }
+            else
+            {
+                sender.ItemsSource = new String[] { "No suggestions..." };
+            }
+        }
+        private string[] suggestions = new string[] { "bubassaur", "ivyssaur", "charmeleon" };
+
+        private string[] GetSuggestions(string text)
+        {
+            string[] results = null;
+
+            results = suggestions.Where(x => x.StartsWith(text)).ToArray();
+
+            return results;
+
+        }
     }
 }
