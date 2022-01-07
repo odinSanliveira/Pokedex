@@ -205,7 +205,16 @@ namespace Pokedex
             
         }
         private void AutoSuggest_TextFind(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
+        {   
+            //pesquisa por nome
+            if (RadioNome.IsChecked == true)
+            {
+
+            }
+            else
+            {
+                //pesquisa por ID
+            }
             //verificação do banco de dados
             if (sender.Text.Length > 1)
             {

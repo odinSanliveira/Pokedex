@@ -53,18 +53,21 @@
             </ComboBox>
 
         </RelativePanel>
-        <RelativePanel Grid.Row="0" Grid.Column="1">
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
             <AutoSuggestBox
+                Name="AutoSuggestBox"
                 TextChanged="AutoSuggest_TextFind"
                 Width="250"
                 Margin="0,5,10,0"
                 PlaceholderText="Search"
                 QueryIcon="Find"
                 Foreground="White"
-                RelativePanel.AlignLeftWithPanel="True">
+                RelativePanel.AlignLeftWithPanel="True"/>
+            
+            <RadioButton IsChecked="True" x:Name="RadioNome">NOME</RadioButton>
+            <RadioButton x:Name="RadioId">ID</RadioButton>
 
-            </AutoSuggestBox>
-        </RelativePanel>
+        </StackPanel>
         <ListView
             Name="PokeListViewMain"
             Grid.Row="1"
