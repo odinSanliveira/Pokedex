@@ -28,19 +28,55 @@ namespace Pokedex
     {
         public ObservableCollection<PokemonCRUD> Pokemon { get; set; }
         public PokemonCRUD userPokemon { get; set; }
+        public int ItemSelected { get; set; }
 
         public CrudPokemon()
         {
             this.InitializeComponent();
             Pokemon = new ObservableCollection<PokemonCRUD>();
             userPokemon = new PokemonCRUD();
+            DBOperation.ReadCRUDB(Pokemon);
         }
 
         
         private void PokeListViewCrud_ItemClick(object sender, ItemClickEventArgs e)
         {
-            
-            
+            var selectedPokemon = (PokemonCRUD)e.ClickedItem;
+            ItemSelected = selectedPokemon.id;
+
+            PokemonName.Text = selectedPokemon.pokemonName;
+            TypeOne.Text = selectedPokemon.pokemonType;
+            TypeBlock.Text = "Type";
+            HpBlock.Text = "HP";
+            Hp.Text = selectedPokemon.HPCrud.ToString();
+            AttackBlock.Text = "Attack";
+            Attack.Text = selectedPokemon.AttackCrud.ToString();
+            DefenseBlock.Text = "Defense";
+            Defense.Text = selectedPokemon.DefenseCrud.ToString();
+            SpecialAttackBlock.Text = "Special Attack";
+            SpecialAttack.Text = selectedPokemon.SpecialAttackCrud.ToString();
+            SpecialDefenseBlock.Text = "Special Defense";
+            SpecialDefense.Text = selectedPokemon.SpecialDefenseCrud.ToString();
+            SpeedBlock.Text = "Speed";
+            Speed.Text = selectedPokemon.Speed.ToString();
+            HeightBlock.Text = "Height";
+            Height.Text = selectedPokemon.heightCRUD.ToString();
+            WeightBlock.Text = "Weight";
+            Weight.Text = selectedPokemon.weightCRUD.ToString();
+
+            if (selectedPokemon.pokemonType2 == "")
+            {
+                TypeTwo.Text = "";
+            }
+            else
+            {
+
+                TypeTwo.Text = selectedPokemon.pokemonType2;
+            }
+            var pokemonImage = new BitmapImage();
+            Uri url = new Uri(selectedPokemon.sprite, UriKind.Absolute);
+            pokemonImage.UriSource = url;
+            pokemondetailimage.Source = pokemonImage;
 
         }
 
@@ -60,27 +96,20 @@ namespace Pokedex
             userPokemon.Speed = int.Parse(PokeSpeed.Text);
             userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
             userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
-
-            var pokemonImage = new BitmapImage();
-            Uri url = new Uri(userPokemon.sprite, UriKind.Absolute);
-            pokemonImage.UriSource = url;
-            pokemondetailimage.Source = pokemonImage;
-
-            if (PokeTypeTwo.Text == "")
-            {
-                TypeTwo.Text = "";
-            }
-            else
-            {
-
-                TypeTwo.Text = PokeTypeTwo.Text;
-            }
-
             var db = new PokeDataContext();
             db.UserPokemon.Add(this.userPokemon);
             db.SaveChanges();
             DBOperation.ReadCRUDB(Pokemon);
 
+        }
+
+        private void Delete_Pokemon(object sender, RoutedEventArgs e)
+        {
+            var id = ItemSelected;
+        }
+        private void Update_Pokemon(object sender, RoutedEventArgs e)
+        {
+            var id = ItemSelected;
         }
     }
 }

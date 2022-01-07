@@ -14,7 +14,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="300"/>
 
             </Grid.RowDefinitions>
             <TextBlock Grid.Row ="0" Text="CRUD POKEMON" Foreground="Black" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
@@ -341,6 +341,9 @@
                                         FontSize="18"
                                         Foreground="Black"
                                         Text="{x:Bind TypeGetter()}" />-->
+
+                                    <Button Click="Delete_Pokemon">Deletar</Button>
+                                    <Button Click="Update_Pokemon">Alterar</Button>
                                 </StackPanel>
                             </DataTemplate>
 
