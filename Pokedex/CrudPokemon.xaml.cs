@@ -64,6 +64,9 @@ namespace Pokedex
             WeightBlock.Text = "Weight";
             Weight.Text = selectedPokemon.weightCRUD.ToString();
 
+            //botão precisa ser mostrado quando selecionado
+            Delete_button.Visibility = Visibility.Visible;
+
             if (selectedPokemon.pokemonType2 == "")
             {
                 TypeTwo.Text = "";
@@ -110,6 +113,7 @@ namespace Pokedex
             DBOperation.ReadCRUDB(Pokemon);
 
         }
+
         private void Update_Pokemon(object sender, RoutedEventArgs e)
         {
             var id = ItemSelected;
