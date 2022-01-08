@@ -1,11 +1,8 @@
 ﻿using PagedList;
 using Pokedex.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pokedex
 {
@@ -14,15 +11,16 @@ namespace Pokedex
 
         public static ObservableCollection<Pokemon> ReadDB(ObservableCollection<Pokemon> empty, int Index)
         {
-            using (var db = new PokeDataContext()) {
+            using (var db = new PokeDataContext())
+            {
 
                 var SaveLists = from TypeList in db.TypeList
-                             join Types in db.Types
-                             on TypeList.TypeID equals Types.id
-                             select new PokemonType { id = TypeList.id, Pokemonid = TypeList.Pokemonid, type = Types, TypeID = Types.id };
+                                join Types in db.Types
+                                on TypeList.TypeID equals Types.id
+                                select new PokemonType { id = TypeList.id, Pokemonid = TypeList.Pokemonid, type = Types, TypeID = Types.id };
 
                 var SaveStats = from Stats in db.Stats
-                               select new Stat { Pokemonid = Stats.Pokemonid, id = Stats.id, base_stat = Stats.base_stat };
+                                select new Stat { Pokemonid = Stats.Pokemonid, id = Stats.id, base_stat = Stats.base_stat };
 
                 var SavePokemon = (from PokemonUnit in db.Pokemon
                                    join Sprites in db.Sprite
@@ -162,16 +160,7 @@ namespace Pokedex
                                    }).ToList<Pokemon>();
 
                 //Pode-se usar tanto name quanto url, url requer uma pequena alteração de paramatros, pois o tipo em si, só diferencia por uma número na string
-                empty.Clear();
                 var SelectByTypeName = (SavePokemon.Where(m => m.types.Any(u => u.type.name == typeSelected))).ToList<Pokemon>();
-
-                
-
-                //pokemonListbyType = (from Test in typeReference
-                //              from Unit in SelectByTypeName
-                //              where Test != Unit.name
-                //              select string.Format("", Test)).ToList<string>();
-
                 empty.Clear();
 
                 var ActualPage = TypeIndex;
@@ -195,11 +184,11 @@ namespace Pokedex
             using (var db = new PokeDataContext())
             {
                 var result = (from List in db.Listing
-                             select new NamedAPIResourceList
-                             {
-                                 id = List.id,
-                                 next = List.next
-                             }).ToList();
+                              select new NamedAPIResourceList
+                              {
+                                  id = List.id,
+                                  next = List.next
+                              }).ToList();
                 var LastResult = result.LastOrDefault();
                 var endpoint = LastResult.next.ToString();
                 var dummy = 1;
@@ -208,7 +197,7 @@ namespace Pokedex
 
             }
         }
-        
+
 
         //Operations on CRUD
 
@@ -273,16 +262,16 @@ namespace Pokedex
             }
         }
 
-        public static void AlterPokemonCrud(PokemonCRUD alteredPokemon,int Index)
+        public static void AlterPokemonCrud(PokemonCRUD alteredPokemon, int Index)
         {
             using (var db = new PokeDataContext())
             {
                 var result = (from UserPokemon in db.UserPokemon
-                       where UserPokemon.id == Index
-                       select UserPokemon).ToList<PokemonCRUD>();
+                              where UserPokemon.id == Index
+                              select UserPokemon).ToList<PokemonCRUD>();
                 foreach (var item in result)
                 {
-              
+
                     item.AttackCrud = alteredPokemon.AttackCrud;
                     item.DefenseCrud = alteredPokemon.DefenseCrud;
                     item.HPCrud = alteredPokemon.HPCrud;

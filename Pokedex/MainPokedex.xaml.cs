@@ -3,27 +3,14 @@ using Pokedex.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 
-// O modelo de item de Página em Branco está documentado em https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Pokedex
 {
-    /// <summary>
-    /// Uma página vazia que pode ser usada isoladamente ou navegada dentro de um Quadro.
-    /// </summary>
     public sealed partial class MainPokedex : Page
     {
 
@@ -43,6 +30,7 @@ namespace Pokedex
         {
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
+
             Page = 1;
             TypePage = 1;
 
@@ -100,10 +88,6 @@ namespace Pokedex
             Uri url = new Uri(selectedPokemon.sprites.front_default, UriKind.Absolute);
             pokemonImage.UriSource = url;
             PokemonDetailImage.Source = pokemonImage;
-
-
-
-
         }
 
         private async void Previous_Click(object sender, RoutedEventArgs e)
@@ -142,9 +126,6 @@ namespace Pokedex
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
             string PageAPIReference = DBOperation.resourceDBRead();
-            string TypePageApiReference;
-            //Definir lazyloading de tipos pela APIRequest
-
 
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
 
@@ -152,6 +133,7 @@ namespace Pokedex
             if (comboBoxItem.Content.ToString() == "select" || comboBoxItem.Content.ToString() == "all")
             {
                 Page++;
+
                 DBOperation.ReadDB(Pokemon, Page);
 
                 if (Pokemon.Count == 0)
@@ -161,27 +143,31 @@ namespace Pokedex
             }
             else
             {
+                List<string> pokemonsInDB = new List<string>();
                 TypePage++;
+
                 var typeSelected = comboBoxItem.Content.ToString();
+
                 var result = await ApiRequest.getTypeList("https://pokeapi.co/api/v2/type/"+typeSelected);
                 DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
-                List<string> INDB = new List<string>();
-                var testtt = result.ToPagedList(TypePage, 10);
+                var currentPagePokemons = result.ToPagedList(TypePage, 10);
+
                 foreach (var item in Pokemon)
                 {
-                    INDB.Add(item.name);
+                    pokemonsInDB.Add(item.name);
                 }
-                var cac = testtt.Except(INDB);
-                foreach (var item in cac)
+                var filtering = currentPagePokemons.Except(pokemonsInDB);
+                foreach (var notLoadeadPoke in filtering)
                 {
-                    var url = "https://pokeapi.co/api/v2/pokemon/"+item;
-                    var testt = await ApiRequest.GetPokemonDetailByUrl(url);
-                    Pokemon.Add(testt);
+                    var url = "https://pokeapi.co/api/v2/pokemon/"+notLoadeadPoke;
+                    var notLoadedPokeDetails = await ApiRequest.GetPokemonDetailByUrl(url);
+                    Pokemon.Add(notLoadedPokeDetails);
+
                     using (var db = new PokeDataContext())
                     {
-                        if (!db.Pokemon.Any(u => u.id == testt.id))
+                        if (!db.Pokemon.Any(u => u.id == notLoadedPokeDetails.id))
                         {
-                            db.Pokemon.Add(testt);
+                            db.Pokemon.Add(notLoadedPokeDetails);
                             db.SaveChanges();
                         }
                     }
@@ -212,41 +198,48 @@ namespace Pokedex
         private async void Types_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
+
             if (comboBoxItem.Content.ToString() != "select")
             {
                 if (comboBoxItem.Content.ToString() == "all")
                 {
                     Page = 1;
                     TypePage = 1;
+
                     DBOperation.ReadDB(Pokemon, Page);
                 }
                 else
                 {
+                    List<string> pokemonsInDB = new List<string>();
                     Page=1;
                     TypePage=1;
+
                     var typeSelected = comboBoxItem.Content.ToString();
+
                     var result = await ApiRequest.getTypeList("https://pokeapi.co/api/v2/type/"+typeSelected);
                     DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
-                    List<string> INDB = new List<string>();
-                    var testtt = result.ToPagedList(TypePage, 10);
+                    var currentPagePokemons = result.ToPagedList(TypePage, 10);
+
                     foreach (var item in Pokemon)
                     {
-                        INDB.Add(item.name);
+                        pokemonsInDB.Add(item.name);
                     }
-                    var cac = testtt.Except(INDB);
-                    foreach (var item in cac)
+                    var filtering = currentPagePokemons.Except(pokemonsInDB);
+                    foreach (var notLoadeadPoke in filtering)
                     {
-                        var url = "https://pokeapi.co/api/v2/pokemon/"+item;
-                        var testt = await ApiRequest.GetPokemonDetailByUrl(url);
-                        Pokemon.Add(testt);
+                        var url = "https://pokeapi.co/api/v2/pokemon/"+notLoadeadPoke;
+                        var notLoadedPokeDetails = await ApiRequest.GetPokemonDetailByUrl(url);
+                        Pokemon.Add(notLoadedPokeDetails);
+
                         using (var db = new PokeDataContext())
                         {
-                            if (!db.Pokemon.Any(u => u.id == testt.id))
+                            if (!db.Pokemon.Any(u => u.id == notLoadedPokeDetails.id))
                             {
-                                db.Pokemon.Add(testt);
+                                db.Pokemon.Add(notLoadedPokeDetails);
                                 db.SaveChanges();
                             }
                         }
+
                     }
 
 
@@ -261,7 +254,6 @@ namespace Pokedex
             {
                 if (sender.Text.Length > 1 && sender.Text.Any(c => !char.IsDigit(c)))
                 {
-                    //sender.ItemsSource = this.GetSuggestions(sender.Text);
                     var nameRequested = sender.Text;
                     DBOperation.SearchDBByName(Pokemon, nameRequested);
                     if (Pokemon.Count == 0)
@@ -287,7 +279,6 @@ namespace Pokedex
 
                 if (sender.Text.Length > 1 && sender.Text.Any(c => !char.IsLetter(c)))
                 {
-                    //sender.ItemsSource = this.GetSuggestions(sender.Text);
                     var idRequested = int.Parse(sender.Text);
                     DBOperation.SearchDBByID(Pokemon, idRequested);
                     if (Pokemon.Count == 0)
@@ -305,17 +296,6 @@ namespace Pokedex
                     DBOperation.ReadDB(Pokemon, Page);
                 }
             }
-            
-
-            //private string[] GetSuggestions(string text)
-            //{
-            //    string[] results = null;
-
-            //    results = suggestions.Where(x => x.StartsWith(text)).ToArray();
-
-            //    return results;
-
-            //}
         }
-    } 
+    }
 }

@@ -1,12 +1,9 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Pokedex.Models;
+﻿using Pokedex.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -19,7 +16,7 @@ namespace Pokedex
         public static HttpClient apiClient { get; set; }
         public static Uri previous { get; set; }
         public static Uri next { get; set; }
-        
+
 
         public static void InitializeClient()
         {
@@ -53,12 +50,10 @@ namespace Pokedex
 
             var result = (TypeFilterClass)serializer.ReadObject(ms);
 
-            var result2 = result.pokemon;
+            var linqFilter = (from pokemon in result.pokemon
+                              select string.Format(pokemon.pokemon.name)).ToList<String>();
 
-            var resul3 = (from pokemon in result2
-                         select string.Format(pokemon.pokemon.name)).ToList<String>();
-
-            return resul3;
+            return linqFilter;
         }
 
         public static async Task<Pokemon> GetPokemonDetailByUrl(string url)
@@ -81,36 +76,26 @@ namespace Pokedex
         public static async Task FillPokedexList(ObservableCollection<Pokemon> pokedex, string endpoint)
         {
             PokeDataContext nes = new PokeDataContext();
-            try
+            var pokemonData = await getAPIAtribbute(endpoint);
+            next = pokemonData.next;
+            previous = pokemonData.previous;
+            var pokemons = pokemonData.results;
+            using (var db = new PokeDataContext())
             {
-                var pokemonData = await getAPIAtribbute(endpoint);
-                next = pokemonData.next;
-                previous = pokemonData.previous;
-                var pokemons = pokemonData.results;
-                using (var db = new PokeDataContext())
-                {
-                    db.Listing.Add(pokemonData);
-                    db.SaveChanges();
-                    
-                }
-                /* here we could implement path for the attributes*/
-                pokedex.Clear();
-
-                foreach (var pokemon in pokemons)
-                {
-
-                    var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url); //access when is clicked                    
-                    pokedex.Add(pokemonDetail);
-                    pokemonDetail.Save(pokemonDetail);
-                }
+                db.Listing.Add(pokemonData);
+                db.SaveChanges();
 
             }
-            catch (Exception exe)
+            
+            pokedex.Clear();
+
+            foreach (var pokemon in pokemons)
             {
-                return;
+
+                var pokemonDetail = await GetPokemonDetailByUrl(pokemon.url);                   
+                pokedex.Add(pokemonDetail);
+                pokemonDetail.Save(pokemonDetail);
             }
-
-
         }
         public static async Task<PokemonType> GetPokemonType(string endpoint)
         {
