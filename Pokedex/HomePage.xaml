@@ -104,37 +104,11 @@
 
 
                 <!--Mudar Fonte-->
-                <TextBlock 
-                Text="Apresentação"
-                Grid.Column="1"
-                Foreground="White" 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontWeight="Medium"
-                FontSize="22"
-            />
-                <TextBlock 
-                Text="Desafios"
-                Grid.Column="2"
-                Foreground="White" 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontWeight="Medium"
-                FontSize="22"
-            />
-                <TextBlock 
-                Text="GitHub"
-                Grid.Column="3"
-                Foreground="White" 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontWeight="Medium"
-                FontSize="22"
-            />
+               
 
             </Grid>
 
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="1" Margin="10">
                 <StackPanel  Orientation="Horizontal" Background="#46177D">
                     <Image Width="100" Height="100" Source="Assets/Sidi_square.png"/>
 
@@ -182,6 +156,50 @@
                        FontSize="12"
                        FontWeight="Light"
                        VerticalAlignment="Center"/>
+                <TextBlock Text="TEXTO DE EXPLICAÇÃO DE MELHORIAS" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="12"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="TEXTO DE EXPLICAÇÃO DE MELHORIAS" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="12"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="TEXTO DE EXPLICAÇÃO DE MELHORIAS" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="12"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="TEXTO DE EXPLICAÇÃO DE MELHORIAS" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="12"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="TEXTO DE EXPLICAÇÃO DE MELHORIAS" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="12"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="TEXTO DE EXPLICAÇÃO DE MELHORIAS" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="12"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+
+                <TextBlock Text="TEXTO DE EXPLICAÇÃO DE MELHORIAS" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="12"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+
                 <StackPanel >
                     <!--<Button
                     x:Name="StartButton"
@@ -202,9 +220,13 @@
                             </Style>
                         </Button.Style>
                     </Button>-->
-                    <Button Style="{StaticResource StartButtonLayout}" >SiDi</Button>
+                    <Button Style="{StaticResource StartButtonLayout}" x:Name="Start" Click="Start_Click">SiDi</Button>
                 </StackPanel>
             </StackPanel>
+
+            <Grid Grid.Row="1" Grid.Column="1" Margin="20">
+                <!-- Imagens do QRCode -->
+            </Grid>
 
         </Grid>
     </ScrollViewer>

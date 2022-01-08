@@ -27,6 +27,10 @@ namespace Pokedex
             this.InitializeComponent();
         }
 
-       
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            //Função para gerar QRCode
+
+        }
     }
 }
