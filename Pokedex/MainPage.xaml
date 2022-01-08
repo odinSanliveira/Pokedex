@@ -6,7 +6,7 @@
     xmlns:data="using:Pokedex.Models"
     xmlns:local="using:Pokedex"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="#181735"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -37,7 +37,7 @@
 
 
         <!--  top menu  -->
-        <RelativePanel Background="#FF4EA095">
+        <RelativePanel Background="#0F0F2D">
             <Button
                 Name="MenuButton"
                 Click="MenuButton_Click"
@@ -65,12 +65,15 @@
             DisplayMode="Overlay"
             OpenPaneLength="150">
             <SplitView.Pane>
-                <ListBox Background="#FF419380" SelectionChanged="ListBox_SelectionChanged" SelectionMode="Single">
+                <ListBox Background="#181735" SelectionChanged="ListBox_SelectionChanged" SelectionMode="Single">
+                    <ListBoxItem Name="Home">
+                        <TextBlock FontSize="24" Padding="2" Foreground="White">Home</TextBlock>
+                    </ListBoxItem> 
                     <ListBoxItem Name="PokedexLayout">
-                        <TextBlock FontSize="24" Padding="5">Pokedex</TextBlock>
+                        <TextBlock FontSize="24" Padding="2" Foreground="White">Pokedex</TextBlock>
                     </ListBoxItem>
                     <ListBoxItem Name="Register">
-                        <TextBlock FontSize="24" Padding="5">Registrar</TextBlock>
+                        <TextBlock FontSize="24" Padding="2" Foreground="White">Registrar</TextBlock>
                     </ListBoxItem>
                 </ListBox>
             </SplitView.Pane>

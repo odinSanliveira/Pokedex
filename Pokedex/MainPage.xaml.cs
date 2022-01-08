@@ -25,8 +25,8 @@ namespace Pokedex
         public MainPage()
         {
             this.InitializeComponent();
-            PokedexLayout.IsSelected = true;
-            FramePokedex.Navigate(typeof(MainPokedex));
+            Home.IsSelected = true;
+            FramePokedex.Navigate(typeof(HomePage));
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -42,6 +42,10 @@ namespace Pokedex
             else if (PokedexLayout.IsSelected)
             {
                 FramePokedex.Navigate(typeof(MainPokedex));
+            }else if (Home.IsSelected)
+            {
+                FramePokedex.Navigate(typeof(HomePage));
+
             }
         }
     }

@@ -103,6 +103,7 @@ namespace Pokedex
             db.UserPokemon.Add(this.userPokemon);
             db.SaveChanges();
             DBOperation.ReadCRUDB(Pokemon);
+            userPokemon = new PokemonCRUD();
 
         }
 
