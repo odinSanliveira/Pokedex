@@ -1,4 +1,5 @@
-﻿using Pokedex.Models;
+﻿using PagedList;
+using Pokedex.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -44,6 +45,7 @@ namespace Pokedex
             ProgressRing.Visibility = Visibility.Visible;
             Page = 1;
             TypePage = 1;
+
 
             DBOperation.ReadDB(Pokemon, Page);
             if (Pokemon.Count == 0)
@@ -145,12 +147,13 @@ namespace Pokedex
 
 
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
-  
+
 
             if (comboBoxItem.Content.ToString() == "select" || comboBoxItem.Content.ToString() == "all")
             {
                 Page++;
                 DBOperation.ReadDB(Pokemon, Page);
+
                 if (Pokemon.Count == 0)
                 {
                     await ApiRequest.FillPokedexList(Pokemon, PageAPIReference);
@@ -160,7 +163,27 @@ namespace Pokedex
             {
                 TypePage++;
                 var typeSelected = comboBoxItem.Content.ToString();
+                var result = await ApiRequest.getTypeList("https://pokeapi.co/api/v2/type/"+typeSelected);
                 DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
+                List<string> INDB = new List<string>();
+                var testtt = result.ToPagedList(TypePage, 10);
+                foreach (var item in Pokemon)
+                {
+                    INDB.Add(item.name);
+                }
+                var cac = testtt.Except(INDB);
+                foreach (var item in cac)
+                {
+                    var url = "https://pokeapi.co/api/v2/pokemon/"+item;
+                    var testt = await ApiRequest.GetPokemonDetailByUrl(url);
+                    Pokemon.Add(testt);
+                    //using (var db = new PokeDataContext())
+                    //{
+                    //    db.Pokemon.Add(testt);
+                    //    db.SaveChanges();
+                    //}
+
+                }
 
             }
 
@@ -183,7 +206,7 @@ namespace Pokedex
 
         }
 
-        private void Types_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Types_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = Types.Items[Types.SelectedIndex] as ComboBoxItem;
             if (comboBoxItem.Content.ToString() != "select")
@@ -199,21 +222,49 @@ namespace Pokedex
                     Page=1;
                     TypePage=1;
                     var typeSelected = comboBoxItem.Content.ToString();
+                    var result = await ApiRequest.getTypeList("https://pokeapi.co/api/v2/type/"+typeSelected);
                     DBOperation.SearchDBByType(Pokemon, typeSelected, TypePage);
+                    List<string> INDB = new List<string>();
+                    var testtt = result.ToPagedList(TypePage, 10);
+                    foreach (var item in Pokemon)
+                    {
+                        INDB.Add(item.name);
+                    }
+                    var cac = testtt.Except(INDB);
+                    foreach (var item in cac)
+                    {
+                        var url = "https://pokeapi.co/api/v2/pokemon/"+item;
+                        var testt = await ApiRequest.GetPokemonDetailByUrl(url);
+                        Pokemon.Add(testt);
+                        //using (var db = new PokeDataContext())
+                        //{
+                        //    db.Pokemon.Add(testt);
+                        //    db.SaveChanges();
+                        //}
+                    }
+
+
                 }
             }
-            
+
         }
-        private void AutoSuggest_TextFind(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {   
+        private async void AutoSuggest_TextFind(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
             //pesquisa por nome
             if (RadioNome.IsChecked == true)
             {
-                if (sender.Text.Length > 1)
+                if (sender.Text.Length > 1 && sender.Text.Any(c => !char.IsDigit(c)))
                 {
                     //sender.ItemsSource = this.GetSuggestions(sender.Text);
                     var nameRequested = sender.Text;
                     DBOperation.SearchDBByName(Pokemon, nameRequested);
+                    if (Pokemon.Count == 0)
+                    {
+                        var searchAPIurl = "https://pokeapi.co/api/v2/pokemon/"+nameRequested;
+                        var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
+                        Pokemon.Clear();
+                        Pokemon.Add(searchRequest);
+                    }
                 }
                 else
                 {
@@ -222,14 +273,24 @@ namespace Pokedex
                     DBOperation.ReadDB(Pokemon, Page);
                 }
             }
+
+
             else
             {
                 //pesquisa por ID
-                if (sender.Text.Length > 1)
+
+                if (sender.Text.Length > 1 && sender.Text.Any(c => !char.IsLetter(c)))
                 {
                     //sender.ItemsSource = this.GetSuggestions(sender.Text);
                     var idRequested = int.Parse(sender.Text);
                     DBOperation.SearchDBByID(Pokemon, idRequested);
+                    if (Pokemon.Count == 0)
+                    {
+                        var searchAPIurl = "https://pokeapi.co/api/v2/pokemon/"+idRequested;
+                        var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
+                        Pokemon.Clear();
+                        Pokemon.Add(searchRequest);
+                    }
                 }
                 else
                 {
@@ -238,16 +299,17 @@ namespace Pokedex
                     DBOperation.ReadDB(Pokemon, Page);
                 }
             }
+            
+
+            //private string[] GetSuggestions(string text)
+            //{
+            //    string[] results = null;
+
+            //    results = suggestions.Where(x => x.StartsWith(text)).ToArray();
+
+            //    return results;
+
+            //}
         }
-
-        //private string[] GetSuggestions(string text)
-        //{
-        //    string[] results = null;
-
-        //    results = suggestions.Where(x => x.StartsWith(text)).ToArray();
-
-        //    return results;
-
-        //}
-    }
+    } 
 }

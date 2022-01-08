@@ -159,13 +159,19 @@ namespace Pokedex
                                        types = (List<PokemonType>)SaveLists.Where(m => m.Pokemonid == PokemonUnit.id),
                                        stats = (List<Stat>)SaveStats.Where(m => m.Pokemonid == PokemonUnit.id),
                                        weight=PokemonUnit.weight
-                                   }
-                                   
-                                   
-                                   ).ToList<Pokemon>();
+                                   }).ToList<Pokemon>();
+
                 //Pode-se usar tanto name quanto url, url requer uma pequena alteração de paramatros, pois o tipo em si, só diferencia por uma número na string
                 empty.Clear();
                 var SelectByTypeName = (SavePokemon.Where(m => m.types.Any(u => u.type.name == typeSelected))).ToList<Pokemon>();
+
+                
+
+                //pokemonListbyType = (from Test in typeReference
+                //              from Unit in SelectByTypeName
+                //              where Test != Unit.name
+                //              select string.Format("", Test)).ToList<string>();
+
                 empty.Clear();
 
                 var ActualPage = TypeIndex;
@@ -202,6 +208,7 @@ namespace Pokedex
 
             }
         }
+        
 
         //Operations on CRUD
 
@@ -266,5 +273,30 @@ namespace Pokedex
             }
         }
 
+        public static void AlterPokemonCrud(PokemonCRUD alteredPokemon,int Index)
+        {
+            using (var db = new PokeDataContext())
+            {
+                var result = (from UserPokemon in db.UserPokemon
+                       where UserPokemon.id == Index
+                       select UserPokemon).ToList<PokemonCRUD>();
+                foreach (var item in result)
+                {
+              
+                    item.AttackCrud = alteredPokemon.AttackCrud;
+                    item.DefenseCrud = alteredPokemon.DefenseCrud;
+                    item.HPCrud = alteredPokemon.HPCrud;
+                    item.pokemonName = alteredPokemon.pokemonName;
+                    item.pokemonType = alteredPokemon.pokemonType;
+                    item.pokemonType2 = alteredPokemon.pokemonType2;
+                    item.SpecialAttackCrud = alteredPokemon.SpecialAttackCrud;
+                    item.SpecialDefenseCrud= alteredPokemon.SpecialDefenseCrud;
+                    item.Speed = alteredPokemon.Speed;
+                    item.weightCRUD = alteredPokemon.weightCRUD;
+                    item.heightCRUD = alteredPokemon.heightCRUD;
+                }
+
+            }
+        }
     }
 }

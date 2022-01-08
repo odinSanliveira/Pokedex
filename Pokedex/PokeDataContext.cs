@@ -15,7 +15,7 @@ namespace Pokedex
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var sFilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "storedPokemon19998586.db");
+            var sFilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "storedPokemon199987675646678246.db");
             //C:\Users\ResourcePC\AppData\Local\Packages\556a5a1e-b6e2-4bca-8b27-5ff0c19d7593_jmcehrcabdhea\LocalState
             optionsBuilder.UseSqlite("Data Source =" + sFilePath);
            //optionsBuilder.UseLazyLoadingProxies();
@@ -32,6 +32,8 @@ namespace Pokedex
         public DbSet<Stat> Stats { get; set; }
         public DbSet<NamedAPIResourceList> Listing { get; set; }
         public DbSet<PokemonCRUD> UserPokemon   { get; set; }
+        //public DbSet<TypeFilterClass> TypesListed { get; set; }
+        //public DbSet<TypeList> typePokemonList { get; set; }
 
     }
 }

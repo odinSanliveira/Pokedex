@@ -42,6 +42,25 @@ namespace Pokedex
             return result;
         }
 
+        public static async Task<List<string>> getTypeList(string endpoint)
+        {
+            HttpClient Client = new HttpClient();
+            var responseMessage = await Client.GetAsync(endpoint);
+            var jsonMessage = await responseMessage.Content.ReadAsStringAsync();
+
+            var serializer = new DataContractJsonSerializer(typeof(TypeFilterClass));
+            var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonMessage));
+
+            var result = (TypeFilterClass)serializer.ReadObject(ms);
+
+            var result2 = result.pokemon;
+
+            var resul3 = (from pokemon in result2
+                         select string.Format(pokemon.pokemon.name)).ToList<String>();
+
+            return resul3;
+        }
+
         public static async Task<Pokemon> GetPokemonDetailByUrl(string url)
         {
 

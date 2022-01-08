@@ -117,6 +117,9 @@ namespace Pokedex
         private void Update_Pokemon(object sender, RoutedEventArgs e)
         {
             var id = ItemSelected;
+            DBOperation.AlterPokemonCrud(userPokemon, id);
+            DBOperation.ReadCRUDB(Pokemon);
+            
         }
         private void TextBox_OnBeforeTextChanging(TextBox sender,
                                           TextBoxBeforeTextChangingEventArgs args)
