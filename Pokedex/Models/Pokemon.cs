@@ -34,8 +34,13 @@ namespace Pokedex.Models
         public void Save(Pokemon pokemon)
         {
             var db = new PokeDataContext();
-            db.Pokemon.Add(this);
-            db.SaveChanges();
+            //db.Pokemon.Add(this);
+            //db.SaveChanges();
+            if (!db.Pokemon.Any(u => u.id == pokemon.id))
+            {
+                db.Pokemon.Add(this);
+                db.SaveChanges();
+            }
 
         }
     }

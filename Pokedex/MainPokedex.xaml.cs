@@ -177,11 +177,14 @@ namespace Pokedex
                     var url = "https://pokeapi.co/api/v2/pokemon/"+item;
                     var testt = await ApiRequest.GetPokemonDetailByUrl(url);
                     Pokemon.Add(testt);
-                    //using (var db = new PokeDataContext())
-                    //{
-                    //    db.Pokemon.Add(testt);
-                    //    db.SaveChanges();
-                    //}
+                    using (var db = new PokeDataContext())
+                    {
+                        if (!db.Pokemon.Any(u => u.id == testt.id))
+                        {
+                            db.Pokemon.Add(testt);
+                            db.SaveChanges();
+                        }
+                    }
 
                 }
 
@@ -236,11 +239,14 @@ namespace Pokedex
                         var url = "https://pokeapi.co/api/v2/pokemon/"+item;
                         var testt = await ApiRequest.GetPokemonDetailByUrl(url);
                         Pokemon.Add(testt);
-                        //using (var db = new PokeDataContext())
-                        //{
-                        //    db.Pokemon.Add(testt);
-                        //    db.SaveChanges();
-                        //}
+                        using (var db = new PokeDataContext())
+                        {
+                            if (!db.Pokemon.Any(u => u.id == testt.id))
+                            {
+                                db.Pokemon.Add(testt);
+                                db.SaveChanges();
+                            }
+                        }
                     }
 
 
