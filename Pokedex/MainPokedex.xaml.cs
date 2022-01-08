@@ -259,41 +259,52 @@ namespace Pokedex
                     if (Pokemon.Count == 0)
                     {
                         var searchAPIurl = "https://pokeapi.co/api/v2/pokemon/"+nameRequested;
-                        var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
-                        Pokemon.Clear();
-                        Pokemon.Add(searchRequest);
+                        try
+                        {
+                            var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
+                            Pokemon.Clear();
+                            Pokemon.Add(searchRequest);
+                        }
+                        catch (Exception ex)
+                        {
+                            sender.ItemsSource = new String[] { "No suggestions..." };
+                            Page = 1;
+                            DBOperation.ReadDB(Pokemon, Page);
+                        }
+
                     }
-                }
-                else
-                {
-                    sender.ItemsSource = new String[] { "No suggestions..." };
-                    Page = 1;
-                    DBOperation.ReadDB(Pokemon, Page);
-                }
-            }
-
-
-            else
-            {
-                //pesquisa por ID
-
-                if (sender.Text.Length > 1 && sender.Text.Any(c => !char.IsLetter(c)))
-                {
-                    var idRequested = int.Parse(sender.Text);
-                    DBOperation.SearchDBByID(Pokemon, idRequested);
-                    if (Pokemon.Count == 0)
+                    else
                     {
-                        var searchAPIurl = "https://pokeapi.co/api/v2/pokemon/"+idRequested;
-                        var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
-                        Pokemon.Clear();
-                        Pokemon.Add(searchRequest);
+                        sender.ItemsSource = new String[] { "No suggestions..." };
+                        Page = 1;
+                        DBOperation.ReadDB(Pokemon, Page);
                     }
+
                 }
+
+
                 else
                 {
-                    sender.ItemsSource = new String[] { "No suggestions..." };
-                    Page = 1;
-                    DBOperation.ReadDB(Pokemon, Page);
+                    //pesquisa por ID
+
+                    if (sender.Text.Length > 1 && sender.Text.Any(c => !char.IsLetter(c)))
+                    {
+                        var idRequested = int.Parse(sender.Text);
+                        DBOperation.SearchDBByID(Pokemon, idRequested);
+                        if (Pokemon.Count == 0)
+                        {
+                            var searchAPIurl = "https://pokeapi.co/api/v2/pokemon/"+idRequested;
+                            var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
+                            Pokemon.Clear();
+                            Pokemon.Add(searchRequest);
+                        }
+                    }
+                    else
+                    {
+                        sender.ItemsSource = new String[] { "No suggestions..." };
+                        Page = 1;
+                        DBOperation.ReadDB(Pokemon, Page);
+                    }
                 }
             }
         }
