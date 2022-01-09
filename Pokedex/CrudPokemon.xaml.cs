@@ -93,11 +93,13 @@ namespace Pokedex
 
         private void Register_click(object sender, RoutedEventArgs e)
         {
-
-
             userPokemon.pokemonName = PokeName.Text;
             userPokemon.pokemonType = PokeTypeOne.Text;
             userPokemon.pokemonType2 = PokeTypeTwo.Text;
+            if(int.Parse(PokeIdSprite.Text) > 898)
+            {
+                PokeIdSprite.Text = "898";
+            }
             userPokemon.sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + PokeIdSprite.Text + ".png";
             userPokemon.HPCrud = int.Parse(PokeHp.Text);
             userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
@@ -108,12 +110,13 @@ namespace Pokedex
             userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
             userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
             var db = new PokeDataContext();
-            db.UserPokemon.Add(this.userPokemon);
-            db.SaveChanges();
+            if (!db.UserPokemon.Any(u => u.id == userPokemon.id))
+            {
+                db.UserPokemon.Add(this.userPokemon);
+                db.SaveChanges();
+            }
             DBOperation.ReadCRUDB(Pokemon);
             ClearBoxes(AddingNewPokemon);
-            //userPokemon = new PokemonCRUD();
-
         }
 
         private void Delete_Pokemon(object sender, RoutedEventArgs e)
@@ -171,18 +174,22 @@ namespace Pokedex
         private void UpdatePokemon(object sender, RoutedEventArgs e)
         {
             var id = ItemSelected;
-            //userPokemon.pokemonName = PokeName.Text;
-            //userPokemon.pokemonType = PokeTypeOne.Text;
-            //userPokemon.pokemonType2 = PokeTypeTwo.Text;
-            //userPokemon.sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + PokeIdSprite.Text + ".png";
-            //userPokemon.HPCrud = int.Parse(PokeHp.Text);
-            //userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
-            //userPokemon.DefenseCrud = int.Parse(PokeDefense.Text);
-            //userPokemon.SpecialAttackCrud = int.Parse(PokeSpecialAttack.Text);
-            //userPokemon.SpecialDefenseCrud = int.Parse(PokeSpecialDefense.Text);
-            //userPokemon.Speed = int.Parse(PokeSpeed.Text);
-            //userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
-            //userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
+            userPokemon.pokemonName = PokeName.Text;
+            userPokemon.pokemonType = PokeTypeOne.Text;
+            userPokemon.pokemonType2 = PokeTypeTwo.Text;
+            userPokemon.sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + PokeIdSprite.Text + ".png";
+            if (PokeIdSprite.Text == "")
+            {
+                userPokemon.sprite = SelectedPokemonImage.UriSource.ToString();
+            }
+            userPokemon.HPCrud = int.Parse(PokeHp.Text);
+            userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
+            userPokemon.DefenseCrud = int.Parse(PokeDefense.Text);
+            userPokemon.SpecialAttackCrud = int.Parse(PokeSpecialAttack.Text);
+            userPokemon.SpecialDefenseCrud = int.Parse(PokeSpecialDefense.Text);
+            userPokemon.Speed = int.Parse(PokeSpeed.Text);
+            userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
+            userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
             DBOperation.AlterPokemonCrud(userPokemon, id);
             DBOperation.ReadCRUDB(Pokemon);
             ClearBoxes(AddingNewPokemon);
@@ -216,6 +223,7 @@ namespace Pokedex
         {
             args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
         }
+
         private void NumberBox_OnBeforeTextChanging(TextBox sender,
                                           TextBoxBeforeTextChangingEventArgs args)
         {

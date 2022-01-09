@@ -276,6 +276,7 @@ namespace Pokedex
                     item.DefenseCrud = alteredPokemon.DefenseCrud;
                     item.HPCrud = alteredPokemon.HPCrud;
                     item.pokemonName = alteredPokemon.pokemonName;
+                    item.sprite = alteredPokemon.sprite;
                     item.pokemonType = alteredPokemon.pokemonType;
                     item.pokemonType2 = alteredPokemon.pokemonType2;
                     item.SpecialAttackCrud = alteredPokemon.SpecialAttackCrud;
@@ -284,6 +285,7 @@ namespace Pokedex
                     item.weightCRUD = alteredPokemon.weightCRUD;
                     item.heightCRUD = alteredPokemon.heightCRUD;
                 }
+                db.SaveChanges();
 
             }
         }
