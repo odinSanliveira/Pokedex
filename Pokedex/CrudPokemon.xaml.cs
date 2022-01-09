@@ -23,11 +23,12 @@ namespace Pokedex
     /// <summary>
     /// Uma página vazia que pode ser usada isoladamente ou navegada dentro de um Quadro.
     /// </summary>
-       
+
     public sealed partial class CrudPokemon : Page
     {
         public ObservableCollection<PokemonCRUD> Pokemon { get; set; }
         public PokemonCRUD userPokemon { get; set; }
+        public PokemonCRUD toEditPokemon { get; set; }
         public int ItemSelected { get; set; }
 
         public BitmapImage SelectedPokemonImage { get; set; }
@@ -35,21 +36,24 @@ namespace Pokedex
         public CrudPokemon()
         {
             this.InitializeComponent();
-            SelectedPokemonImage = new BitmapImage();   
+            SelectedPokemonImage = new BitmapImage();
             Pokemon = new ObservableCollection<PokemonCRUD>();
             userPokemon = new PokemonCRUD();
             DBOperation.ReadCRUDB(Pokemon);
+            //botão alterar inativo inicialmente
+            UpdateButton.IsEnabled = false;
+            ClearButton.IsEnabled = false;
         }
 
-        
+
         private void PokeListViewCrud_ItemClick(object sender, ItemClickEventArgs e)
         {
             var selectedPokemon = (PokemonCRUD)e.ClickedItem;
             ItemSelected = selectedPokemon.id;
 
             PokemonName.Text = selectedPokemon.pokemonName;
-            TypeOne.Text = selectedPokemon.pokemonType;
             TypeBlock.Text = "Type";
+            TypeOne.Text = selectedPokemon.pokemonType;
             HpBlock.Text = "HP";
             Hp.Text = selectedPokemon.HPCrud.ToString();
             AttackBlock.Text = "Attack";
@@ -69,6 +73,7 @@ namespace Pokedex
 
             //botão precisa ser mostrado quando selecionado
             Delete_button.Visibility = Visibility.Visible;
+            EditFormButton.Visibility = Visibility.Visible;
 
             if (selectedPokemon.pokemonType2 == "")
             {
@@ -79,21 +84,21 @@ namespace Pokedex
 
                 TypeTwo.Text = selectedPokemon.pokemonType2;
             }
-           
+
             Uri url = new Uri(selectedPokemon.sprite, UriKind.Absolute);
             SelectedPokemonImage.UriSource = url;
             pokemondetailimage.Source = SelectedPokemonImage;
 
         }
 
-        private void Register_click(object sender, RoutedEventArgs e) 
+        private void Register_click(object sender, RoutedEventArgs e)
         {
 
 
             userPokemon.pokemonName = PokeName.Text;
             userPokemon.pokemonType = PokeTypeOne.Text;
             userPokemon.pokemonType2 = PokeTypeTwo.Text;
-            userPokemon.sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+PokeIdSprite.Text+".png";
+            userPokemon.sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + PokeIdSprite.Text + ".png";
             userPokemon.HPCrud = int.Parse(PokeHp.Text);
             userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
             userPokemon.DefenseCrud = int.Parse(PokeDefense.Text);
@@ -106,12 +111,13 @@ namespace Pokedex
             db.UserPokemon.Add(this.userPokemon);
             db.SaveChanges();
             DBOperation.ReadCRUDB(Pokemon);
-            userPokemon = new PokemonCRUD();
+            ClearBoxes(AddingNewPokemon);
+            //userPokemon = new PokemonCRUD();
 
         }
 
         private void Delete_Pokemon(object sender, RoutedEventArgs e)
-        {            
+        {
 
             foreach (UIElement element in StatsGrid.Children)
             {
@@ -125,26 +131,35 @@ namespace Pokedex
             foreach (UIElement element in DetailHeadGrid.Children)
             {
                 TextBlock textblock = element as TextBlock;
-               
+
                 if (textblock != null)
                 {
                     textblock.Text = "";
                 }
-                
+
             }
             SelectedPokemonImage.UriSource = null;
             var id = ItemSelected;
             DBOperation.DeletePokemonCrud(id);
             DBOperation.ReadCRUDB(Pokemon);
 
-            //botão se esconde quando deleta um pokémon
+            //botões se escondem quando deleta um pokémon
             Delete_button.Visibility = Visibility.Collapsed;
+            EditFormButton.Visibility = Visibility.Collapsed;
 
         }
 
-        private void Clear_Boxes(object sender, RoutedEventArgs e)
+        private void ClearForm(object sender, RoutedEventArgs e)
         {
-            foreach (UIElement element in AddingNewPokemon.Children)
+            ClearBoxes(AddingNewPokemon);
+            SaveButton.IsEnabled = true;
+            UpdateButton.IsEnabled = false;
+            ClearButton.IsEnabled = false;
+        }
+
+        public void ClearBoxes(Grid GridName)
+        {
+            foreach (UIElement element in GridName.Children)
             {
                 TextBox textbox = element as TextBox;
                 if (textbox != null)
@@ -153,15 +168,51 @@ namespace Pokedex
                 }
             }
         }
-            private void Update_Pokemon(object sender, RoutedEventArgs e)
+        private void UpdatePokemon(object sender, RoutedEventArgs e)
         {
             var id = ItemSelected;
+            //userPokemon.pokemonName = PokeName.Text;
+            //userPokemon.pokemonType = PokeTypeOne.Text;
+            //userPokemon.pokemonType2 = PokeTypeTwo.Text;
+            //userPokemon.sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + PokeIdSprite.Text + ".png";
+            //userPokemon.HPCrud = int.Parse(PokeHp.Text);
+            //userPokemon.AttackCrud = int.Parse(PokeAttack.Text);
+            //userPokemon.DefenseCrud = int.Parse(PokeDefense.Text);
+            //userPokemon.SpecialAttackCrud = int.Parse(PokeSpecialAttack.Text);
+            //userPokemon.SpecialDefenseCrud = int.Parse(PokeSpecialDefense.Text);
+            //userPokemon.Speed = int.Parse(PokeSpeed.Text);
+            //userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
+            //userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
             DBOperation.AlterPokemonCrud(userPokemon, id);
             DBOperation.ReadCRUDB(Pokemon);
-            
+            ClearBoxes(AddingNewPokemon);
+            SaveButton.IsEnabled = true;
+            UpdateButton.IsEnabled = false;
+            ClearButton.IsEnabled = false;
+        }
+        private void UpdateForm(object sender, RoutedEventArgs e)
+        {
+            PokeName.Text = PokemonName.Text;
+            PokeTypeOne.Text = TypeOne.Text;
+            PokeHp.Text = Hp.Text;
+            PokeAttack.Text = Attack.Text;
+            PokeDefense.Text = Defense.Text;
+            PokeSpecialAttack.Text = SpecialAttack.Text;
+            PokeSpecialDefense.Text = SpecialDefense.Text;
+            PokeSpeed.Text = Speed.Text;
+            PokeHeight.Text = Height.Text;
+            PokeWeight.Text = Weight.Text;
+            PokeIdSprite.Text = "";
+            if (TypeTwo.Text != "")
+            {
+                PokeTypeTwo.Text = TypeTwo.Text;
+            }
+            SaveButton.IsEnabled = false;
+            UpdateButton.IsEnabled = true;
+            ClearButton.IsEnabled = true;
         }
         private void TextBox_OnBeforeTextChanging(TextBox sender,
-                                          TextBoxBeforeTextChangingEventArgs args)
+                                      TextBoxBeforeTextChangingEventArgs args)
         {
             args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
         }

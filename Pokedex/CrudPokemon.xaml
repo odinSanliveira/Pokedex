@@ -83,8 +83,7 @@
             <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="CornerRadius" Value="4"/>
-            <Setter Property="Margin" Value="4"/>
-            <Setter Property="Width" Value="100"/>
+            <Setter Property="Width" Value="130"/>
             <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
             <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
             <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
@@ -154,7 +153,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="DeleteButton" TargetType="Button">
             <Setter Property="Background" Value="#b42529"/>
             <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
@@ -295,9 +294,9 @@
                         <TextBlock Grid.Row="11" Grid.Column="0" Text="ID Sprite" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBox Grid.Row="11" Grid.Column="1" Margin="5" x:Name="PokeIdSprite" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="12">
-                            <Button Style="{StaticResource SaveButton}"  Content="Salvar" Margin="10" Click="Register_click"/>
-                            <Button Style="{StaticResource EditButton}" Click="Update_Pokemon">Alterar</Button>
-                            <Button Style="{StaticResource EditButton}" Click="Clear_Boxes">Limpar</Button>
+                            <Button Style="{StaticResource SaveButton}" x:Name="SaveButton"  Content="Salvar" Margin="10" Click="Register_click"/>
+                            <Button Style="{StaticResource EditButton}" x:Name="UpdateButton" Content="Alterar" Click="UpdatePokemon"/>
+                            <Button Style="{StaticResource EditButton}" x:Name = "ClearButton" Content ="Limpar" Click="ClearForm"/>
 
                         </StackPanel>
 
@@ -347,15 +346,15 @@
                         </Grid>
                         <Grid Grid.Row="1" Padding="10" x:Name="StatsGrid">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="130" />
@@ -527,6 +526,14 @@
                                 Grid.Row="0" Grid.Column="4" 
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Center">Deletar</Button>
+                            <Button Style="{StaticResource EditButton}"
+                                    x:Name="EditFormButton"
+                                    Click="UpdateForm"
+                                    Visibility="Collapsed"
+                                    Grid.Row="1" 
+                                    Grid.Column="4"
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Center">Alterar</Button>
 
                         </Grid>
 
