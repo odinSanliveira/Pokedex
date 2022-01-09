@@ -30,9 +30,12 @@ namespace Pokedex
         public PokemonCRUD userPokemon { get; set; }
         public int ItemSelected { get; set; }
 
+        public BitmapImage SelectedPokemonImage { get; set; }
+
         public CrudPokemon()
         {
             this.InitializeComponent();
+            SelectedPokemonImage = new BitmapImage();   
             Pokemon = new ObservableCollection<PokemonCRUD>();
             userPokemon = new PokemonCRUD();
             DBOperation.ReadCRUDB(Pokemon);
@@ -76,10 +79,10 @@ namespace Pokedex
 
                 TypeTwo.Text = selectedPokemon.pokemonType2;
             }
-            var pokemonImage = new BitmapImage();
+           
             Uri url = new Uri(selectedPokemon.sprite, UriKind.Absolute);
-            pokemonImage.UriSource = url;
-            pokemondetailimage.Source = pokemonImage;
+            SelectedPokemonImage.UriSource = url;
+            pokemondetailimage.Source = SelectedPokemonImage;
 
         }
 
@@ -108,14 +111,49 @@ namespace Pokedex
         }
 
         private void Delete_Pokemon(object sender, RoutedEventArgs e)
-        {
+        {            
+
+            foreach (UIElement element in StatsGrid.Children)
+            {
+                TextBlock textblock = element as TextBlock;
+
+                if (textblock != null)
+                {
+                    textblock.Text = "";
+                }
+            }
+            foreach (UIElement element in DetailHeadGrid.Children)
+            {
+                TextBlock textblock = element as TextBlock;
+               
+                if (textblock != null)
+                {
+                    textblock.Text = "";
+                }
+                
+            }
+            SelectedPokemonImage.UriSource = null;
             var id = ItemSelected;
             DBOperation.DeletePokemonCrud(id);
             DBOperation.ReadCRUDB(Pokemon);
 
+            //botão se esconde quando deleta um pokémon
+            Delete_button.Visibility = Visibility.Collapsed;
+
         }
 
-        private void Update_Pokemon(object sender, RoutedEventArgs e)
+        private void Clear_Boxes(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement element in AddingNewPokemon.Children)
+            {
+                TextBox textbox = element as TextBox;
+                if (textbox != null)
+                {
+                    textbox.Text = String.Empty;
+                }
+            }
+        }
+            private void Update_Pokemon(object sender, RoutedEventArgs e)
         {
             var id = ItemSelected;
             DBOperation.AlterPokemonCrud(userPokemon, id);

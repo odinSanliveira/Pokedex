@@ -296,6 +296,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="12">
                             <Button Style="{StaticResource SaveButton}"  Content="Salvar" Margin="10" Click="Register_click"/>
                             <Button Style="{StaticResource EditButton}" Click="Update_Pokemon">Alterar</Button>
+                            <Button Style="{StaticResource EditButton}" Click="Clear_Boxes">Limpar</Button>
 
                         </StackPanel>
 
@@ -303,7 +304,7 @@
                 </Border>
                 <Border Grid.Column="1" BorderBrush="#565656" BorderThickness="1" Margin="5" CornerRadius="15" Padding="5">
                     <!--Detalhes dos Pokemons do lado direito-->
-                    <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid Grid.Row="1" Grid.Column="1" x:Name="DetailGrid">
 
                         <Grid.RowDefinitions>
 
@@ -315,7 +316,8 @@
                         <Grid
                             Grid.Row="0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            x:Name="DetailHeadGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
@@ -342,7 +344,7 @@
 
 
                         </Grid>
-                        <Grid Grid.Row="1" Padding="10">
+                        <Grid Grid.Row="1" Padding="10" x:Name="StatsGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30" />
                                 <RowDefinition Height="30" />
