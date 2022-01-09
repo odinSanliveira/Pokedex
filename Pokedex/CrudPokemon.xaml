@@ -83,6 +83,7 @@
             <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Margin" Value="4"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
             <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
@@ -227,7 +228,7 @@
         </Style>
 
     </Page.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
 
         <Grid>
@@ -534,7 +535,7 @@
 
 
             </Grid>
-            <Border Grid.Row="2" BorderBrush="#565656" BorderThickness="1" Margin="5">
+            <Border Grid.Row="2" BorderBrush="#565656" BorderThickness="1" Margin="5" CornerRadius="15">
                 <!-- Lista de pokémons cadastrados-->
                 <Grid>
                     <ListView
