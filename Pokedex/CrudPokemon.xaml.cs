@@ -89,6 +89,7 @@ namespace Pokedex
             SelectedPokemonImage.UriSource = url;
             pokemondetailimage.Source = SelectedPokemonImage;
 
+
         }
 
         private void Register_click(object sender, RoutedEventArgs e)

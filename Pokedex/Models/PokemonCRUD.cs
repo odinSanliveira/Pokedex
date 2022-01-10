@@ -23,5 +23,7 @@ namespace Pokedex.Models
         public int Speed { get; set; }
         public int heightCRUD { get; set; }
         public int weightCRUD   { get; set; }
+
+
     }
 }

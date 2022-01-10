@@ -24,7 +24,7 @@ namespace Pokedex
 
                 var SavePokemon = (from PokemonUnit in db.Pokemon
                                    join Sprites in db.Sprite
-                                   on PokemonUnit.id equals Sprites.id
+                                   on PokemonUnit.id equals Sprites.Pokemonid
                                    select new Pokemon
                                    {
                                        id = PokemonUnit.id,
@@ -42,6 +42,7 @@ namespace Pokedex
 
                 foreach (var item in Convert)
                 {
+                    
                     empty.Add(item);
                 }
 
@@ -65,7 +66,7 @@ namespace Pokedex
 
                 var SavePokemon = (from PokemonUnit in db.Pokemon
                                    join Sprites in db.Sprite
-                                   on PokemonUnit.id equals Sprites.id
+                                   on PokemonUnit.id equals Sprites.Pokemonid
                                    where PokemonUnit.id.Equals(Index)
                                    select new Pokemon
                                    {
@@ -106,7 +107,7 @@ namespace Pokedex
 
                 var SavePokemon = (from PokemonUnit in db.Pokemon
                                    join Sprites in db.Sprite
-                                   on PokemonUnit.id equals Sprites.id
+                                   on PokemonUnit.id equals Sprites.Pokemonid
                                    where PokemonUnit.name.Contains(nameRequested)
                                    select new Pokemon
                                    {
@@ -147,7 +148,7 @@ namespace Pokedex
 
                 var SavePokemon = (from PokemonUnit in db.Pokemon
                                    join Sprites in db.Sprite
-                                   on PokemonUnit.id equals Sprites.id
+                                   on PokemonUnit.id equals Sprites.Pokemonid
                                    select new Pokemon
                                    {
                                        id = PokemonUnit.id,
@@ -191,7 +192,6 @@ namespace Pokedex
                               }).ToList();
                 var LastResult = result.LastOrDefault();
                 var endpoint = LastResult.next.ToString();
-                var dummy = 1;
 
                 return endpoint;
 
