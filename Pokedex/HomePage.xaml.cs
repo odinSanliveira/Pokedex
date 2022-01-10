@@ -25,12 +25,15 @@ namespace Pokedex
         public HomePage()
         {
             this.InitializeComponent();
+            QrCode.Visibility = Visibility.Collapsed;
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             //Função para gerar QRCode
-
+            QrCode.Visibility = Visibility.Visible;
         }
+
+       
     }
 }

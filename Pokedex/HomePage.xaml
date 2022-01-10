@@ -162,7 +162,7 @@
                        FontSize="30"
                        FontWeight="SemiBold"
                        VerticalAlignment="Center"/>
-                <TextBlock Text="Aprendizado de XAML" 
+                <TextBlock Text="Aprendizado do XAML" 
                        Margin="5"
                        Foreground="White"
                        FontSize="18"
@@ -186,48 +186,42 @@
                        FontSize="30"
                        FontWeight="SemiBold"
                        VerticalAlignment="Center"/>
-                <TextBlock Text="TEXTO DE EXPLICAÇÃO DE CONQUISTAS" 
-                       Margin="5"
-                       Foreground="White"
-                       FontSize="12"
-                       FontWeight="Light"
-                       VerticalAlignment="Center"/>
-
-                <TextBlock Text="Melhorias" 
-                       Margin="5"
-                       Foreground="White"
-                       FontSize="30"
-                       FontWeight="SemiBold"
-                       VerticalAlignment="Center"/>
-                <TextBlock Text="Melhorias alcançadas" 
+                <TextBlock Text="Sucesso na entrega dos requisitos" 
                        Margin="5"
                        Foreground="White"
                        FontSize="18"
                        FontWeight="Light"
                        VerticalAlignment="Center"/>
-                
+                <TextBlock Text="Aprendizado de novas tecnologias e suas funcionalidades" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="18"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="Aprofundamento de conhecimento abordado no curso" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="18"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="Desenvolvimento em noções de Design Patterns" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="18"
+                       FontWeight="Light"
+                       VerticalAlignment="Center"/>
+
+                <TextBlock Text="Exposição" 
+                       Margin="5"
+                       Foreground="White"
+                       FontSize="30"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"/>
+
 
                 <StackPanel >
-                    <!--<Button
-                    x:Name="StartButton"
-                    Content="Start"
-                    PointerEntered="StartButton_PointerEntered"
-                    PointerExited="StartButton_PointerExited"
-                    Foreground="White"
-                    FontSize="24"
-                    FontWeight="Medium"
-                    HorizontalAlignment="Center"
-                    >
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#46177d"/>
-                                <Setter Property="CornerRadius" Value="20 10 20 10"/>
-                                <Setter Property="Width" Value="250"/>
-                                
-                            </Style>
-                        </Button.Style>
-                    </Button>-->
                     <Button Style="{StaticResource StartButtonLayout}" x:Name="Start" Click="Start_Click" Content="GitHub"/>
+                    <Image x:Name="QrCode" Source="Assets/github.png" Width="200" Margin="20"/>
                 </StackPanel>
             </StackPanel>
 
