@@ -13,7 +13,8 @@
             <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="CornerRadius" Value="20 10 20 10"/>
-            <Setter Property="Width" Value="120"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Padding" Value="5"/>
             <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
             <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
             <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
@@ -220,12 +221,62 @@
                             </Style>
                         </Button.Style>
                     </Button>-->
-                    <Button Style="{StaticResource StartButtonLayout}" x:Name="Start" Click="Start_Click">SiDi</Button>
+                    <Button Style="{StaticResource StartButtonLayout}" x:Name="Start" Click="Start_Click" Content="GitHub"/>
                 </StackPanel>
             </StackPanel>
 
-            <Grid Grid.Row="1" Grid.Column="1" Margin="20">
+            <Grid 
+                Grid.RowSpan="2" 
+                Grid.Column="1"
+                Margin="160, -365, -610, 85">
                 <!-- Imagens do QRCode -->
+                <Grid.RenderTransform>
+                    <RotateTransform Angle="50"/>
+                </Grid.RenderTransform>
+
+                <StackPanel Orientation="Horizontal" Margin="-250 150 -255 -250">
+                    <StackPanel>
+                        <Border Width="700"
+                            Height="35"
+                            Background="#50d691"
+                            Margin="150 0 0 0"
+                            CornerRadius="20"
+                            />
+                        <Border Width="700"
+                            Height="35"
+                            Background="#FFF"
+                            Margin="0 15 0 0"
+                            CornerRadius="20"
+                            />
+                        <Border Width="700"
+                            Height="35"
+                            Background="#50d691"
+                            Margin="75 15 0 0"
+                            CornerRadius="20"
+                            />
+                    </StackPanel>
+                    <StackPanel>
+                        <Border Width="700"
+                            Height="35"
+                            Background="#50d691"
+                            Margin="150 0 0 0"
+                            CornerRadius="20"
+                            />
+                        <Border Width="700"
+                            Height="35"
+                            Background="#FFF"
+                            Margin="0 15 0 0"
+                            CornerRadius="20"
+                            />
+                        <Border Width="700"
+                            Height="35"
+                            Background="#50d691"
+                            Margin="75 15 0 0"
+                            CornerRadius="20"
+                            />
+                    </StackPanel>
+                </StackPanel>
+                
             </Grid>
 
         </Grid>
