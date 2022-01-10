@@ -53,7 +53,7 @@ namespace Pokedex
         {
 
             var selectedPokemon = (Pokemon)e.ClickedItem;
-
+            
             PokemonName.Text = selectedPokemon.name;
             TypeOne.Text = selectedPokemon.types[0].type.name;
             TypeBlock.Text = "Type";
@@ -90,7 +90,7 @@ namespace Pokedex
             PokemonDetailImage.Source = pokemonImage;
         }
 
-        private async void Previous_Click(object sender, RoutedEventArgs e)
+        private void Previous_Click(object sender, RoutedEventArgs e)
         {
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
@@ -136,7 +136,7 @@ namespace Pokedex
 
                 DBOperation.ReadDB(Pokemon, Page);
 
-                if (Pokemon.Count == 0)
+                if (Pokemon.Count < 10)
                 {
                     await ApiRequest.FillPokedexList(Pokemon, PageAPIReference);
                 }
@@ -163,14 +163,15 @@ namespace Pokedex
                     var notLoadedPokeDetails = await ApiRequest.GetPokemonDetailByUrl(url);
                     Pokemon.Add(notLoadedPokeDetails);
 
-                    using (var db = new PokeDataContext())
-                    {
-                        if (!db.Pokemon.Any(u => u.id == notLoadedPokeDetails.id))
-                        {
-                            db.Pokemon.Add(notLoadedPokeDetails);
-                            db.SaveChanges();
-                        }
-                    }
+                    //Ao não ser que você baseie a locação de ID pelo namedapiresource adicionar esses items à DB se torna muito custoso
+                    //using (var db = new PokeDataContext())
+                    //{
+                    //    if (!db.Pokemon.Any(u => u.id == notLoadedPokeDetails.id))
+                    //    {
+                    //        db.Pokemon.Add(notLoadedPokeDetails);
+                    //        db.SaveChanges();
+                    //    }
+                    //}
 
                 }
 
@@ -201,18 +202,16 @@ namespace Pokedex
 
             if (comboBoxItem.Content.ToString() != "select")
             {
+                Page = 1;
+                TypePage = 1;
                 if (comboBoxItem.Content.ToString() == "all")
                 {
-                    Page = 1;
-                    TypePage = 1;
-
                     DBOperation.ReadDB(Pokemon, Page);
                 }
                 else
                 {
                     List<string> pokemonsInDB = new List<string>();
-                    Page=1;
-                    TypePage=1;
+                    
 
                     var typeSelected = comboBoxItem.Content.ToString();
 
@@ -231,16 +230,17 @@ namespace Pokedex
                         var notLoadedPokeDetails = await ApiRequest.GetPokemonDetailByUrl(url);
                         Pokemon.Add(notLoadedPokeDetails);
 
-                        using (var db = new PokeDataContext())
-                        {
-                            if (!db.Pokemon.Any(u => u.id == notLoadedPokeDetails.id))
-                            {
-                                db.Pokemon.Add(notLoadedPokeDetails);
-                                db.SaveChanges();
-                            }
-                        }
+                        //using (var db = new PokeDataContext())
+                        //{
+                        //    if (!db.Pokemon.Any(u => u.id == notLoadedPokeDetails.id))
+                        //    {
+                        //        db.Pokemon.Add(notLoadedPokeDetails);
+                        //        db.SaveChanges();
+                        //    }
+                        //}
 
                     }
+                    Previous.IsEnabled = false;
 
 
                 }
@@ -265,7 +265,7 @@ namespace Pokedex
                             Pokemon.Clear();
                             Pokemon.Add(searchRequest);
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             sender.ItemsSource = new String[] { "No suggestions..." };
                             Page = 1;
