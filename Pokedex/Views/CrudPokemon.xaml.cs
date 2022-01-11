@@ -1,29 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Pokedex.Models;
+﻿using Pokedex.Models;
+using System;
 using System.Collections.ObjectModel;
-using Windows.Foundation.Collections;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
-
-// O modelo de item de Página em Branco está documentado em https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Pokedex
 {
-    /// <summary>
-    /// Uma página vazia que pode ser usada isoladamente ou navegada dentro de um Quadro.
-    /// </summary>
-
     public sealed partial class CrudPokemon : Page
     {
         public ObservableCollection<PokemonCRUD> Pokemon { get; set; }
@@ -97,7 +81,7 @@ namespace Pokedex
             userPokemon.pokemonName = PokeName.Text;
             userPokemon.pokemonType = PokeTypeOne.Text;
             userPokemon.pokemonType2 = PokeTypeTwo.Text;
-            if(int.Parse(PokeIdSprite.Text) > 898)
+            if (int.Parse(PokeIdSprite.Text) > 898)
             {
                 PokeIdSprite.Text = "898";
             }
@@ -110,8 +94,14 @@ namespace Pokedex
             userPokemon.Speed = int.Parse(PokeSpeed.Text);
             userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
             userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
+
+            var isNull = userPokemon.GetType().GetProperties()
+              .Where(m => m.PropertyType == typeof(string))
+              .Select(m => (string)m.GetValue(userPokemon))
+              .Any(value => string.IsNullOrEmpty(value));
+
             var db = new PokeDataContext();
-            if (!db.UserPokemon.Any(u => u.id == userPokemon.id))
+            if (!db.UserPokemon.Any(u => u.id == userPokemon.id) && !isNull)
             {
                 db.UserPokemon.Add(this.userPokemon);
                 db.SaveChanges();
@@ -174,7 +164,14 @@ namespace Pokedex
         }
         private void UpdatePokemon(object sender, RoutedEventArgs e)
         {
-            var id = ItemSelected;
+            var isNull = userPokemon.GetType().GetProperties()
+              .Where(m => m.PropertyType == typeof(string))
+              .Select(m => (string)m.GetValue(userPokemon))
+              .Any(value => string.IsNullOrEmpty(value));
+
+            if (!isNull)
+            {
+                var id = ItemSelected;
             userPokemon.pokemonName = PokeName.Text;
             userPokemon.pokemonType = PokeTypeOne.Text;
             userPokemon.pokemonType2 = PokeTypeTwo.Text;
@@ -191,8 +188,16 @@ namespace Pokedex
             userPokemon.Speed = int.Parse(PokeSpeed.Text);
             userPokemon.heightCRUD = int.Parse(PokeHeight.Text);
             userPokemon.weightCRUD = int.Parse(PokeWeight.Text);
-            DBOperation.AlterPokemonCrud(userPokemon, id);
+
+            
+
+            
+             DBOperation.AlterPokemonCrud(userPokemon, id);
+            }
+
             DBOperation.ReadCRUDB(Pokemon);
+
+            
             ClearBoxes(AddingNewPokemon);
             SaveButton.IsEnabled = true;
             UpdateButton.IsEnabled = false;

@@ -13,9 +13,6 @@ namespace Pokedex
 {
     public sealed partial class MainPokedex : Page
     {
-
-
-
         public ObservableCollection<Pokemon> Pokemon { get; set; }
         public int Page { get; set; }
         public int TypePage { get; set; }
@@ -33,8 +30,7 @@ namespace Pokedex
 
             Page = 1;
             TypePage = 1;
-
-
+            
             DBOperation.ReadDB(Pokemon, Page);
             if (Pokemon.Count == 0)
             {
@@ -163,16 +159,6 @@ namespace Pokedex
                     var notLoadedPokeDetails = await ApiRequest.GetPokemonDetailByUrl(url);
                     Pokemon.Add(notLoadedPokeDetails);
 
-                    //Ao não ser que você baseie a locação de ID pelo namedapiresource adicionar esses items à DB se torna muito custoso
-                    //using (var db = new PokeDataContext())
-                    //{
-                    //    if (!db.Pokemon.Any(u => u.id == notLoadedPokeDetails.id))
-                    //    {
-                    //        db.Pokemon.Add(notLoadedPokeDetails);
-                    //        db.SaveChanges();
-                    //    }
-                    //}
-
                 }
 
             }
@@ -229,16 +215,6 @@ namespace Pokedex
                         var url = "https://pokeapi.co/api/v2/pokemon/"+notLoadeadPoke;
                         var notLoadedPokeDetails = await ApiRequest.GetPokemonDetailByUrl(url);
                         Pokemon.Add(notLoadedPokeDetails);
-
-                        //using (var db = new PokeDataContext())
-                        //{
-                        //    if (!db.Pokemon.Any(u => u.id == notLoadedPokeDetails.id))
-                        //    {
-                        //        db.Pokemon.Add(notLoadedPokeDetails);
-                        //        db.SaveChanges();
-                        //    }
-                        //}
-
                     }
                     Previous.IsEnabled = false;
 
@@ -273,16 +249,8 @@ namespace Pokedex
                         }
 
                     }
-                    else
-                    {
-                        sender.ItemsSource = new String[] { "No suggestions..." };
-                        Page = 1;
-                        DBOperation.ReadDB(Pokemon, Page);
-                    }
 
                 }
-
-
                 else
                 {
                     //pesquisa por ID
@@ -294,9 +262,19 @@ namespace Pokedex
                         if (Pokemon.Count == 0)
                         {
                             var searchAPIurl = "https://pokeapi.co/api/v2/pokemon/"+idRequested;
-                            var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
-                            Pokemon.Clear();
-                            Pokemon.Add(searchRequest);
+                            try
+                            {
+                                var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
+                                Pokemon.Clear();
+                                Pokemon.Add(searchRequest);
+                            }
+                            catch (Exception)
+                            {
+                                sender.ItemsSource = new String[] { "No suggestions..." };
+                                Page = 1;
+                                DBOperation.ReadDB(Pokemon, Page);
+                            }
+
                         }
                     }
                     else

@@ -116,21 +116,21 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ApiRequest.cs" />
-    <Compile Include="App.xaml.cs">
+    <Compile Include="ViewModel\ApiRequest.cs" />
+    <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CrudPokemon.xaml.cs">
+    <Compile Include="Views\CrudPokemon.xaml.cs">
       <DependentUpon>CrudPokemon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DBOperation.cs" />
-    <Compile Include="HomePage.xaml.cs">
+    <Compile Include="ViewModel\DBOperation.cs" />
+    <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPokedex.xaml.cs">
+    <Compile Include="Views\MainPokedex.xaml.cs">
       <DependentUpon>MainPokedex.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\NamedAPIResource.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="Models\TypeDetail.cs" />
     <Compile Include="Models\TypeFilterClass.cs" />
     <Compile Include="Models\TypeList.cs" />
-    <Compile Include="PokeDataContext.cs" />
+    <Compile Include="ViewModel\PokeDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,23 +164,23 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Views\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CrudPokemon.xaml">
+    <Page Include="Views\CrudPokemon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HomePage.xaml">
+    <Page Include="Views\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPokedex.xaml">
+    <Page Include="Views\MainPokedex.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

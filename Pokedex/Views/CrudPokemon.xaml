@@ -270,7 +270,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" x:Name="PokeName" BeforeTextChanging="NumberBox_OnBeforeTextChanging"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" x:Name="PokeName"  BeforeTextChanging="NumberBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Height" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBox Grid.Row="1" Grid.Column="1" Margin="5" x:Name="PokeHeight" BeforeTextChanging="TextBox_OnBeforeTextChanging"/>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Weight" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
