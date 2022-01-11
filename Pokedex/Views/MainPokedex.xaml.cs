@@ -14,7 +14,7 @@ namespace Pokedex
     public sealed partial class MainPokedex : Page
     {
         public ObservableCollection<Pokemon> Pokemon { get; set; }
-        public int Page { get; set; }
+        public int Page {get; set; }
         public int TypePage { get; set; }
         public MainPokedex()
         {
@@ -30,7 +30,7 @@ namespace Pokedex
 
             Page = 1;
             TypePage = 1;
-            
+
             DBOperation.ReadDB(Pokemon, Page);
             if (Pokemon.Count == 0)
             {
@@ -49,7 +49,7 @@ namespace Pokedex
         {
 
             var selectedPokemon = (Pokemon)e.ClickedItem;
-            
+
             PokemonName.Text = selectedPokemon.name;
             TypeOne.Text = selectedPokemon.types[0].type.name;
             TypeBlock.Text = "Type";
@@ -193,11 +193,12 @@ namespace Pokedex
                 if (comboBoxItem.Content.ToString() == "all")
                 {
                     DBOperation.ReadDB(Pokemon, Page);
+                    Previous.IsEnabled = false;
                 }
                 else
                 {
                     List<string> pokemonsInDB = new List<string>();
-                    
+
 
                     var typeSelected = comboBoxItem.Content.ToString();
 
@@ -223,6 +224,7 @@ namespace Pokedex
         }
         private async void AutoSuggest_TextFind(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
+
             //pesquisa por nome
             if (RadioNome.IsChecked == true)
             {
@@ -251,36 +253,47 @@ namespace Pokedex
                 }
                 else
                 {
-                    //pesquisa por ID
+                    Page = 1;
+                    TypePage = 1;
+                    Types.SelectedIndex=1;
+                    DBOperation.ReadDB(Pokemon, Page);
+                }
+            }
+            else if(RadioId.IsChecked == true)
+            {
+                //pesquisa por ID
 
-                    if (sender.Text.Length > 1 && sender.Text.Any(c => !char.IsLetter(c)))
+                if (sender.Text.Length > 1 && sender.Text.Any(c => !char.IsLetter(c)))
+                {
+
+                    var idRequested = int.Parse(sender.Text);
+                    DBOperation.SearchDBByID(Pokemon, idRequested);
+                    if (Pokemon.Count == 0)
                     {
-                        var idRequested = int.Parse(sender.Text);
-                        DBOperation.SearchDBByID(Pokemon, idRequested);
-                        if (Pokemon.Count == 0)
+                        var searchAPIurl = "https://pokeapi.co/api/v2/pokemon/"+idRequested;
+                        try
                         {
-                            var searchAPIurl = "https://pokeapi.co/api/v2/pokemon/"+idRequested;
-                            try
-                            {
-                                var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
-                                Pokemon.Clear();
-                                Pokemon.Add(searchRequest);
-                            }
-                            catch (Exception)
-                            {
-                                sender.ItemsSource = new String[] { "No suggestions..." };
-                                Page = 1;
-                                DBOperation.ReadDB(Pokemon, Page);
-                            }
-
+                            var searchRequest = await ApiRequest.GetPokemonDetailByUrl(searchAPIurl);
+                            Pokemon.Clear();
+                            Pokemon.Add(searchRequest);
                         }
+                        catch (Exception)
+                        {
+                            sender.ItemsSource = new String[] { "No suggestions..." };
+                            Page = 1;
+                            DBOperation.ReadDB(Pokemon, Page);
+                        }
+
                     }
-                    else
-                    {
-                        sender.ItemsSource = new String[] { "No suggestions..." };
-                        Page = 1;
-                        DBOperation.ReadDB(Pokemon, Page);
-                    }
+                    
+                }
+                else
+                {
+                    Page = 1;
+                    TypePage = 1;
+                    Types.SelectedIndex=1;
+                    DBOperation.ReadDB(Pokemon, Page);
+                    
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace Pokedex
         public HomePage()
         {
             this.InitializeComponent();
-            QrCode.Visibility = Visibility.Visible;
+            QrCode.Visibility = Visibility.Collapsed;
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)

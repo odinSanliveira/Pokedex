@@ -218,9 +218,11 @@
                        FontSize="30"
                        FontWeight="SemiBold"
                        VerticalAlignment="Center"/>
-                <StackPanel >
+                
+                
+                <StackPanel>
                     <Button Style="{StaticResource StartButtonLayout}" x:Name="Start" Click="Start_Click" Content="GitHub"/>
-                    <Image x:Name="QrCode" Source="Assets/github.png" Width="200" Margin="20"/>
+                    <Image x:Name="QrCode" Width="200" Margin="20" Source="/Assets/github.png"/>
                 </StackPanel>
             </StackPanel>
 
