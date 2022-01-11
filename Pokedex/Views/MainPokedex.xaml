@@ -162,8 +162,8 @@
             <ComboBox x:Name ="Types"
                       SelectedIndex="0"
                       SelectionChanged="Types_SelectionChanged" 
-                      HorizontalAlignment="Center" 
-                      RelativePanel.AlignLeftWithPanel="True" 
+                      RelativePanel.AlignRightWithPanel="True"
+                      Margin="0 5 10 0"
                       Width="150">
                 <ComboBoxItem x:Name="select" Content="select"/>
                 <ComboBoxItem x:Name="all" Content="all"/>

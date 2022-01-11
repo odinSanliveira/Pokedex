@@ -216,10 +216,8 @@ namespace Pokedex
                         var notLoadedPokeDetails = await ApiRequest.GetPokemonDetailByUrl(url);
                         Pokemon.Add(notLoadedPokeDetails);
                     }
-                    Previous.IsEnabled = false;
-
-
                 }
+                Previous.IsEnabled = false;
             }
 
         }
